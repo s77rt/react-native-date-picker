@@ -1,0 +1,53 @@
+{
+	"name": "@s77rt/react-native-date-picker",
+	"version": "0.0.1",
+	"description": "Native Date Picker",
+	"react-native": "js/index",
+	"source": "js/index",
+	"main": "js/index",
+	"files": [
+		"js",
+		"android",
+		"ios",
+		"react-native-date-picker.podspec",
+		"!android/build",
+		"!ios/build",
+		"!**/__tests__",
+		"!**/__fixtures__",
+		"!**/__mocks__"
+	],
+	"keywords": [
+		"react-native",
+		"react native",
+		"date picker",
+		"calendar"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/s77rt/react-native-date-picker.git"
+	},
+	"author": "Abdelhafidh Belalia <admin@abdelhafidh.com> (https://github.com/s77rt)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/s77rt/react-native-date-picker/issues"
+	},
+	"homepage": "https://github.com/s77rt/react-native-date-picker#readme",
+	"devDependencies": {},
+	"peerDependencies": {
+		"react": "*",
+		"react-native": "*"
+	},
+	"codegenConfig": {
+		"name": "RTNDatePickerSpecs",
+		"type": "components",
+		"jsSrcsDir": "js",
+		"android": {
+			"javaPackageName": "com.s77rt.rtndatepicker"
+		},
+		"ios": {
+			"componentProvider": {
+				"RTNDatePicker": "RTNDatePicker"
+			}
+		}
+	}
+}

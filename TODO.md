@@ -1,0 +1,2 @@
+-   [ ] Update description (package.json, README and GitHub)
+-   [ ] Do a quick search and verify that I wrote date picker and not data picker
