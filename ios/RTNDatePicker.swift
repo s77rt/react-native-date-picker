@@ -1,36 +1,50 @@
 import SwiftUI
 
+class RTNDatePickerModel: ObservableObject {
+  @Published var label: String = ""
+  @Published var onChange: () -> Void = {}
+
+  init() {}
+}
+
 struct RTNDatePicker: View {
-  var onChange: () -> Void
+  @ObservedObject var model: RTNDatePickerModel
 
   @State private var date = Date()
 
   var body: some View {
-    DatePicker("Date", selection: $date, displayedComponents: [.date]).onChange(of: date) {
+    DatePicker(model.label, selection: $date, displayedComponents: [.date]).onChange(of: date) {
       print(date)
-      self.onChange()
+      model.onChange()
     }
   }
 }
 
 @objc public class RTNDatePickerUIHost: UIView {
-  @objc override init(frame: CGRect) {
+  private let model = RTNDatePickerModel()
+
+  @objc override public init(frame: CGRect) {
     super.init(frame: frame)
 
-    let view = RTNDatePicker(onChange: dateDidChange)
-    let hostingController = UIHostingController(rootView: view)
+    model.onChange = dateDidChange
 
+    let view = RTNDatePicker(model: model)
+    let hostingController = UIHostingController(rootView: view)
     hostingController.view.frame = self.bounds
-    hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
 
     addSubview(hostingController.view)
   }
 
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     fatalError("init?(coder: NSCoder) is not implemented")
   }
 
   private func dateDidChange() {
     print("dateDidChange")
+  }
+
+  @objc public func setLabel(label: String) {
+    model.label = label
   }
 }
