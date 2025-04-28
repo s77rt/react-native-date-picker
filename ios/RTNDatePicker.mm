@@ -1,4 +1,4 @@
-#import "RTNDatePicker.h"
+#import <React/RCTViewComponentView.h>
 
 #import <react/renderer/components/RTNDatePickerSpecs/ComponentDescriptors.h>
 #import <react/renderer/components/RTNDatePickerSpecs/EventEmitters.h>
@@ -7,7 +7,12 @@
 
 #import "RCTFabricComponentsPlugins.h"
 
+#import "react_native_date_picker-Swift.h"
+
 using namespace facebook::react;
+
+@interface RTNDatePicker : RCTViewComponentView
+@end
 
 @interface RTNDatePicker () <RCTRTNDatePickerViewProtocol>
 @end
@@ -27,8 +32,7 @@ using namespace facebook::react;
         std::make_shared<const RTNDatePickerProps>();
     _props = defaultProps;
 
-    _view = [[UIView alloc] init];
-    _view.backgroundColor = [UIColor redColor];
+    _view = [[RTNDatePickerUIHost alloc] init];
 
     self.contentView = _view;
   }
