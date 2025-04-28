@@ -31,6 +31,7 @@ struct RTNDatePickerView: View {
     let view = RTNDatePickerView(model: model)
     let hostingController = UIHostingController(rootView: view)
     hostingController.view.frame = self.bounds
+    hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
     addSubview(hostingController.view)
   }
