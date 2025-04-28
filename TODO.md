@@ -1,4 +1,6 @@
 -   [ ] Update description (package.json, README and GitHub)
 -   [ ] Do a quick search and verify that I wrote date picker and not data picker
--   [] Add (void)dealloc to cleanup the ref
--   [] Remove prints
+-   [ ] Add (void)dealloc to cleanup the ref
+-   [ ] Remove prints
+-   [ ] Check default height in iOS
+-   [ ] Use Web for ref (callback signature, etc. )

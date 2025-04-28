@@ -2,7 +2,8 @@ import SwiftUI
 
 class RTNDatePickerModel: ObservableObject {
   @Published var label: String = ""
-  @Published var onChange: () -> Void = {}
+  @Published var date: Date = Date()
+  @Published var onChange: (Date) -> Void = { _ in }
 
   init() {}
 }
@@ -10,12 +11,11 @@ class RTNDatePickerModel: ObservableObject {
 struct RTNDatePicker: View {
   @ObservedObject var model: RTNDatePickerModel
 
-  @State private var date = Date()
-
   var body: some View {
-    DatePicker(model.label, selection: $date, displayedComponents: [.date]).onChange(of: date) {
-      print(date)
-      model.onChange()
+    DatePicker(model.label, selection: $model.date, displayedComponents: [.date]).onChange(
+      of: model.date
+    ) {
+      model.onChange(model.date)
     }
   }
 }
@@ -40,11 +40,15 @@ struct RTNDatePicker: View {
     fatalError("init?(coder: NSCoder) is not implemented")
   }
 
-  private func dateDidChange() {
-    print("dateDidChange")
+  private func dateDidChange(date: Date) {
+    print("dateDidChange", date)
   }
 
   @objc public func setLabel(label: String) {
     model.label = label
+  }
+
+  @objc public func setDate(date: Date) {
+    model.date = date
   }
 }
