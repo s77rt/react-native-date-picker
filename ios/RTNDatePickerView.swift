@@ -1,6 +1,6 @@
 import SwiftUI
 
-class RTNDatePickerModel: ObservableObject {
+class RTNDatePickerViewModel: ObservableObject {
   @Published var label: String = ""
   @Published var date: Date = Date()
   @Published var onChange: (Date) -> Void = { _ in }
@@ -8,8 +8,8 @@ class RTNDatePickerModel: ObservableObject {
   init() {}
 }
 
-struct RTNDatePicker: View {
-  @ObservedObject var model: RTNDatePickerModel
+struct RTNDatePickerView: View {
+  @ObservedObject var model: RTNDatePickerViewModel
 
   var body: some View {
     DatePicker(model.label, selection: $model.date, displayedComponents: [.date]).onChange(
@@ -20,18 +20,17 @@ struct RTNDatePicker: View {
   }
 }
 
-@objc public class RTNDatePickerUIHost: UIView {
-  private let model = RTNDatePickerModel()
+@objc public class RTNDatePickerUIView: UIView {
+  private let model = RTNDatePickerViewModel()
 
   @objc override public init(frame: CGRect) {
     super.init(frame: frame)
 
     model.onChange = dateDidChange
 
-    let view = RTNDatePicker(model: model)
+    let view = RTNDatePickerView(model: model)
     let hostingController = UIHostingController(rootView: view)
     hostingController.view.frame = self.bounds
-    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
 
     addSubview(hostingController.view)
   }

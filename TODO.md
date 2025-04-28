@@ -4,5 +4,4 @@
 -   [ ] Remove prints
 -   [ ] Check default height in iOS
 -   [ ] Use Web for ref (callback signature, etc. )
--   [ ] Rename RTNDatePicker.swift (and the class) to RTNDatePickerView.swift for code-look-alike with Android
 -   [ ] iOS: What if the label is too long and what happen if we change it dynamically

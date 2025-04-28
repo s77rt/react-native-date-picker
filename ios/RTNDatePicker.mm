@@ -18,7 +18,7 @@ using namespace facebook::react;
 @end
 
 @implementation RTNDatePicker {
-  RTNDatePickerUIHost *_view;
+  RTNDatePickerUIView *_view;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider {
@@ -32,7 +32,7 @@ using namespace facebook::react;
         std::make_shared<const RTNDatePickerProps>();
     _props = defaultProps;
 
-    _view = [[RTNDatePickerUIHost alloc] initWithFrame:frame];
+    _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
     [_view setLabelWithLabel:@"Abra kadabra"];
 
     self.contentView = _view;
