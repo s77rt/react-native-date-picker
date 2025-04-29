@@ -4,6 +4,8 @@ class RTNDatePickerViewModel: ObservableObject {
   @Published var isOpen: Bool = false
   @Published var value: Date = Date()
   @Published var onChange: (Date) -> Void = { _ in }
+  @Published var onConfirm: () -> Void = {}
+  @Published var onCancel: () -> Void = {}
 
   init() {}
 }
@@ -24,12 +26,12 @@ struct RTNDatePickerView: View {
         Divider()
         HStack {
           Button(
-            action: {},
+            action: model.onCancel,
             label: { Text("Cancel") }
           )
           Spacer()
           Button(
-            action: {},
+            action: model.onConfirm,
             label: { Text("Confirm").bold() }
           )
         }
@@ -41,13 +43,23 @@ struct RTNDatePickerView: View {
   }
 }
 
+@objc public protocol RTNDatePickerUIViewDelegate: NSObjectProtocol {
+  @objc func onChange(date: Date)
+  @objc func onConfirm()
+  @objc func onCancel()
+}
+
 @objc public class RTNDatePickerUIView: UIView {
+  @objc public weak var delegate: RTNDatePickerUIViewDelegate?
+
   private let model = RTNDatePickerViewModel()
 
   @objc override public init(frame: CGRect) {
     super.init(frame: frame)
 
-    model.onChange = dateDidChange
+    model.onChange = onChange
+    model.onConfirm = onConfirm
+    model.onCancel = onCancel
 
     let view = RTNDatePickerView(model: model)
     let hostingController = UIHostingController(rootView: view)
@@ -61,8 +73,16 @@ struct RTNDatePickerView: View {
     fatalError("init?(coder: NSCoder) is not implemented")
   }
 
-  private func dateDidChange(date: Date) {
-    print("dateDidChange", date)
+  private func onChange(date: Date) {
+    delegate?.onChange(date: date)
+  }
+
+  private func onConfirm() {
+    delegate?.onConfirm()
+  }
+
+  private func onCancel() {
+    delegate?.onCancel()
   }
 
   @objc public func setIsOpen(isOpen: Bool) {

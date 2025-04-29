@@ -14,7 +14,8 @@ using namespace facebook::react;
 @interface RTNDatePicker : RCTViewComponentView
 @end
 
-@interface RTNDatePicker () <RCTRTNDatePickerViewProtocol>
+@interface RTNDatePicker () <RCTRTNDatePickerViewProtocol,
+                             RTNDatePickerUIViewDelegate>
 @end
 
 @implementation RTNDatePicker {
@@ -33,6 +34,7 @@ using namespace facebook::react;
     _props = defaultProps;
 
     _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
+    _view.delegate = self;
 
     self.contentView = _view;
   }
@@ -52,6 +54,25 @@ using namespace facebook::react;
   }
 
   [super updateProps:props oldProps:oldProps];
+}
+
+- (void)onChangeWithDate:(NSDate *_Nonnull)date {
+  if (_eventEmitter) {
+    static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter).onChange({});
+  }
+}
+
+- (void)onConfirm {
+  if (_eventEmitter) {
+    static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter)
+        .onConfirm({});
+  }
+}
+
+- (void)onCancel {
+  if (_eventEmitter) {
+    static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter).onCancel({});
+  }
 }
 
 @end
