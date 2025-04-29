@@ -40,6 +40,20 @@ using namespace facebook::react;
   return self;
 }
 
+- (void)updateProps:(Props::Shared const &)props
+           oldProps:(Props::Shared const &)oldProps {
+  const auto &oldViewProps =
+      *std::static_pointer_cast<RTNDatePickerProps const>(_props);
+  const auto &newViewProps =
+      *std::static_pointer_cast<RTNDatePickerProps const>(props);
+
+  if (oldViewProps.isOpen != newViewProps.isOpen) {
+    [_view setIsOpenWithIsOpen:newViewProps.isOpen];
+  }
+
+  [super updateProps:props oldProps:oldProps];
+}
+
 @end
 
 Class<RCTComponentViewProtocol> RTNDatePickerCls(void) {

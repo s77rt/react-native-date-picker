@@ -1,6 +1,7 @@
 import SwiftUI
 
 class RTNDatePickerViewModel: ObservableObject {
+  @Published var isOpen: Bool = false
   @Published var date: Date = Date()
   @Published var onChange: (Date) -> Void = { _ in }
 
@@ -11,14 +12,32 @@ struct RTNDatePickerView: View {
   @ObservedObject var model: RTNDatePickerViewModel
 
   var body: some View {
-    DatePicker("", selection: $model.date, displayedComponents: [.date]).datePickerStyle(
-      .compact
-    ).labelsHidden()
-      .onChange(
-        of: model.date
-      ) {
-        model.onChange(model.date)
+    EmptyView().fullScreenCover(isPresented: $model.isOpen) {
+      VStack {
+        DatePicker("", selection: $model.date, displayedComponents: [.date]).datePickerStyle(
+          .graphical
+        ).labelsHidden().onChange(
+          of: model.date
+        ) {
+          model.onChange(model.date)
+        }.frame(width: 320)
+        Divider()
+        HStack {
+          Button(
+            action: {},
+            label: { Text("Cancel") }
+          )
+          Spacer()
+          Button(
+            action: {},
+            label: { Text("Confirm").bold() }
+          )
+        }
       }
+      .frame(width: 320)
+      .padding()
+      .presentationBackground(.clear).background(Color(UIColor.systemBackground).cornerRadius(20))
+    }
   }
 }
 
@@ -44,6 +63,10 @@ struct RTNDatePickerView: View {
 
   private func dateDidChange(date: Date) {
     print("dateDidChange", date)
+  }
+
+  @objc public func setIsOpen(isOpen: Bool) {
+    model.isOpen = isOpen
   }
 
   @objc public func setDate(date: Date) {

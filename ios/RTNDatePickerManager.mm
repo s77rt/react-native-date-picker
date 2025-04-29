@@ -7,4 +7,6 @@
 
 RCT_EXPORT_MODULE(RTNDatePicker)
 
+RCT_EXPORT_VIEW_PROPERTY(isOpen, BOOL)
+
 @end

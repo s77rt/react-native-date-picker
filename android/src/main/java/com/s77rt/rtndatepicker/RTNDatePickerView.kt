@@ -18,7 +18,7 @@ fun RTNDatePickerView() {
         onDismissRequest = {},
         confirmButton = {
             TextButton(onClick = {}) {
-                Text("OK")
+                Text("Confirm")
             }
         },
         dismissButton = {

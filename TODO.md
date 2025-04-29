@@ -5,3 +5,5 @@
 -   [ ] Check default height in iOS
 -   [ ] Use Web for ref (callback signature, etc. )
 -   [ ] iOS: What if the label is too long and what happen if we change it dynamically
+-   [ ] Rename setDate to setValue
+-   [ ] iOS Add dropshadow
