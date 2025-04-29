@@ -33,7 +33,6 @@ using namespace facebook::react;
     _props = defaultProps;
 
     _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
-    [_view setLabelWithLabel:@"Abra kadabra"];
 
     self.contentView = _view;
   }
