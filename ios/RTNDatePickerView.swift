@@ -43,9 +43,11 @@ struct RTNDatePickerView: View {
         }
         .frame(width: 320)
         .padding()
-        .presentationBackground(.ultraThinMaterial).background(
-          Color(UIColor.systemBackground).cornerRadius(20))
+        .presentationBackground(Color.black.opacity(0.2))
+        .background(Color(UIColor.systemBackground).cornerRadius(20))
       }
-    }
+    }.transaction({ transaction in
+      transaction.disablesAnimations = true
+    })
   }
 }
