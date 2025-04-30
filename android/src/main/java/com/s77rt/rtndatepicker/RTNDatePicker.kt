@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
 
 class RTNDatePicker : FrameLayout {
-    internal lateinit var viewModel: RTNDatePickerViewModel
+    internal val viewModel = RTNDatePickerViewModel()
 
     constructor(context: Context) : super(context) {
         configureComponent(context)
@@ -24,8 +24,6 @@ class RTNDatePicker : FrameLayout {
     }
 
     private fun configureComponent(context: Context) {
-        viewModel = RTNDatePickerViewModel()
-
         ComposeView(context).also {
             it.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 

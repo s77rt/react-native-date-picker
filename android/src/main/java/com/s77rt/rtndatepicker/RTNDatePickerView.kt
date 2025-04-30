@@ -37,7 +37,7 @@ fun RTNDatePickerView(
 
     if (isOpen) {
         DatePickerDialog(
-            onDismissRequest = {},
+            onDismissRequest = onCancel,
             confirmButton = {
                 TextButton(onClick = onConfirm) {
                     Text("Confirm")
