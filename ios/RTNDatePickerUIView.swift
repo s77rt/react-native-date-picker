@@ -9,16 +9,13 @@ import SwiftUI
 @objc public class RTNDatePickerUIView: UIView {
   @objc public weak var delegate: RTNDatePickerUIViewDelegate?
 
-  private let model = RTNDatePickerViewModel()
+  private let viewModel = RTNDatePickerViewModel()
 
   @objc override public init(frame: CGRect) {
     super.init(frame: frame)
 
-    model.onChange = onChange
-    model.onConfirm = onConfirm
-    model.onCancel = onCancel
-
-    let view = RTNDatePickerView(model: model)
+    let view = RTNDatePickerView(
+      viewModel: viewModel, onChange: onChange, onConfirm: onConfirm, onCancel: onCancel)
     let hostingController = UIHostingController(rootView: view)
     hostingController.view.frame = self.bounds
     hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -43,10 +40,10 @@ import SwiftUI
   }
 
   @objc public func setIsOpen(isOpen: Bool) {
-    model.isOpen = isOpen
+    viewModel.isOpen = isOpen
   }
 
   @objc public func setValue(date: Date) {
-    model.value = date
+    viewModel.value = date
   }
 }

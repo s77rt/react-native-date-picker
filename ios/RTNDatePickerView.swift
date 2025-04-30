@@ -3,35 +3,35 @@ import SwiftUI
 class RTNDatePickerViewModel: ObservableObject {
   @Published var isOpen: Bool = false
   @Published var value: Date = Date()
-  @Published var onChange: (Date) -> Void = { _ in }
-  @Published var onConfirm: () -> Void = {}
-  @Published var onCancel: () -> Void = {}
 
   init() {}
 }
 
 struct RTNDatePickerView: View {
-  @ObservedObject var model: RTNDatePickerViewModel
+  @ObservedObject var viewModel: RTNDatePickerViewModel
+  var onChange: (Date) -> Void = { _ in }
+  var onConfirm: () -> Void = {}
+  var onCancel: () -> Void = {}
 
   var body: some View {
-    EmptyView().fullScreenCover(isPresented: $model.isOpen) {
+    EmptyView().fullScreenCover(isPresented: $viewModel.isOpen) {
       VStack {
-        DatePicker("", selection: $model.value, displayedComponents: [.date]).datePickerStyle(
+        DatePicker("", selection: $viewModel.value, displayedComponents: [.date]).datePickerStyle(
           .graphical
         ).labelsHidden().onChange(
-          of: model.value
+          of: viewModel.value
         ) {
-          model.onChange(model.value)
+          onChange(viewModel.value)
         }.frame(width: 320)
         Divider()
         HStack {
           Button(
-            action: model.onCancel,
+            action: onCancel,
             label: { Text("Cancel") }
           )
           Spacer()
           Button(
-            action: model.onConfirm,
+            action: onConfirm,
             label: { Text("Confirm").bold() }
           )
         }
