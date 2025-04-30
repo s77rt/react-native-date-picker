@@ -33,8 +33,16 @@ using namespace facebook::react;
         std::make_shared<const RTNDatePickerProps>();
     _props = defaultProps;
 
+    const auto &defaultViewProps =
+        *std::static_pointer_cast<RTNDatePickerProps const>(_props);
+
     _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
     _view.delegate = self;
+
+    [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
+    [_view
+        setValueWithDate:[NSDate dateWithTimeIntervalSince1970:defaultViewProps
+                                                                   .value]];
 
     self.contentView = _view;
   }
@@ -51,6 +59,11 @@ using namespace facebook::react;
 
   if (oldViewProps.isOpen != newViewProps.isOpen) {
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
+  }
+  if (oldViewProps.value != newViewProps.value) {
+    [_view
+        setValueWithDate:[NSDate
+                             dateWithTimeIntervalSince1970:newViewProps.value]];
   }
 
   [super updateProps:props oldProps:oldProps];
