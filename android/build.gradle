@@ -2,14 +2,17 @@ buildscript {
   ext.safeExtGet = {prop, fallback ->
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
   }
+
+  def kotlinVersion = safeExtGet('kotlinVersion', "2.0.0")
+
   repositories {
     google()
     gradlePluginPortal()
   }
   dependencies {
     classpath("com.android.tools.build:gradle:7.3.1")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.22")
-    classpath("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.1.0")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    classpath("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:$kotlinVersion")
   }
 }
 
@@ -23,7 +26,7 @@ android {
   namespace "com.s77rt.rtndatepicker"
 
   buildFeatures {
-    compose = true
+    compose true
   }
 
 
@@ -41,6 +44,6 @@ repositories {
 
 dependencies {
   implementation 'com.facebook.react:react-native'
-  implementation(platform("androidx.compose:compose-bom:2025.02.00"))
-  implementation("androidx.compose.material3:material3")
+  implementation platform('androidx.compose:compose-bom:2025.04.01')
+  implementation 'androidx.compose.material3:material3'
 }
