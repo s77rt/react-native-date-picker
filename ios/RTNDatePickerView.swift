@@ -9,9 +9,9 @@ class RTNDatePickerViewModel: ObservableObject {
 
 struct RTNDatePickerView: View {
   @ObservedObject var viewModel: RTNDatePickerViewModel
-  var onChange: (Date) -> Void = { _ in }
-  var onConfirm: () -> Void = {}
-  var onCancel: () -> Void = {}
+  var onChange: (Date) -> Void
+  var onConfirm: () -> Void
+  var onCancel: () -> Void
 
   var body: some View {
     EmptyView().fullScreenCover(isPresented: $viewModel.isOpen) {
