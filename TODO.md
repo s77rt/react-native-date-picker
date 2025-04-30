@@ -7,3 +7,4 @@
 -   [ ] iOS: What if the label is too long and what happen if we change it dynamically
 -   [ ] Rename setDate to setValue
 -   [ ] iOS Add dropshadow
+-   [ ] iOS move out callbacks from model view
