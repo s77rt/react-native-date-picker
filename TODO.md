@@ -9,3 +9,4 @@
 -   [ ] iOS Add dropshadow
 -   [ ] iOS move out callbacks from model view
 -   [ ] Fix extra onChange callbacks (check both on init and on setting new value)
+-   [ ] Test uncontrolled

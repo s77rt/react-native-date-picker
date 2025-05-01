@@ -10,6 +10,7 @@ import SwiftUI
   @objc public weak var delegate: RTNDatePickerUIViewDelegate?
 
   private let viewModel = RTNDatePickerViewModel()
+  private var lastValueUpdate: Date = Date()  // Default value in the view model
 
   @objc override public init(frame: CGRect) {
     super.init(frame: frame)
@@ -28,6 +29,10 @@ import SwiftUI
   }
 
   private func onChange(date: Date) {
+    if lastValueUpdate == date {
+      return
+    }
+    lastValueUpdate = date
     delegate?.onChange(date: date)
   }
 
@@ -44,6 +49,9 @@ import SwiftUI
   }
 
   @objc public func setValue(date: Date) {
+    // Changing the value programmatically shouldn't trigger the onChange event
+    lastValueUpdate = date
+
     viewModel.value = date
   }
 }
