@@ -7,6 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
@@ -43,6 +44,10 @@ fun RTNDatePickerView(
 ) {
     val isOpen by viewModel.isOpen.collectAsState()
     val datePickerState by viewModel.datePickerState.collectAsState()
+
+    LaunchedEffect(datePickerState.selectedDateMillis) {
+        onChange()
+    }
 
     if (isOpen) {
         DatePickerDialog(
