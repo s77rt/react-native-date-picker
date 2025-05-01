@@ -10,3 +10,5 @@
 -   [ ] iOS move out callbacks from model view
 -   [ ] Fix extra onChange callbacks (check both on init and on setting new value)
 -   [ ] Test uncontrolled
+-   [ ] Check warning Could not find generated setter for class com.s77rt.rtndatepicker.RTNDatePickerManager
+-   [ ] Date in Android is expected to be at the start of the day (00:00 AM)
