@@ -38,7 +38,7 @@ class RTNDatePickerViewModel : ViewModel() {
 @Composable
 fun RTNDatePickerView(
     viewModel: RTNDatePickerViewModel,
-    onChange: () -> Unit,
+    onChange: (date: Long?) -> Unit,
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
 ) {
@@ -46,7 +46,7 @@ fun RTNDatePickerView(
     val datePickerState by viewModel.datePickerState.collectAsState()
 
     LaunchedEffect(datePickerState.selectedDateMillis) {
-        onChange()
+        onChange(datePickerState.selectedDateMillis)
     }
 
     if (isOpen) {

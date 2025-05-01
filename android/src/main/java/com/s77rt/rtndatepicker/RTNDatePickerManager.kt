@@ -27,7 +27,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         isOpen: Boolean,
     ) {
-        view.viewModel.updateIsOpen(isOpen)
+        view.setIsOpen(isOpen)
     }
 
     @ReactProp(name = "value")
@@ -35,7 +35,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         value: Double,
     ) {
-        view.viewModel.updateValue((value * 1000).toLong()) // Datepicker date is in milliseconds
+        view.setValue((value * 1000).toLong()) // Datepicker date is in milliseconds
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =
