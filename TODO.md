@@ -13,3 +13,5 @@
 -   [ ] Check warning Could not find generated setter for class com.s77rt.rtndatepicker.RTNDatePickerManager
 -   [ ] Date in Android is expected to be at the start of the day (00:00 AM)
 -   [ ] Android: Should I move the milliseconds convertion to js? What about the event callback? (in seconds or milliseconds?) -- I think I should
+-   [ ] Make native props optional (and nullable?) and handle null (also check generated code)
+-   [ ] iOS: check the onChange callback value, is it on at start of the day or not?

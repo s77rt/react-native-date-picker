@@ -1,1 +1,2 @@
-export { default as DatePicker } from "./RTNDatePickerNativeComponent";
+export { default as DatePicker } from "./DatePicker";
+export type { DatePickerProps } from "./types";
