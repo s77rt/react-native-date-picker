@@ -54,7 +54,7 @@ class RTNDatePicker : FrameLayout {
 
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
-        val event = RTNDatePickerChangeEvent(surfaceId, id)
+        val event = RTNDatePickerChangeEvent(surfaceId, id, if (date == null) Double.NaN else date.toDouble())
 
         eventDispatcher?.dispatchEvent(event)
     }
