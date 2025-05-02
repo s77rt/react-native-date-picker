@@ -35,7 +35,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         value: Double,
     ) {
-        view.setValue((value * 1000).toLong()) // Datepicker date is in milliseconds
+        view.setValue(value.toLong())
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =
