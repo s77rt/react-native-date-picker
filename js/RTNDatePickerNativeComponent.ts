@@ -7,10 +7,14 @@ import type {
 	DirectEventHandler,
 } from "react-native/Libraries/Types/CodegenTypes";
 
+interface ChangeEvent {
+	value: Double;
+}
+
 export interface RTNDatePickerNativeProps extends ViewProps {
 	isOpen: boolean;
 	value: Double;
-	onChange: BubblingEventHandler<null>;
+	onChange: BubblingEventHandler<Readonly<ChangeEvent>>;
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;
 }

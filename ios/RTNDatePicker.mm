@@ -71,7 +71,8 @@ using namespace facebook::react;
 
 - (void)onChangeWithDate:(NSDate *_Nonnull)date {
   if (_eventEmitter) {
-    static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter).onChange({});
+    static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter)
+        .onChange({date.timeIntervalSince1970});
   }
 }
 
