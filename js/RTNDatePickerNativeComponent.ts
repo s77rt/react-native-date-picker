@@ -7,7 +7,7 @@ import type {
 	DirectEventHandler,
 } from "react-native/Libraries/Types/CodegenTypes";
 
-interface ChangeEvent {
+export interface ChangeEvent {
 	value: Double;
 }
 
