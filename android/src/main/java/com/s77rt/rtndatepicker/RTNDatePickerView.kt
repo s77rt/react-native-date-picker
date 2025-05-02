@@ -63,7 +63,7 @@ fun RTNDatePickerView(
                 }
             },
         ) {
-            DatePicker(state = datePickerState)
+            DatePicker(state = datePickerState, showModeToggle = false)
         }
     }
 }
