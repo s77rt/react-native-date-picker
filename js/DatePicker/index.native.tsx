@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from "react";
 import type { NativeSyntheticEvent } from "react-native";
-import type { DatePickerProps } from "../types";
+import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import type { ChangeEvent } from "../RTNDatePickerNativeComponent";
 import {
