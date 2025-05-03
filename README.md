@@ -30,6 +30,16 @@ function Example() {
 	const [displayedDate, setDisplayedDate] = useState<Date>();
 	const [selectedDate, setSelectedDate] = useState<Date>();
 
+	const selectDateAndClose = useCallback((confirmedDate: Date) => {
+		setSelectedDate(confirmedDate);
+		setIsDatePickerOpen(false);
+	}, []);
+
+	const resetDateAndClose = useCallback((restoredDate: Date) => {
+		setDisplayedDate(restoredDate);
+		setIsDatePickerOpen(false);
+	}, []);
+
 	return (
 		<>
 			<Text>Selected date: {selectedDate?.toString()}</Text>
@@ -41,14 +51,8 @@ function Example() {
 				isOpen={isDatePickerOpen}
 				value={displayedDate}
 				onChange={setDisplayedDate}
-				onConfirm={() => {
-					setSelectedDate(displayedDate);
-					setIsDatePickerOpen(false);
-				}}
-				onCancel={() => {
-					setDisplayedDate(selectedDate);
-					setIsDatePickerOpen(false);
-				}}
+				onConfirm={selectDateAndClose}
+				onCancel={resetDateAndClose}
 			/>
 		</>
 	);
@@ -57,13 +61,13 @@ function Example() {
 
 ## Props
 
-| Prop        | Type                    | Default      | Description                                                             |
-| ----------- | ----------------------- | ------------ | ----------------------------------------------------------------------- |
-| `ìsOpen`    | `boolean`               | `false`      | Whether the date picker modal is open.                                  |
-| `value`     | `Date`                  | `new Date()` | The set date in the date picker.                                        |
-| `onChange`  | `(value: Date) => void` |              | Callback when the user changes the date.                                |
-| `onConfirm` | `(value: Date) => void` |              | Callback when the user clicks the confirm button.                       |
-| `onCancel`  | `(value: Date) => void` |              | Callback when the user clicks the cancel button or dismisses the modal. |
+| Prop        | Type                    | Default      | Description                                                                                                       |
+| ----------- | ----------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `ìsOpen`    | `boolean`               | `false`      | Whether the date picker modal is open.                                                                            |
+| `value`     | `Date`                  | `new Date()` | The set date in the date picker.                                                                                  |
+| `onChange`  | `(value: Date) => void` |              | Callback when the user changes the date. `value` is the date the user clicked on.                                 |
+| `onConfirm` | `(value: Date) => void` |              | Callback when the user clicks the confirm button. `value` is the date the user confirmed.                         |
+| `onCancel`  | `(value: Date) => void` |              | Callback when the user clicks the cancel button or dismisses the modal. `value` is the date prior user selection. |
 
 ## License
 
