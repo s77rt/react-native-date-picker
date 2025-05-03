@@ -12,9 +12,14 @@ function DatePicker({
 	onCancel: onCancelProp,
 }: DatePickerProps) {
 	const value = useMemo(() => {
-		// The selected date is expected to be at the start of the day
+		// The selected date is expected to be at the start of the day in UTC
 		// Ref: https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-		return new Date(valueProp ?? Date.now()).setUTCHours(0, 0, 0, 0);
+		const date = new Date(valueProp ?? Date.now());
+		const dateUTC = new Date(
+			date.getTime() - date.getTimezoneOffset() * 60000
+		);
+
+		return dateUTC.setUTCHours(0, 0, 0, 0);
 	}, [valueProp]);
 
 	const onChange = useCallback(

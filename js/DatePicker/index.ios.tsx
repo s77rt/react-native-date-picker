@@ -12,8 +12,13 @@ function DatePicker({
 	onCancel: onCancelProp,
 }: DatePickerProps) {
 	const value = useMemo(() => {
-		// Set the date to the start of the day for consistency with Android
-		return new Date(valueProp ?? Date.now()).setUTCHours(0, 0, 0, 0) / 1000;
+		// Set the date to the start of the day in UTC for consistency with Android
+		const date = new Date(valueProp ?? Date.now());
+		const dateUTC = new Date(
+			date.getTime() - date.getTimezoneOffset() * 60000
+		);
+
+		return dateUTC.setUTCHours(0, 0, 0, 0) / 1000;
 	}, [valueProp]);
 
 	const onChange = useCallback(
