@@ -16,16 +16,8 @@ function DatePicker({
 	onCancel: onCancelProp,
 }: DatePickerProps) {
 	const value = useMemo(() => {
-		// On Android the selected date is expected to be at the start of the day in UTC
-		// https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-		//
-		// PS: This is not required on iOS but kept for consistency
 		const date = valueProp ?? new Date();
-		const dateUTC = new Date(
-			date.getTime() - date.getTimezoneOffset() * 60000
-		);
-
-		return nativeValueFromMsEpoch(dateUTC.setUTCHours(0, 0, 0, 0));
+		return nativeValueFromMsEpoch(date.getTime());
 	}, [valueProp]);
 
 	const onChange = useCallback(
