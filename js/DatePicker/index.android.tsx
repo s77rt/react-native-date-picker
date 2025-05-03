@@ -14,7 +14,7 @@ function DatePicker({
 	const value = useMemo(() => {
 		// The selected date is expected to be at the start of the day in UTC
 		// Ref: https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-		const date = new Date(valueProp ?? Date.now());
+		const date = valueProp ?? new Date();
 		const dateUTC = new Date(
 			date.getTime() - date.getTimezoneOffset() * 60000
 		);

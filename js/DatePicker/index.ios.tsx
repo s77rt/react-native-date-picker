@@ -13,7 +13,7 @@ function DatePicker({
 }: DatePickerProps) {
 	const value = useMemo(() => {
 		// Set the date to the start of the day in UTC for consistency with Android
-		const date = new Date(valueProp ?? Date.now());
+		const date = valueProp ?? new Date();
 		const dateUTC = new Date(
 			date.getTime() - date.getTimezoneOffset() * 60000
 		);
