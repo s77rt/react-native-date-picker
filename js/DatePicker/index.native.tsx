@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useRef } from "react";
 import type { NativeSyntheticEvent } from "react-native";
 import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
@@ -20,21 +20,26 @@ function DatePicker({
 		return nativeValueFromMsEpoch(date.getTime());
 	}, [valueProp]);
 
+	const displayedValue = useRef(value);
+	const selectedValue = useRef(value);
+
 	const onChange = useCallback(
 		(event: NativeSyntheticEvent<ChangeEvent>) => {
+			displayedValue.current = event.nativeEvent.value;
 			onChangeProp?.(
-				new Date(nativeValueToMsEpoch(event.nativeEvent.value))
+				new Date(nativeValueToMsEpoch(displayedValue.current))
 			);
 		},
 		[onChangeProp]
 	);
 
 	const onConfirm = useCallback(() => {
-		onConfirmProp?.();
+		selectedValue.current = displayedValue.current;
+		onConfirmProp?.(new Date(nativeValueToMsEpoch(selectedValue.current)));
 	}, [onConfirmProp]);
 
 	const onCancel = useCallback(() => {
-		onCancelProp?.();
+		onCancelProp?.(new Date(nativeValueToMsEpoch(selectedValue.current)));
 	}, [onCancelProp]);
 
 	return (
