@@ -7,6 +7,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
+import java.time.Instant
+import java.time.ZoneId
 
 class RTNDatePicker : FrameLayout {
     private lateinit var reactContext: ReactContext
@@ -79,7 +81,23 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateIsOpen(isOpen)
     }
 
-    public fun setValue(value: Long) {
+    public fun setValue(valueUncorrected: Long) {
+        // The selected date is expected to be at the start of the day in UTC
+        // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
+        val value =
+            Instant
+                .ofEpochMilli(valueUncorrected)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+                .atStartOfDay(ZoneId.of("UTC"))
+                .toEpochSecond() * 1000
+
+        // If the value is corrected, notify js regardless of the last value update
+        if (value != valueUncorrected) {
+            lastValueUpdate = null
+            onChange(value)
+        }
+
         // Changing the value programmatically shouldn't trigger the onChange event
         lastValueUpdate = value
 

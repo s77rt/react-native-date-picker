@@ -8,8 +8,6 @@ import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.viewmanagers.RTNDatePickerManagerDelegate
 import com.facebook.react.viewmanagers.RTNDatePickerManagerInterface
-import java.time.Instant
-import java.time.ZoneId
 
 @ReactModule(name = RTNDatePickerManager.NAME)
 class RTNDatePickerManager(
@@ -37,17 +35,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         value: Double,
     ) {
-        // The selected date is expected to be at the start of the day in UTC
-        // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-        val date =
-            Instant
-                .ofEpochMilli(value.toLong())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
-                .atStartOfDay(ZoneId.of("UTC"))
-                .toEpochSecond() * 1000
-
-        view.setValue(date)
+        view.setValue(value.toLong())
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =
