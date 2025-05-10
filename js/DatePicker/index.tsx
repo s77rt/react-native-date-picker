@@ -16,7 +16,7 @@ function DatePicker({
 
 	const value = useMemo(() => {
 		const date = valueProp ?? null;
-		if (!date) {
+		if (date === null) {
 			return "";
 		}
 		return [
