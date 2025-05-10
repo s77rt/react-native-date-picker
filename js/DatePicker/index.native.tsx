@@ -15,7 +15,10 @@ import {
 
 function DatePicker({ value, onChange, ref }: DatePickerProps) {
 	const initialDisplayedValue = useMemo(() => {
-		const date = value ?? new Date();
+		const date = value ?? null;
+		if (date === null) {
+			return null;
+		}
 		return nativeValueFromMsEpoch(date.getTime());
 	}, [value]);
 
@@ -30,7 +33,11 @@ function DatePicker({ value, onChange, ref }: DatePickerProps) {
 	);
 
 	const onConfirm = useCallback(() => {
-		onChange?.(new Date(nativeValueToMsEpoch(displayedValue)));
+		const date =
+			displayedValue === null
+				? null
+				: new Date(nativeValueToMsEpoch(displayedValue));
+		onChange?.(date);
 		setIsOpen(false);
 	}, [displayedValue, onChange]);
 
