@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.time.Instant
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,8 +28,8 @@ class RTNDatePickerViewModel : ViewModel() {
         _isOpen.value = newIsOpen
     }
 
-    fun updateValue(newValue: Long) {
-        _datePickerState.value.displayedMonthMillis = newValue
+    fun updateValue(newValue: Long?) {
+        _datePickerState.value.displayedMonthMillis = if (newValue == null) Instant.now().toEpochMilli() else newValue
         _datePickerState.value.selectedDateMillis = newValue
     }
 }
@@ -63,7 +64,7 @@ fun RTNDatePickerView(
                 }
             },
         ) {
-            DatePicker(state = datePickerState, showModeToggle = false)
+            DatePicker(state = datePickerState)
         }
     }
 }
