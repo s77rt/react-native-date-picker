@@ -1,2 +1,2 @@
 export { default as DatePicker } from "./DatePicker";
-export type { DatePickerProps } from "./DatePicker/types";
+export type { DatePickerHandle, DatePickerProps } from "./DatePicker/types";

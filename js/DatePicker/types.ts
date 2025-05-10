@@ -1,7 +1,11 @@
+import type { Ref } from "react";
+
+export type DatePickerHandle = {
+	showPicker: () => void;
+};
+
 export type DatePickerProps = {
-	isOpen?: boolean;
+	ref?: Ref<DatePickerHandle>;
 	value?: Date;
 	onChange?: (value: Date) => void;
-	onConfirm?: (value: Date) => void;
-	onCancel?: (value: Date) => void;
 };
