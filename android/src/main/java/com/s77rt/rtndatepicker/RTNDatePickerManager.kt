@@ -35,7 +35,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         value: Double,
     ) {
-        // React passes null as 0f (codegen)
+        // Codegen passes null as 0f (0.0)
         if (value == 0.0) {
             view.setValue(null)
             return
