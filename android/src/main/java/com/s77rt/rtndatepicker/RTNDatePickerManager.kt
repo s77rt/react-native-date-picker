@@ -36,6 +36,7 @@ class RTNDatePickerManager(
         value: Double,
     ) {
         // Codegen passes null as 0f (0.0)
+        // https://github.com/facebook/react-native/blob/996be870713cd72df1f91db99e8f981bbc5406af/packages/react-native-codegen/src/generators/components/GeneratePropsJavaDelegate.js#L107
         if (value == 0.0) {
             view.setValue(null)
             return
