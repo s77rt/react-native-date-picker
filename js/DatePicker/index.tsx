@@ -14,6 +14,17 @@ function DatePicker({
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
+	const style = useMemo(
+		() =>
+			({
+				position: "absolute",
+				opacity: 0,
+				zIndex: -9999,
+				pointerEvents: "none",
+			} as const),
+		[]
+	);
+
 	const value = useMemo(() => {
 		const date = valueProp ?? null;
 		if (date === null) {
@@ -46,8 +57,8 @@ function DatePicker({
 
 	return (
 		<input
-			style={{ position: "absolute", opacity: 0 }}
 			ref={inputRef}
+			style={style}
 			type="date"
 			value={value}
 			onChange={onChange}
