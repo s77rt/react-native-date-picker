@@ -37,6 +37,7 @@ function DatePicker({
 		ref,
 		() => ({
 			showPicker() {
+				inputRef.current?.focus();
 				inputRef.current?.showPicker();
 			},
 		}),
@@ -44,7 +45,13 @@ function DatePicker({
 	);
 
 	return (
-		<input ref={inputRef} type="date" value={value} onChange={onChange} />
+		<input
+			style={{ position: "absolute", opacity: 0 }}
+			ref={inputRef}
+			type="date"
+			value={value}
+			onChange={onChange}
+		/>
 	);
 }
 
