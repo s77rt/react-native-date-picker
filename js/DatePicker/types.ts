@@ -6,6 +6,6 @@ export type DatePickerHandle = {
 
 export type DatePickerProps = {
 	ref?: Ref<DatePickerHandle>;
-	value?: Date;
-	onChange?: (value: Date) => void;
+	value?: Date | null;
+	onChange?: (value: Date | null) => void;
 };
