@@ -40,9 +40,13 @@ using namespace facebook::react;
     _view.delegate = self;
 
     [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
-    [_view
-        setValueWithDate:[NSDate dateWithTimeIntervalSince1970:defaultViewProps
-                                                                   .value]];
+
+    // DatePicker value cannot be nil. Treat 0.0 as the current date.
+    NSDate *date =
+        defaultViewProps.value == 0.0
+            ? NSDate.now
+            : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.value];
+    [_view setValueWithDate:date];
 
     self.contentView = _view;
   }
@@ -61,9 +65,12 @@ using namespace facebook::react;
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
   }
   if (oldViewProps.value != newViewProps.value) {
-    [_view
-        setValueWithDate:[NSDate
-                             dateWithTimeIntervalSince1970:newViewProps.value]];
+    // DatePicker value cannot be nil. Treat 0.0 as the current date.
+    NSDate *date =
+        newViewProps.value == 0.0
+            ? NSDate.now
+            : [NSDate dateWithTimeIntervalSince1970:newViewProps.value];
+    [_view setValueWithDate:date];
   }
 
   [super updateProps:props oldProps:oldProps];
