@@ -9,13 +9,14 @@ import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import type { ChangeEvent } from "../RTNDatePickerNativeComponent";
 import {
+	defaultDateValue,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
 
 function DatePicker({ value, onChange, ref }: DatePickerProps) {
 	const initialDisplayedValue = useMemo(() => {
-		const date = value ?? null;
+		const date = value ?? defaultDateValue();
 		if (date === null) {
 			return null;
 		}

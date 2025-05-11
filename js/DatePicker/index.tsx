@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
+import { defaultDateValue } from "../utils/DateUtils";
 
 function DatePicker({
 	value: valueProp,
@@ -28,7 +29,7 @@ function DatePicker({
 	);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? null;
+		const date = valueProp ?? defaultDateValue();
 		if (date === null) {
 			return "";
 		}
