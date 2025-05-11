@@ -62,6 +62,7 @@ function DatePicker({
 			type="date"
 			value={value}
 			onChange={onChange}
+			tabIndex="-1"
 		/>
 	);
 }
