@@ -7,13 +7,17 @@ import com.facebook.react.uimanager.events.Event
 internal class RTNDatePickerChangeEvent(
     surfaceId: Int,
     viewId: Int,
-    private val value: Double,
+    private val value: Double?,
 ) : Event<RTNDatePickerChangeEvent>(surfaceId, viewId) {
     override fun getEventName(): String = EVENT_NAME
 
     override fun getEventData(): WritableMap? =
-        Arguments.createMap().apply {
-            putDouble("value", value)
+        Arguments.createMap().also {
+            if (value == null) {
+                it.putNull("value")
+            } else {
+                it.putDouble("value", value)
+            }
         }
 
     public companion object {

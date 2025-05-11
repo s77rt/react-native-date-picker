@@ -1,4 +1,9 @@
-import React, { useMemo, useCallback, useRef } from "react";
+import React, {
+	useCallback,
+	useMemo,
+	useState,
+	useImperativeHandle,
+} from "react";
 import type { NativeSyntheticEvent } from "react-native";
 import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
@@ -8,45 +13,55 @@ import {
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
 
-function DatePicker({
-	isOpen = false,
-	value: valueProp,
-	onChange: onChangeProp,
-	onConfirm: onConfirmProp,
-	onCancel: onCancelProp,
-}: DatePickerProps) {
-	const value = useMemo(() => {
-		const date = valueProp ?? new Date();
+function DatePicker({ value, onChange, ref }: DatePickerProps) {
+	const initialDisplayedValue = useMemo(() => {
+		const date = value ?? null;
+		if (date === null) {
+			return null;
+		}
 		return nativeValueFromMsEpoch(date.getTime());
-	}, [valueProp]);
+	}, [value]);
 
-	const displayedValue = useRef(value);
-	const selectedValue = useRef(value);
+	const [isOpen, setIsOpen] = useState(false);
 
-	const onChange = useCallback(
+	const [displayedValue, setDisplayedValue] = useState(initialDisplayedValue);
+	const onDisplayedValueChange = useCallback(
 		(event: NativeSyntheticEvent<ChangeEvent>) => {
-			displayedValue.current = event.nativeEvent.value;
-			onChangeProp?.(
-				new Date(nativeValueToMsEpoch(displayedValue.current))
-			);
+			setDisplayedValue(event.nativeEvent.value);
 		},
-		[onChangeProp]
+		[]
 	);
 
 	const onConfirm = useCallback(() => {
-		selectedValue.current = displayedValue.current;
-		onConfirmProp?.(new Date(nativeValueToMsEpoch(selectedValue.current)));
-	}, [onConfirmProp]);
+		const date =
+			displayedValue === null
+				? null
+				: new Date(nativeValueToMsEpoch(displayedValue));
+		onChange?.(date);
+		setIsOpen(false);
+	}, [displayedValue, onChange]);
 
 	const onCancel = useCallback(() => {
-		onCancelProp?.(new Date(nativeValueToMsEpoch(selectedValue.current)));
-	}, [onCancelProp]);
+		setDisplayedValue(initialDisplayedValue);
+		setIsOpen(false);
+	}, [initialDisplayedValue]);
+
+	useImperativeHandle(
+		ref,
+		() => ({
+			showPicker() {
+				setDisplayedValue(initialDisplayedValue);
+				setIsOpen(true);
+			},
+		}),
+		[initialDisplayedValue]
+	);
 
 	return (
 		<RTNDatePickerNativeComponent
 			isOpen={isOpen}
-			value={value}
-			onChange={onChange}
+			value={displayedValue}
+			onChange={onDisplayedValueChange}
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 		/>

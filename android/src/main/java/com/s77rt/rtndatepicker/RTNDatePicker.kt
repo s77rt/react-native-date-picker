@@ -56,7 +56,7 @@ class RTNDatePicker : FrameLayout {
 
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
-        val event = RTNDatePickerChangeEvent(surfaceId, id, if (date == null) Double.NaN else date.toDouble())
+        val event = RTNDatePickerChangeEvent(surfaceId, id, if (date == null) null else date.toDouble())
 
         eventDispatcher?.dispatchEvent(event)
     }
@@ -81,16 +81,20 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateIsOpen(isOpen)
     }
 
-    public fun setValue(valueUncorrected: Long) {
+    public fun setValue(valueUncorrected: Long?) {
         // The selected date is expected to be at the start of the day in UTC
         // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
         val value =
-            Instant
-                .ofEpochMilli(valueUncorrected)
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
-                .atStartOfDay(ZoneId.of("UTC"))
-                .toEpochSecond() * 1000
+            if (valueUncorrected == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(valueUncorrected)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
 
         // If the value is corrected, notify js regardless of the last value update
         if (value != valueUncorrected) {
