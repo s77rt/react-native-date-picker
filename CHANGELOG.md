@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2025-05-11
+
+### Added
+
+-   Web support ([#4](https://github.com/s77rt/react-native-date-picker/pull/4)).
+
+### Changed
+
+-   Simplified usage and props ([#4](https://github.com/s77rt/react-native-date-picker/pull/4)).
+
 ## [0.2.0] - 2025-05-03
 
 ### Changed
@@ -18,5 +28,6 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[1.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/s77rt/react-native-date-picker/releases/tag/v0.1.0
