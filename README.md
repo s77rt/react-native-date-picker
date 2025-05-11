@@ -23,9 +23,7 @@ npm install @s77rt/react-native-date-picker
 <details>
 <summary>See it in action</summary>
 
-| iOS                                                                                                                               | Android                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| <img alt="demo-ios" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-ios.gif" /> | <img alt="demo-android" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-android.gif" /> |
+<video alt="demo" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo.mp4" />
 
 </details>
 
