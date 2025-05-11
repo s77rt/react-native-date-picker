@@ -21,6 +21,8 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
+				width: 0,
+				height: 0,
 			} as const),
 		[]
 	);
@@ -62,7 +64,7 @@ function DatePicker({
 			type="date"
 			value={value}
 			onChange={onChange}
-			tabIndex="-1"
+			tabIndex={-1}
 		/>
 	);
 }
