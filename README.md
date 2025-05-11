@@ -14,9 +14,20 @@ npm install @s77rt/react-native-date-picker
 
 ## Demo
 
-| iOS                                                                                                                           | Android                                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| <img alt="hero" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-ios.gif" /> | <img alt="hero" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-android.gif" /> |
+### Screenshots
+
+|                                                                      iOS                                                                      |                                                                        Android                                                                        | mWeb - Safari                                                                                                                                                 | mWeb - Chrome                                                                                                                                                 | Web - Chrome                                                                                                                                                |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img alt="screenshot-ios" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/screenshot-ios.png" /> | <img alt="screenshot-android" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/screenshot-android.png" /> | <img alt="screenshot-mweb-safari" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/screenshot-mweb-safari.png" /> | <img alt="screenshot-mweb-chrome" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/screenshot-mweb-chrome.jpg" /> | <img alt="screenshot-web-chrome" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/screenshot-web-chrome.png" /> |
+
+<details>
+<summary>See it in action</summary>
+
+| iOS                                                                                                                               | Android                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| <img alt="demo-ios" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-ios.gif" /> | <img alt="demo-android" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/demo-android.gif" /> |
+
+</details>
 
 ## Usage
 
