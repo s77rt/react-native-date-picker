@@ -22,38 +22,28 @@ npm install @s77rt/react-native-date-picker
 
 ```tsx
 import { DatePicker } from "@s77rt/react-native-date-picker";
+import type { DatePickerHandle } from "@s77rt/react-native-date-picker";
 ```
 
 ```tsx
 function Example() {
-	const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-	const [displayedDate, setDisplayedDate] = useState<Date>();
-	const [selectedDate, setSelectedDate] = useState<Date>();
-
-	const selectDateAndClose = useCallback((confirmedDate: Date) => {
-		setSelectedDate(confirmedDate);
-		setIsDatePickerOpen(false);
-	}, []);
-
-	const resetDateAndClose = useCallback((restoredDate: Date) => {
-		setDisplayedDate(restoredDate);
-		setIsDatePickerOpen(false);
-	}, []);
+	const datePicker = useRef<DatePickerHandle>(null);
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
 	return (
 		<>
-			<Text>Selected date: {selectedDate?.toString()}</Text>
-			<Button
-				title="Select date 📅"
-				onPress={() => setIsDatePickerOpen(true)}
-			/>
-			<DatePicker
-				isOpen={isDatePickerOpen}
-				value={displayedDate}
-				onChange={setDisplayedDate}
-				onConfirm={selectDateAndClose}
-				onCancel={resetDateAndClose}
-			/>
+			<Text>Selected date: {selectedDate?.toLocaleDateString()}</Text>
+			<View>
+				<Button
+					title="Select date 📅"
+					onPress={() => datePicker.current?.showPicker()}
+				/>
+				<DatePicker
+					ref={datePicker}
+					value={selectedDate}
+					onChange={setSelectedDate}
+				/>
+			</View>
 		</>
 	);
 }
@@ -61,13 +51,17 @@ function Example() {
 
 ## Props
 
-| Prop        | Type                    | Default      | Description                                                                                                       |
-| ----------- | ----------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `ìsOpen`    | `boolean`               | `false`      | Whether the date picker modal is open.                                                                            |
-| `value`     | `Date`                  | `new Date()` | The set date in the date picker.                                                                                  |
-| `onChange`  | `(value: Date) => void` |              | Callback when the user changes the date. `value` is the date the user clicked on.                                 |
-| `onConfirm` | `(value: Date) => void` |              | Callback when the user clicks the confirm button. `value` is the date the user confirmed.                         |
-| `onCancel`  | `(value: Date) => void` |              | Callback when the user clicks the cancel button or dismisses the modal. `value` is the date prior user selection. |
+| Prop       | Type                            | Description                                       |
+| ---------- | ------------------------------- | ------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                   |
+| `value`    | `Date \| null`                  | The selected date.                                |
+| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date. |
+
+## Methods
+
+| Method       | Type         | Description       |
+| ------------ | ------------ | ----------------- |
+| `showPicker` | `() => void` | Shows the picker. |
 
 ## License
 
