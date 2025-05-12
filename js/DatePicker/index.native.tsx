@@ -15,6 +15,8 @@ import {
 } from "../utils/DateUtils";
 
 function DatePicker({ value, onChange, ref }: DatePickerProps) {
+	const [isOpen, setIsOpen] = useState(false);
+
 	const initialDisplayedValue = useMemo(() => {
 		const date = value ?? defaultDateValue();
 		if (date === null) {
@@ -22,8 +24,6 @@ function DatePicker({ value, onChange, ref }: DatePickerProps) {
 		}
 		return nativeValueFromMsEpoch(date.getTime());
 	}, [value]);
-
-	const [isOpen, setIsOpen] = useState(false);
 
 	const [displayedValue, setDisplayedValue] = useState(initialDisplayedValue);
 	const onDisplayedValueChange = useCallback(
