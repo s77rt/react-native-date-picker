@@ -9,9 +9,9 @@ import type { DatePickerProps } from "./types";
 import { dateToISO8601Date, defaultDateValue } from "../utils/DateUtils";
 
 function DatePicker({
+	ref,
 	value: valueProp,
 	onChange: onChangeProp,
-	ref,
 	min: minProp,
 	max: maxProp,
 }: DatePickerProps) {
