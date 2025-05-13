@@ -19,49 +19,79 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 class RTNDatePickerViewModel : ViewModel() {
+    private var lowerBound: Long? = null
+    private var upperBound: Long? = null
+
     private val _isOpen = MutableStateFlow(false)
-    private val _datePickerState = MutableStateFlow(DatePickerState(Locale.getDefault()))
-
-    val isOpen: StateFlow<Boolean> get() = _isOpen
-    val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
-
-    fun updateIsOpen(newIsOpen: Boolean) {
-        _isOpen.value = newIsOpen
-    }
-
-    fun updateValue(newValue: Long?) {
-        _datePickerState.value.displayedMonthMillis = if (newValue == null) Instant.now().toEpochMilli() else newValue
-        _datePickerState.value.selectedDateMillis = newValue
-    }
-
-    fun updateRange(
-        lowerBound: Long?,
-        upperBound: Long?,
-    ) {
-        // The selectableDates field is a const and cannot be changed.
-        // As a workaround reconstruct the current state as a new state with the desired selectableDates.
-        _datePickerState.value =
+    private val _datePickerState =
+        MutableStateFlow(
             DatePickerState(
-                initialSelectedDateMillis = _datePickerState.value.selectedDateMillis,
-                initialDisplayedMonthMillis = _datePickerState.value.displayedMonthMillis,
-                yearRange = _datePickerState.value.yearRange,
-                initialDisplayMode = _datePickerState.value.displayMode,
                 locale = Locale.getDefault(),
                 selectableDates =
                     object : SelectableDates {
                         override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                            if (lowerBound != null && utcTimeMillis < lowerBound) {
+                            val lb = lowerBound
+                            val ub = upperBound
+
+                            if (lb != null && utcTimeMillis < lb) {
                                 return false
                             }
 
-                            if (upperBound != null && utcTimeMillis > upperBound) {
+                            if (ub != null && utcTimeMillis > ub) {
                                 return false
                             }
 
                             return true
                         }
                     },
-            )
+            ),
+        )
+
+    val isOpen: StateFlow<Boolean> get() = _isOpen
+    val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
+
+    fun syncDisplayedMonth() {
+        var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
+
+        if (newDisplayedMonthMillis == null) {
+            newDisplayedMonthMillis = Instant.now().toEpochMilli()
+        }
+
+        if (!_datePickerState.value.selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
+            val lb = lowerBound
+            val ub = upperBound
+
+            if (lb != null && ub != null) {
+                newDisplayedMonthMillis = if (newDisplayedMonthMillis > ub) ub else lb
+            } else if (lb != null) {
+                newDisplayedMonthMillis = lb
+            } else if (ub != null) {
+                newDisplayedMonthMillis = ub
+            }
+        }
+
+        _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
+    }
+
+    fun updateIsOpen(newIsOpen: Boolean) {
+        if (newIsOpen) {
+            syncDisplayedMonth()
+        }
+        _isOpen.value = newIsOpen
+    }
+
+    fun updateValue(newValue: Long?) {
+        _datePickerState.value.selectedDateMillis = newValue
+        syncDisplayedMonth()
+    }
+
+    fun updateRange(
+        newLowerBound: Long?,
+        newUpperBound: Long?,
+    ) {
+        lowerBound = newLowerBound
+        upperBound = newUpperBound
+        syncDisplayedMonth()
     }
 }
 
