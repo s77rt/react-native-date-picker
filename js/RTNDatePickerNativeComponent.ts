@@ -11,12 +11,18 @@ export interface ChangeEvent {
 	value: Double | null;
 }
 
+export interface Range {
+	lowerBound?: Double;
+	upperBound?: Double;
+}
+
 export interface RTNDatePickerNativeProps extends ViewProps {
 	isOpen: boolean;
 	value: Double | null;
 	onChange: BubblingEventHandler<Readonly<ChangeEvent>>;
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;
+	range: Range;
 }
 
 export default codegenNativeComponent<RTNDatePickerNativeProps>(

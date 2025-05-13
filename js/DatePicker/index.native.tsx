@@ -7,14 +7,14 @@ import React, {
 import type { NativeSyntheticEvent } from "react-native";
 import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
-import type { ChangeEvent } from "../RTNDatePickerNativeComponent";
+import type { ChangeEvent, Range } from "../RTNDatePickerNativeComponent";
 import {
 	defaultDateValue,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
 
-function DatePicker({ value, onChange, ref }: DatePickerProps) {
+function DatePicker({ ref, value, onChange, min, max }: DatePickerProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const initialDisplayedValue = useMemo(() => {
@@ -47,6 +47,20 @@ function DatePicker({ value, onChange, ref }: DatePickerProps) {
 		setIsOpen(false);
 	}, [initialDisplayedValue]);
 
+	const range = useMemo<Range>(
+		() => ({
+			lowerBound:
+				min === undefined
+					? undefined
+					: nativeValueFromMsEpoch(min.getTime()),
+			upperBound:
+				max === undefined
+					? undefined
+					: nativeValueFromMsEpoch(max.getTime()),
+		}),
+		[min, max]
+	);
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -65,6 +79,7 @@ function DatePicker({ value, onChange, ref }: DatePickerProps) {
 			onChange={onDisplayedValueChange}
 			onConfirm={onConfirm}
 			onCancel={onCancel}
+			range={range}
 		/>
 	);
 }

@@ -54,4 +54,8 @@ import SwiftUI
 
     viewModel.value = date
   }
+
+  @objc public func setRange(lowerBound: Date, upperBound: Date) {
+    viewModel.range = lowerBound...upperBound
+  }
 }
