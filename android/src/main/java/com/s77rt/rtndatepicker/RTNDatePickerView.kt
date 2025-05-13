@@ -4,6 +4,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -31,6 +32,36 @@ class RTNDatePickerViewModel : ViewModel() {
     fun updateValue(newValue: Long?) {
         _datePickerState.value.displayedMonthMillis = if (newValue == null) Instant.now().toEpochMilli() else newValue
         _datePickerState.value.selectedDateMillis = newValue
+    }
+
+    fun updateRange(
+        lowerBound: Long?,
+        upperBound: Long?,
+    ) {
+        // The selectableDates field is a const and cannot be changed.
+        // As a workaround reconstruct the current state as a new state with the desired selectableDates.
+        _datePickerState.value =
+            DatePickerState(
+                initialSelectedDateMillis = _datePickerState.value.selectedDateMillis,
+                initialDisplayedMonthMillis = _datePickerState.value.displayedMonthMillis,
+                yearRange = _datePickerState.value.yearRange,
+                initialDisplayMode = _datePickerState.value.displayMode,
+                locale = Locale.getDefault(),
+                selectableDates =
+                    object : SelectableDates {
+                        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                            if (lowerBound != null && utcTimeMillis < lowerBound) {
+                                return false
+                            }
+
+                            if (upperBound != null && utcTimeMillis > upperBound) {
+                                return false
+                            }
+
+                            return true
+                        }
+                    },
+            )
     }
 }
 
