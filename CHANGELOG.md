@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-05-14
+
+### Added
+
+-   min and max props ([#6](https://github.com/s77rt/react-native-date-picker/pull/6)).
+
+### Fixed
+
+-   Android: Displayed month is not reset after cancelling selection ([#7](https://github.com/s77rt/react-native-date-picker/issues/7)).
+
 ## [1.0.1] - 2025-05-11
 
 ### Fixed
@@ -34,6 +44,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[1.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v0.1.0...v0.2.0
