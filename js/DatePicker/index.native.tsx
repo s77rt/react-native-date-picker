@@ -4,6 +4,7 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from "react";
+import { StyleSheet } from "react-native";
 import type { NativeSyntheticEvent } from "react-native";
 import type { DatePickerProps } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
@@ -22,14 +23,18 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	inline = false,
+	style: styleProp,
+	...rest
 }: DatePickerProps) {
 	const style = useMemo(
 		() =>
-			({
-				// Only inline display mode requires an actual reserved space for drawing.
-				...(inline ? defaultSize() : undefined),
-			} as const),
-		[inline]
+			StyleSheet.compose(
+				{
+					...defaultSize(inline),
+				} as const,
+				styleProp
+			),
+		[inline, styleProp]
 	);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -101,6 +106,7 @@ function DatePicker({
 			onCancel={onCancel}
 			range={range}
 			inline={inline}
+			{...rest}
 		/>
 	);
 }
