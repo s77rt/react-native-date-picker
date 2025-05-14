@@ -10,4 +10,5 @@ export type DatePickerProps = {
 	onChange?: (value: Date | null) => void;
 	min?: Date;
 	max?: Date;
+	inline?: boolean;
 };

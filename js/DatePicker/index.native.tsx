@@ -10,6 +10,7 @@ import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import type { ChangeEvent, Range } from "../RTNDatePickerNativeComponent";
 import {
 	defaultDateValue,
+	defaultSize,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
@@ -20,7 +21,17 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	inline = false,
 }: DatePickerProps) {
+	const style = useMemo(
+		() =>
+			({
+				// Only inline display mode requires an actual reserved space for drawing.
+				...(inline ? defaultSize() : undefined),
+			} as const),
+		[inline]
+	);
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const range = useMemo<Range>(
@@ -82,12 +93,14 @@ function DatePicker({
 
 	return (
 		<RTNDatePickerNativeComponent
+			style={style}
 			isOpen={isOpen}
 			value={value}
 			onChange={onChange}
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
+			inline={inline}
 		/>
 	);
 }

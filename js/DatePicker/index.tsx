@@ -3,10 +3,15 @@ import React, {
 	useMemo,
 	useCallback,
 	useImperativeHandle,
+	useEffect,
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import { dateToISO8601Date, defaultDateValue } from "../utils/DateUtils";
+import {
+	dateToISO8601Date,
+	defaultDateValue,
+	defaultSize,
+} from "../utils/DateUtils";
 
 function DatePicker({
 	ref,
@@ -14,6 +19,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	inline = false,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,8 +30,7 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
-				width: 0,
-				height: 0,
+				...defaultSize(),
 			} as const),
 		[]
 	);
@@ -71,6 +76,15 @@ function DatePicker({
 		}),
 		[]
 	);
+
+	useEffect(() => {
+		if (!inline) {
+			return;
+		}
+		console.warn(
+			"@s77rt/react-native-date-picker: inline is not supported on web."
+		);
+	}, [inline]);
 
 	return (
 		<input
