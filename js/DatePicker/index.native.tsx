@@ -23,13 +23,34 @@ function DatePicker({
 }: DatePickerProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const range = useMemo<Range>(
+		() => ({
+			lowerBound:
+				minProp === undefined
+					? undefined
+					: nativeValueFromMsEpoch(minProp.getTime()),
+			upperBound:
+				maxProp === undefined
+					? undefined
+					: nativeValueFromMsEpoch(maxProp.getTime()),
+		}),
+		[minProp, maxProp]
+	);
+
 	const initialValue = useMemo(() => {
 		const date = valueProp ?? defaultDateValue();
 		if (date === null) {
 			return null;
 		}
-		return nativeValueFromMsEpoch(date.getTime());
-	}, [valueProp]);
+		const dateValue = nativeValueFromMsEpoch(date.getTime());
+		if (range.lowerBound !== undefined && dateValue < range.lowerBound) {
+			return range.lowerBound;
+		}
+		if (range.upperBound !== undefined && dateValue > range.upperBound) {
+			return range.upperBound;
+		}
+		return dateValue;
+	}, [valueProp, range]);
 
 	const [value, setValue] = useState(initialValue);
 	const onChange = useCallback((event: NativeSyntheticEvent<ChangeEvent>) => {
@@ -47,20 +68,6 @@ function DatePicker({
 		setValue(initialValue);
 		setIsOpen(false);
 	}, [initialValue]);
-
-	const range = useMemo<Range>(
-		() => ({
-			lowerBound:
-				minProp === undefined
-					? undefined
-					: nativeValueFromMsEpoch(minProp.getTime()),
-			upperBound:
-				maxProp === undefined
-					? undefined
-					: nativeValueFromMsEpoch(maxProp.getTime()),
-		}),
-		[minProp, maxProp]
-	);
 
 	useImperativeHandle(
 		ref,
