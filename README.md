@@ -65,6 +65,8 @@ function Example() {
 | `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                   |
 | `value`    | `Date \| null`                  | The selected date.                                |
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date. |
+| `min`      | `Date`                          | The earliest selectable date.                     |
+| `max`      | `Date`                          | The latest selectable date.                       |
 
 ## Methods
 

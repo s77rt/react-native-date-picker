@@ -107,4 +107,35 @@ class RTNDatePicker : FrameLayout {
 
         viewModel.updateValue(value)
     }
+
+    public fun setRange(
+        lowerBoundUncorrected: Long?,
+        upperBoundUncorrected: Long?,
+    ) {
+        val lowerBound =
+            if (lowerBoundUncorrected == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(lowerBoundUncorrected)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+
+        val upperBound =
+            if (upperBoundUncorrected == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(upperBoundUncorrected)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+
+        viewModel.updateRange(lowerBound, upperBound)
+    }
 }

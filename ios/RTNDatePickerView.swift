@@ -3,6 +3,7 @@ import SwiftUI
 class RTNDatePickerViewModel: ObservableObject {
   @Published var isOpen: Bool = false
   @Published var value: Date = Date()
+  @Published var range: ClosedRange<Date> = Date.distantPast...Date.distantFuture
 
   init() {}
 }
@@ -21,7 +22,9 @@ struct RTNDatePickerView: View {
             onCancel()
           }
         VStack {
-          DatePicker("", selection: $viewModel.value, displayedComponents: [.date]).datePickerStyle(
+          DatePicker(
+            "", selection: $viewModel.value, in: viewModel.range, displayedComponents: [.date]
+          ).datePickerStyle(
             .graphical
           ).labelsHidden().onChange(
             of: viewModel.value

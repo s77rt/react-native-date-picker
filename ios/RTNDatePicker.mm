@@ -40,9 +40,24 @@ using namespace facebook::react;
     _view.delegate = self;
 
     [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
+
     [_view
         setValueWithDate:[NSDate dateWithTimeIntervalSince1970:defaultViewProps
                                                                    .value]];
+
+    // Codegen props are zero-initialized (undefined values are zeroed by
+    // default)
+    NSDate *lowerBound =
+        defaultViewProps.range.lowerBound == 0.0
+            ? NSDate.distantPast
+            : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
+                                                        .lowerBound];
+    NSDate *upperBound =
+        defaultViewProps.range.upperBound == 0.0
+            ? NSDate.distantFuture
+            : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
+                                                        .upperBound];
+    [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
 
     self.contentView = _view;
   }
@@ -60,10 +75,28 @@ using namespace facebook::react;
   if (oldViewProps.isOpen != newViewProps.isOpen) {
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
   }
+
   if (oldViewProps.value != newViewProps.value) {
     [_view
         setValueWithDate:[NSDate
                              dateWithTimeIntervalSince1970:newViewProps.value]];
+  }
+
+  if (oldViewProps.range.lowerBound != newViewProps.range.lowerBound ||
+      oldViewProps.range.upperBound != newViewProps.range.upperBound) {
+    // Codegen props are zero-initialized (undefined values are zeroed by
+    // default)
+    NSDate *lowerBound =
+        newViewProps.range.lowerBound == 0.0
+            ? NSDate.distantPast
+            : [NSDate
+                  dateWithTimeIntervalSince1970:newViewProps.range.lowerBound];
+    NSDate *upperBound =
+        newViewProps.range.upperBound == 0.0
+            ? NSDate.distantFuture
+            : [NSDate
+                  dateWithTimeIntervalSince1970:newViewProps.range.upperBound];
+    [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
   }
 
   [super updateProps:props oldProps:oldProps];

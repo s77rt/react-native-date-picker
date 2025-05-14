@@ -4,6 +4,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,19 +19,77 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 class RTNDatePickerViewModel : ViewModel() {
+    private var lowerBound: Long? = null
+    private var upperBound: Long? = null
+
     private val _isOpen = MutableStateFlow(false)
-    private val _datePickerState = MutableStateFlow(DatePickerState(Locale.getDefault()))
+    private val _datePickerState =
+        MutableStateFlow(
+            DatePickerState(
+                locale = Locale.getDefault(),
+                selectableDates =
+                    object : SelectableDates {
+                        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                            val lb = lowerBound
+                            val ub = upperBound
+
+                            if (lb != null && utcTimeMillis < lb) {
+                                return false
+                            }
+
+                            if (ub != null && utcTimeMillis > ub) {
+                                return false
+                            }
+
+                            return true
+                        }
+                    },
+            ),
+        )
 
     val isOpen: StateFlow<Boolean> get() = _isOpen
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
 
+    fun syncDisplayedMonth() {
+        var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
+
+        if (newDisplayedMonthMillis == null) {
+            newDisplayedMonthMillis = Instant.now().toEpochMilli()
+        }
+
+        if (!_datePickerState.value.selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
+            val lb = lowerBound
+            val ub = upperBound
+
+            if (lb != null && newDisplayedMonthMillis < lb) {
+                newDisplayedMonthMillis = lb
+            } else if (ub != null && newDisplayedMonthMillis > ub) {
+                newDisplayedMonthMillis = ub
+            }
+        }
+
+        _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
+    }
+
     fun updateIsOpen(newIsOpen: Boolean) {
+        if (newIsOpen) {
+            syncDisplayedMonth()
+        }
         _isOpen.value = newIsOpen
     }
 
     fun updateValue(newValue: Long?) {
-        _datePickerState.value.displayedMonthMillis = if (newValue == null) Instant.now().toEpochMilli() else newValue
         _datePickerState.value.selectedDateMillis = newValue
+        syncDisplayedMonth()
+    }
+
+    fun updateRange(
+        newLowerBound: Long?,
+        newUpperBound: Long?,
+    ) {
+        lowerBound = newLowerBound
+        upperBound = newUpperBound
+        syncDisplayedMonth()
     }
 }
 

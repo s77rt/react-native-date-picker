@@ -1,6 +1,7 @@
 package com.s77rt.rtndatepicker
 
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -43,6 +44,22 @@ class RTNDatePickerManager(
         }
 
         view.setValue(value.toLong())
+    }
+
+    @ReactProp(name = "range")
+    override fun setRange(
+        view: RTNDatePicker,
+        range: ReadableMap?,
+    ) {
+        if (range == null) {
+            view.setRange(null, null)
+            return
+        }
+
+        val lowerBound = if (range.hasKey("lowerBound")) range.getDouble("lowerBound").toLong() else null
+        val upperBound = if (range.hasKey("upperBound")) range.getDouble("upperBound").toLong() else null
+
+        view.setRange(lowerBound, upperBound)
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =

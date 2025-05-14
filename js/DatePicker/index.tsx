@@ -6,12 +6,14 @@ import React, {
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import { defaultDateValue } from "../utils/DateUtils";
+import { dateToISO8601Date, defaultDateValue } from "../utils/DateUtils";
 
 function DatePicker({
+	ref,
 	value: valueProp,
 	onChange: onChangeProp,
-	ref,
+	min: minProp,
+	max: maxProp,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,11 +35,7 @@ function DatePicker({
 		if (date === null) {
 			return "";
 		}
-		return [
-			date.getFullYear(),
-			("0" + (date.getMonth() + 1)).slice(-2),
-			("0" + date.getDate()).slice(-2),
-		].join("-");
+		return dateToISO8601Date(date);
 	}, [valueProp]);
 
 	const onChange = useCallback(
@@ -46,6 +44,22 @@ function DatePicker({
 		},
 		[onChangeProp]
 	);
+
+	const min = useMemo(() => {
+		const date = minProp;
+		if (date === undefined) {
+			return undefined;
+		}
+		return dateToISO8601Date(date);
+	}, [minProp]);
+
+	const max = useMemo(() => {
+		const date = maxProp;
+		if (date === undefined) {
+			return undefined;
+		}
+		return dateToISO8601Date(date);
+	}, [maxProp]);
 
 	useImperativeHandle(
 		ref,
@@ -65,6 +79,8 @@ function DatePicker({
 			type="date"
 			value={value}
 			onChange={onChange}
+			min={min}
+			max={max}
 			tabIndex={-1}
 		/>
 	);
