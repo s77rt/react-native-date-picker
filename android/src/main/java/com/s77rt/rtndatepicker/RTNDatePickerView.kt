@@ -61,11 +61,9 @@ class RTNDatePickerViewModel : ViewModel() {
             val lb = lowerBound
             val ub = upperBound
 
-            if (lb != null && ub != null) {
-                newDisplayedMonthMillis = if (newDisplayedMonthMillis > ub) ub else lb
-            } else if (lb != null) {
+            if (lb != null && newDisplayedMonthMillis < lb) {
                 newDisplayedMonthMillis = lb
-            } else if (ub != null) {
+            } else if (ub != null && newDisplayedMonthMillis > ub) {
                 newDisplayedMonthMillis = ub
             }
         }
