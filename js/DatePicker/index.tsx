@@ -6,7 +6,6 @@ import React, {
 	useEffect,
 } from "react";
 import type { ChangeEvent } from "react";
-import { StyleSheet } from "react-native";
 import type { DatePickerProps } from "./types";
 import {
 	dateToISO8601Date,
@@ -21,24 +20,19 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	inline = false,
-	style: styleProp,
-	...rest
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const style = useMemo(
 		() =>
-			StyleSheet.compose(
-				{
-					position: "absolute",
-					opacity: 0,
-					zIndex: -9999,
-					pointerEvents: "none",
-					...defaultSize(inline),
-				} as const,
-				styleProp
-			),
-		[inline, styleProp]
+			({
+				position: "absolute",
+				opacity: 0,
+				zIndex: -9999,
+				pointerEvents: "none",
+				...defaultSize(inline),
+			} as const),
+		[inline]
 	);
 
 	const value = useMemo(() => {
@@ -102,7 +96,6 @@ function DatePicker({
 			min={min}
 			max={max}
 			tabIndex={-1}
-			{...rest}
 		/>
 	);
 }
