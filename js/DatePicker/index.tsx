@@ -23,18 +23,6 @@ function DatePicker({
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const style = useMemo(
-		() =>
-			({
-				position: "absolute",
-				opacity: 0,
-				zIndex: -9999,
-				pointerEvents: "none",
-				...defaultSize(isInline),
-			} as const),
-		[isInline]
-	);
-
 	const value = useMemo(() => {
 		const date = valueProp ?? defaultDateValue();
 		if (date === null) {
@@ -66,6 +54,18 @@ function DatePicker({
 		return dateToISO8601Date(date);
 	}, [maxProp]);
 
+	const style = useMemo(
+		() =>
+			({
+				position: "absolute",
+				opacity: 0,
+				zIndex: -9999,
+				pointerEvents: "none",
+				...defaultSize(isInline),
+			} as const),
+		[isInline]
+	);
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -89,12 +89,12 @@ function DatePicker({
 	return (
 		<input
 			ref={inputRef}
-			style={style}
 			type="date"
 			value={value}
 			onChange={onChange}
 			min={min}
 			max={max}
+			style={style}
 			tabIndex={-1}
 		/>
 	);

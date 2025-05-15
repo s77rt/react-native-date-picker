@@ -26,17 +26,6 @@ function DatePicker({
 	style: styleProp,
 	...rest
 }: DatePickerProps) {
-	const style = useMemo(
-		() =>
-			StyleSheet.compose(
-				{
-					...defaultSize(isInline),
-				} as const,
-				styleProp
-			),
-		[isInline, styleProp]
-	);
-
 	const [isOpen, setIsOpen] = useState(false);
 
 	const range = useMemo<Range>(
@@ -101,6 +90,17 @@ function DatePicker({
 		setIsOpen(false);
 	}, [initialValue]);
 
+	const style = useMemo(
+		() =>
+			StyleSheet.compose(
+				{
+					...defaultSize(isInline),
+				} as const,
+				styleProp
+			),
+		[isInline, styleProp]
+	);
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -114,7 +114,6 @@ function DatePicker({
 
 	return (
 		<RTNDatePickerNativeComponent
-			style={style}
 			isOpen={isOpen}
 			isInline={isInline}
 			value={value}
@@ -122,6 +121,7 @@ function DatePicker({
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
+			style={style}
 			{...rest}
 		/>
 	);
