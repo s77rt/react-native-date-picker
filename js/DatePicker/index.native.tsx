@@ -69,9 +69,25 @@ function DatePicker({
 	}, [valueProp, range]);
 
 	const [value, setValue] = useState(initialValue);
-	const onChange = useCallback((event: NativeSyntheticEvent<ChangeEvent>) => {
-		setValue(event.nativeEvent.value);
-	}, []);
+
+	const onChange = useCallback(
+		(event: NativeSyntheticEvent<ChangeEvent>) => {
+			setValue(event.nativeEvent.value);
+
+			// In inline mode every change is considered a confirmed change
+			// since there is no explicit confirm button
+			if (isInline) {
+				const date =
+					event.nativeEvent.value === null
+						? null
+						: new Date(
+								nativeValueToMsEpoch(event.nativeEvent.value)
+						  );
+				onChangeProp?.(date);
+			}
+		},
+		[isInline, onChangeProp]
+	);
 
 	const onConfirm = useCallback(() => {
 		const date =
