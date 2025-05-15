@@ -22,7 +22,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
-	inline = false,
+	isInline = false,
 	style: styleProp,
 	...rest
 }: DatePickerProps) {
@@ -30,11 +30,11 @@ function DatePicker({
 		() =>
 			StyleSheet.compose(
 				{
-					...defaultSize(inline),
+					...defaultSize(isInline),
 				} as const,
 				styleProp
 			),
-		[inline, styleProp]
+		[isInline, styleProp]
 	);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -105,7 +105,7 @@ function DatePicker({
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
-			inline={inline}
+			isInline={isInline}
 			{...rest}
 		/>
 	);

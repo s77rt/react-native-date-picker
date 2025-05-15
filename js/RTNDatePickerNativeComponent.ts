@@ -23,7 +23,7 @@ export interface RTNDatePickerNativeProps extends ViewProps {
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;
 	range: Range;
-	inline: boolean;
+	isInline: boolean;
 }
 
 export default codegenNativeComponent<RTNDatePickerNativeProps>(

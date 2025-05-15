@@ -17,5 +17,5 @@ export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 		("0" + (date.getMonth() + 1)).slice(-2),
 		("0" + date.getDate()).slice(-2),
 	].join("-");
-export const defaultSize: DefaultSize = (inline: boolean) =>
-	inline ? { width: 320, height: 320 } : { width: 0, height: 0 };
+export const defaultSize: DefaultSize = (isInline: boolean) =>
+	isInline ? { width: 320, height: 320 } : { width: 0, height: 0 };
