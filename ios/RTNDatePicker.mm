@@ -41,6 +41,8 @@ using namespace facebook::react;
 
     [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
 
+    [_view setIsInlineWithIsInline:defaultViewProps.isInline];
+
     [_view
         setValueWithDate:[NSDate dateWithTimeIntervalSince1970:defaultViewProps
                                                                    .value]];
@@ -74,6 +76,10 @@ using namespace facebook::react;
 
   if (oldViewProps.isOpen != newViewProps.isOpen) {
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
+  }
+
+  if (oldViewProps.isInline != newViewProps.isInline) {
+    [_view setIsInlineWithIsInline:newViewProps.isInline];
   }
 
   if (oldViewProps.value != newViewProps.value) {
