@@ -81,6 +81,10 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateIsOpen(isOpen)
     }
 
+    public fun setIsInline(isInline: Boolean) {
+        viewModel.updateIsInline(isInline)
+    }
+
     public fun setValue(valueUncorrected: Long?) {
         // The selected date is expected to be at the start of the day in UTC
         // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()

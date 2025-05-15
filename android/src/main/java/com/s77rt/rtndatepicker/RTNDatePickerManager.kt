@@ -31,6 +31,14 @@ class RTNDatePickerManager(
         view.setIsOpen(isOpen)
     }
 
+    @ReactProp(name = "isInline")
+    override fun setIsInline(
+        view: RTNDatePicker,
+        isInline: Boolean,
+    ) {
+        view.setIsInline(isInline)
+    }
+
     @ReactProp(name = "value")
     override fun setValue(
         view: RTNDatePicker,

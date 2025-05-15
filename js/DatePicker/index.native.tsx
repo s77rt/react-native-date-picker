@@ -100,12 +100,12 @@ function DatePicker({
 		<RTNDatePickerNativeComponent
 			style={style}
 			isOpen={isOpen}
+			isInline={isInline}
 			value={value}
 			onChange={onChange}
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
-			isInline={isInline}
 			{...rest}
 		/>
 	);
