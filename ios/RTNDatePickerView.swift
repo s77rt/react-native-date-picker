@@ -27,11 +27,12 @@ struct RTNDatePickerView: View {
     }
   }
 
+  @ViewBuilder
   var body: some View {
     if viewModel.isInline {
       datePicker
     } else {
-      EmptyView().fullScreenCover(isPresented: $viewModel.isOpen) {
+      ZStack {}.fullScreenCover(isPresented: $viewModel.isOpen) {
         ZStack {
           Color.clear.contentShape(Rectangle())
             .onTapGesture {
