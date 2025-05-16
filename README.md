@@ -34,6 +34,10 @@ import { DatePicker } from "@s77rt/react-native-date-picker";
 import type { DatePickerHandle } from "@s77rt/react-native-date-picker";
 ```
 
+### Modal
+
+<img align="right" width="100" height="auto" src="https://github.com/user-attachments/assets/024bad07-49cc-4b23-a91a-a9ffe95b4249">
+
 ```tsx
 function Example() {
 	const datePicker = useRef<DatePickerHandle>(null);
@@ -58,15 +62,39 @@ function Example() {
 }
 ```
 
+### Inline
+
+<img align="right" width="100" height="auto" src="https://github.com/user-attachments/assets/75467cce-071c-44e4-9362-ff0d0c0cc924">
+
+```tsx
+function Example() {
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+	return (
+		<>
+			<Text>Selected date: {selectedDate?.toLocaleDateString()}</Text>
+			<DatePicker
+				value={selectedDate}
+				onChange={setSelectedDate}
+				inline
+			/>
+		</>
+	);
+}
+```
+
 ## Props
 
-| Prop       | Type                            | Description                                       |
-| ---------- | ------------------------------- | ------------------------------------------------- |
-| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                   |
-| `value`    | `Date \| null`                  | The selected date.                                |
-| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date. |
-| `min`      | `Date`                          | The earliest selectable date.                     |
-| `max`      | `Date`                          | The latest selectable date.                       |
+Inherits [View Props](https://reactnative.dev/docs/view#props).
+
+| Prop       | Type                            | Description                                         |
+| ---------- | ------------------------------- | --------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                     |
+| `value`    | `Date \| null`                  | The selected date.                                  |
+| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.   |
+| `min`      | `Date`                          | The earliest selectable date.                       |
+| `max`      | `Date`                          | The latest selectable date.                         |
+| `inline`   | `boolean`                       | Whether the date picker should be displayed inline. |
 
 ## Methods
 

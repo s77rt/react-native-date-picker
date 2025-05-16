@@ -48,6 +48,10 @@ import SwiftUI
     viewModel.isOpen = isOpen
   }
 
+  @objc public func setIsInline(isInline: Bool) {
+    viewModel.isInline = isInline
+  }
+
   @objc public func setValue(date: Date) {
     // Changing the value programmatically shouldn't trigger the onChange event
     lastValueUpdate = date

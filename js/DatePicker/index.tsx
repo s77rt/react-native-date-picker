@@ -3,10 +3,15 @@ import React, {
 	useMemo,
 	useCallback,
 	useImperativeHandle,
+	useEffect,
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import { dateToISO8601Date, defaultDateValue } from "../utils/DateUtils";
+import {
+	dateToISO8601Date,
+	defaultDateValue,
+	defaultSize,
+} from "../utils/DateUtils";
 
 function DatePicker({
 	ref,
@@ -14,21 +19,9 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	inline: isInline = false,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
-
-	const style = useMemo(
-		() =>
-			({
-				position: "absolute",
-				opacity: 0,
-				zIndex: -9999,
-				pointerEvents: "none",
-				width: 0,
-				height: 0,
-			} as const),
-		[]
-	);
 
 	const value = useMemo(() => {
 		const date = valueProp ?? defaultDateValue();
@@ -61,6 +54,18 @@ function DatePicker({
 		return dateToISO8601Date(date);
 	}, [maxProp]);
 
+	const style = useMemo(
+		() =>
+			({
+				position: "absolute",
+				opacity: 0,
+				zIndex: -9999,
+				pointerEvents: "none",
+				...defaultSize(isInline),
+			} as const),
+		[isInline]
+	);
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -72,15 +77,24 @@ function DatePicker({
 		[]
 	);
 
+	useEffect(() => {
+		if (!isInline) {
+			return;
+		}
+		console.warn(
+			"@s77rt/react-native-date-picker: isInline is not supported on web."
+		);
+	}, [isInline]);
+
 	return (
 		<input
 			ref={inputRef}
-			style={style}
 			type="date"
 			value={value}
 			onChange={onChange}
 			min={min}
 			max={max}
+			style={style}
 			tabIndex={-1}
 		/>
 	);

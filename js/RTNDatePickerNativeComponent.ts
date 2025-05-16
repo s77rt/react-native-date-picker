@@ -18,6 +18,7 @@ export interface Range {
 
 export interface RTNDatePickerNativeProps extends ViewProps {
 	isOpen: boolean;
+	isInline: boolean;
 	value: Double | null;
 	onChange: BubblingEventHandler<Readonly<ChangeEvent>>;
 	onConfirm: DirectEventHandler<null>;

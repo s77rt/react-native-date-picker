@@ -23,6 +23,7 @@ class RTNDatePickerViewModel : ViewModel() {
     private var upperBound: Long? = null
 
     private val _isOpen = MutableStateFlow(false)
+    private val _isInline = MutableStateFlow(false)
     private val _datePickerState =
         MutableStateFlow(
             DatePickerState(
@@ -48,6 +49,7 @@ class RTNDatePickerViewModel : ViewModel() {
         )
 
     val isOpen: StateFlow<Boolean> get() = _isOpen
+    val isInline: StateFlow<Boolean> get() = _isInline
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
 
     fun syncDisplayedMonth() {
@@ -78,6 +80,10 @@ class RTNDatePickerViewModel : ViewModel() {
         _isOpen.value = newIsOpen
     }
 
+    fun updateIsInline(newIsInline: Boolean) {
+        _isInline.value = newIsInline
+    }
+
     fun updateValue(newValue: Long?) {
         _datePickerState.value.selectedDateMillis = newValue
         syncDisplayedMonth()
@@ -103,13 +109,16 @@ fun RTNDatePickerView(
     onCancel: () -> Unit,
 ) {
     val isOpen by viewModel.isOpen.collectAsState()
+    val isInline by viewModel.isInline.collectAsState()
     val datePickerState by viewModel.datePickerState.collectAsState()
 
     LaunchedEffect(datePickerState.selectedDateMillis) {
         onChange(datePickerState.selectedDateMillis)
     }
 
-    if (isOpen) {
+    if (isInline) {
+        DatePicker(state = datePickerState, showModeToggle = false)
+    } else if (isOpen) {
         DatePickerDialog(
             onDismissRequest = onCancel,
             confirmButton = {
