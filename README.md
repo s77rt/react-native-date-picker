@@ -69,7 +69,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.   |
 | `min`      | `Date`                          | The earliest selectable date.                       |
 | `max`      | `Date`                          | The latest selectable date.                         |
-| `isInline` | `boolean`                       | Whether the date picker should be displayed inline. |
+| `inline`   | `boolean`                       | Whether the date picker should be displayed inline. |
 
 ## Methods
 

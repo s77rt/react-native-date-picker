@@ -11,5 +11,5 @@ export type DatePickerProps = ViewProps & {
 	onChange?: (value: Date | null) => void;
 	min?: Date;
 	max?: Date;
-	isInline?: boolean;
+	inline?: boolean;
 };

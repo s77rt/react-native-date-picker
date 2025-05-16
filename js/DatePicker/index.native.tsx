@@ -22,7 +22,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
-	isInline = false,
+	inline: isInline = false,
 	style: styleProp,
 	...rest
 }: DatePickerProps) {
