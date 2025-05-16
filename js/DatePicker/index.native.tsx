@@ -18,6 +18,7 @@ import {
 
 function DatePicker({
 	ref,
+	type = "date",
 	value: valueProp,
 	onChange: onChangeProp,
 	min: minProp,
@@ -121,6 +122,7 @@ function DatePicker({
 
 	return (
 		<RTNDatePickerNativeComponent
+			type={type}
 			isOpen={isOpen}
 			isInline={isInline}
 			value={value}
