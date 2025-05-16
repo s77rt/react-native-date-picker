@@ -57,7 +57,14 @@ function DatePicker({
 		return dateValue;
 	}, [valueProp, range]);
 
+	const [prevInitialValue, setPrevInitialValue] = useState(initialValue);
+
 	const [value, setValue] = useState(initialValue);
+
+	if (initialValue !== prevInitialValue) {
+		setPrevInitialValue(initialValue);
+		setValue(initialValue);
+	}
 
 	const onChange = useCallback(
 		(event: NativeSyntheticEvent<ChangeEvent>) => {
