@@ -60,13 +60,16 @@ function Example() {
 
 ## Props
 
-| Prop       | Type                            | Description                                       |
-| ---------- | ------------------------------- | ------------------------------------------------- |
-| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                   |
-| `value`    | `Date \| null`                  | The selected date.                                |
-| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date. |
-| `min`      | `Date`                          | The earliest selectable date.                     |
-| `max`      | `Date`                          | The latest selectable date.                       |
+Inherits [View Props](https://reactnative.dev/docs/view#props).
+
+| Prop       | Type                            | Description                                         |
+| ---------- | ------------------------------- | --------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                     |
+| `value`    | `Date \| null`                  | The selected date.                                  |
+| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.   |
+| `min`      | `Date`                          | The earliest selectable date.                       |
+| `max`      | `Date`                          | The latest selectable date.                         |
+| `isInline` | `boolean`                       | Whether the date picker should be displayed inline. |
 
 ## Methods
 
