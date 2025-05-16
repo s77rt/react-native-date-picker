@@ -1,6 +1,6 @@
 {
 	"name": "@s77rt/react-native-date-picker",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Native Date Picker",
 	"react-native": "js/index",
 	"source": "js/index",
