@@ -36,7 +36,7 @@ import type { DatePickerHandle } from "@s77rt/react-native-date-picker";
 
 ### Modal
 
-<img align="right" width="100" height="auto" src="https://github.com/user-attachments/assets/024bad07-49cc-4b23-a91a-a9ffe95b4249">
+<img align="right" width="100" height="auto" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/example-modal.png">
 
 ```tsx
 function Example() {
@@ -64,7 +64,7 @@ function Example() {
 
 ### Inline
 
-<img align="right" width="100" height="auto" src="https://github.com/user-attachments/assets/75467cce-071c-44e4-9362-ff0d0c0cc924">
+<img align="right" width="100" height="auto" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/example-inline.png">
 
 ```tsx
 function Example() {
