@@ -84,7 +84,7 @@ function DatePicker({
 			return;
 		}
 		console.warn(
-			"@s77rt/react-native-date-picker: isInline is not supported on web."
+			"@s77rt/react-native-date-picker: inline is not supported on web."
 		);
 	}, [isInline]);
 
