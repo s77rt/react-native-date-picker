@@ -4,12 +4,14 @@ import type {
 	DefaultDateValue,
 	DateToISO8601Date,
 	DefaultSize,
+	DateToHHmm,
 } from "./types";
 
 export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 	nativeValue;
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
+
 export const defaultDateValue: DefaultDateValue = () => null;
 export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 	[
@@ -17,5 +19,20 @@ export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 		("0" + (date.getMonth() + 1)).slice(-2),
 		("0" + date.getDate()).slice(-2),
 	].join("-");
-export const defaultSize: DefaultSize = (isInline: boolean) =>
-	isInline ? { width: 360, height: 524 } : { width: 0, height: 0 };
+export const dateToHHmm: DateToHHmm = (date: Date) =>
+	[
+		("0" + date.getHours()).slice(-2),
+		("0" + date.getMinutes()).slice(-2),
+	].join(":");
+
+export const defaultSize: DefaultSize = (type: string, isInline: boolean) => {
+	if (type === "date" && isInline) {
+		return { width: 360, height: 524 };
+	}
+
+	if (type === "time" && isInline) {
+		return { width: 360, height: 524 };
+	}
+
+	return { width: 0, height: 0 };
+};

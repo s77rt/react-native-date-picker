@@ -1,6 +1,7 @@
 import SwiftUI
 
 class RTNDatePickerViewModel: ObservableObject {
+  @Published var type: String = "date"
   @Published var isOpen: Bool = false
   @Published var isInline: Bool = false
   @Published var value: Date = Date()
@@ -15,15 +16,30 @@ struct RTNDatePickerView: View {
   var onConfirm: () -> Void
   var onCancel: () -> Void
 
+  @ViewBuilder
   var datePicker: some View {
-    DatePicker(
-      "", selection: $viewModel.value, in: viewModel.range, displayedComponents: [.date]
-    ).datePickerStyle(
-      .graphical
-    ).labelsHidden().onChange(
-      of: viewModel.value
-    ) {
-      onChange(viewModel.value)
+    if viewModel.type == "time" {
+      DatePicker(
+        "", selection: $viewModel.value, in: viewModel.range,
+        displayedComponents: .hourAndMinute
+      ).datePickerStyle(
+        .wheel
+      ).labelsHidden().onChange(
+        of: viewModel.value
+      ) {
+        onChange(viewModel.value)
+      }
+    } else {
+      DatePicker(
+        "", selection: $viewModel.value, in: viewModel.range,
+        displayedComponents: .date
+      ).datePickerStyle(
+        .graphical
+      ).labelsHidden().onChange(
+        of: viewModel.value
+      ) {
+        onChange(viewModel.value)
+      }
     }
   }
 

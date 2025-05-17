@@ -18,6 +18,7 @@ import {
 
 function DatePicker({
 	ref,
+	type = "date",
 	value: valueProp,
 	onChange: onChangeProp,
 	min: minProp,
@@ -101,11 +102,11 @@ function DatePicker({
 		() =>
 			StyleSheet.compose(
 				{
-					...defaultSize(isInline),
+					...defaultSize(type, isInline),
 				} as const,
 				styleProp
 			),
-		[isInline, styleProp]
+		[type, isInline, styleProp]
 	);
 
 	useImperativeHandle(
@@ -121,6 +122,7 @@ function DatePicker({
 
 	return (
 		<RTNDatePickerNativeComponent
+			type={type}
 			isOpen={isOpen}
 			isInline={isInline}
 			value={value}

@@ -39,6 +39,9 @@ using namespace facebook::react;
     _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
     _view.delegate = self;
 
+    [_view setTypeWithType:[NSString stringWithUTF8String:defaultViewProps.type
+                                                              .c_str()]];
+
     [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
 
     [_view setIsInlineWithIsInline:defaultViewProps.isInline];
@@ -73,6 +76,11 @@ using namespace facebook::react;
       *std::static_pointer_cast<RTNDatePickerProps const>(_props);
   const auto &newViewProps =
       *std::static_pointer_cast<RTNDatePickerProps const>(props);
+
+  if (oldViewProps.type != newViewProps.type) {
+    [_view setTypeWithType:[NSString
+                               stringWithUTF8String:newViewProps.type.c_str()]];
+  }
 
   if (oldViewProps.isOpen != newViewProps.isOpen) {
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];

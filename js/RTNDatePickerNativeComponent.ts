@@ -17,6 +17,7 @@ export interface Range {
 }
 
 export interface RTNDatePickerNativeProps extends ViewProps {
+	type: string;
 	isOpen: boolean;
 	isInline: boolean;
 	value: Double | null;
