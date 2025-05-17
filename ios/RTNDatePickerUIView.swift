@@ -44,6 +44,10 @@ import SwiftUI
     delegate?.onCancel()
   }
 
+  @objc public func setType(type: String) {
+    viewModel.type = type
+  }
+
   @objc public func setIsOpen(isOpen: Bool) {
     viewModel.isOpen = isOpen
   }
