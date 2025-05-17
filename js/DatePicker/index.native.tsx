@@ -102,11 +102,11 @@ function DatePicker({
 		() =>
 			StyleSheet.compose(
 				{
-					...defaultSize(isInline),
+					...defaultSize(type, isInline),
 				} as const,
 				styleProp
 			),
-		[isInline, styleProp]
+		[type, isInline, styleProp]
 	);
 
 	useImperativeHandle(
