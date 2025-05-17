@@ -8,6 +8,7 @@ import React, {
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
 import {
+	dateToHHmm,
 	dateToISO8601Date,
 	defaultDateValue,
 	defaultSize,
@@ -15,6 +16,7 @@ import {
 
 function DatePicker({
 	ref,
+	type = "date",
 	value: valueProp,
 	onChange: onChangeProp,
 	min: minProp,
@@ -28,8 +30,8 @@ function DatePicker({
 		if (date === null) {
 			return "";
 		}
-		return dateToISO8601Date(date);
-	}, [valueProp]);
+		return type == "date" ? dateToISO8601Date(date) : dateToHHmm(date);
+	}, [type, valueProp]);
 
 	const onChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
@@ -43,16 +45,16 @@ function DatePicker({
 		if (date === undefined) {
 			return undefined;
 		}
-		return dateToISO8601Date(date);
-	}, [minProp]);
+		return type == "date" ? dateToISO8601Date(date) : dateToHHmm(date);
+	}, [type, minProp]);
 
 	const max = useMemo(() => {
 		const date = maxProp;
 		if (date === undefined) {
 			return undefined;
 		}
-		return dateToISO8601Date(date);
-	}, [maxProp]);
+		return type == "date" ? dateToISO8601Date(date) : dateToHHmm(date);
+	}, [type, maxProp]);
 
 	const style = useMemo(
 		() =>
@@ -61,9 +63,9 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
-				...defaultSize(isInline),
+				...defaultSize(type, isInline),
 			} as const),
-		[isInline]
+		[type, isInline]
 	);
 
 	useImperativeHandle(
@@ -89,7 +91,7 @@ function DatePicker({
 	return (
 		<input
 			ref={inputRef}
-			type="date"
+			type={type}
 			value={value}
 			onChange={onChange}
 			min={min}
