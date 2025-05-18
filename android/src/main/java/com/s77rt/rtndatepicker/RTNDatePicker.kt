@@ -77,6 +77,10 @@ class RTNDatePicker : FrameLayout {
         eventDispatcher?.dispatchEvent(event)
     }
 
+    public fun setType(type: String) {
+        viewModel.updateType(type)
+    }
+
     public fun setIsOpen(isOpen: Boolean) {
         viewModel.updateIsOpen(isOpen)
     }

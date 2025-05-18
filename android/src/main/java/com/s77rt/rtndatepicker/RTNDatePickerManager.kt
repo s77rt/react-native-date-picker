@@ -23,6 +23,17 @@ class RTNDatePickerManager(
 
     override fun createViewInstance(context: ThemedReactContext): RTNDatePicker = RTNDatePicker(context)
 
+    @ReactProp(name = "type")
+    override fun setType(
+        view: RTNDatePicker,
+        type: String?,
+    ) {
+        if (type == null) {
+            return
+        }
+        view.setType(type)
+    }
+
     @ReactProp(name = "isOpen")
     override fun setIsOpen(
         view: RTNDatePicker,
