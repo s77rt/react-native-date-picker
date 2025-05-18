@@ -44,7 +44,7 @@ function DatePicker({
 	);
 
 	const initialValue = useMemo(() => {
-		const date = valueProp ?? defaultDateValue();
+		const date = valueProp ?? defaultDateValue(type);
 		if (date === null) {
 			return null;
 		}
@@ -56,7 +56,7 @@ function DatePicker({
 			return range.upperBound;
 		}
 		return dateValue;
-	}, [valueProp, range]);
+	}, [type, valueProp, range]);
 
 	const [prevInitialValue, setPrevInitialValue] = useState(initialValue);
 

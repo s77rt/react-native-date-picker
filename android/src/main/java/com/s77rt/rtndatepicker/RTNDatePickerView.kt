@@ -1,5 +1,6 @@
 package com.s77rt.rtndatepicker
 
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DatePickerState
@@ -8,12 +9,12 @@ import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
+import androidx.compose.material3.TimePickerSelectionMode
 import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -88,6 +89,10 @@ class RTNDatePickerViewModel : ViewModel() {
         _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
     }
 
+    fun resetTimeSelection() {
+        _timePickerState.value.selection = TimePickerSelectionMode.Hour
+    }
+
     fun updateType(newType: String) {
         _type.value = newType
     }
@@ -95,6 +100,7 @@ class RTNDatePickerViewModel : ViewModel() {
     fun updateIsOpen(newIsOpen: Boolean) {
         if (newIsOpen) {
             syncDisplayedMonth()
+            resetTimeSelection()
         }
         _isOpen.value = newIsOpen
     }
@@ -117,6 +123,22 @@ class RTNDatePickerViewModel : ViewModel() {
                     .atStartOfDay(ZoneId.of("UTC"))
                     .toEpochSecond() * 1000
             }
+
+        if (newValue != null) {
+            _timePickerState.value.hour =
+                Instant
+                    .ofEpochMilli(newValue)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime()
+                    .getHour()
+
+            _timePickerState.value.minute =
+                Instant
+                    .ofEpochMilli(newValue)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime()
+                    .getMinute()
+        }
 
         syncDisplayedMonth()
     }
@@ -168,19 +190,40 @@ fun RTNDatePickerView(
     val datePickerState by viewModel.datePickerState.collectAsState()
     val timePickerState by viewModel.timePickerState.collectAsState()
 
-    LaunchedEffect(datePickerState.selectedDateMillis) {
-        onChange(datePickerState.selectedDateMillis)
+    LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
+        val date = datePickerState.selectedDateMillis
+        if (date == null) {
+            onChange(null)
+        } else {
+            onChange(
+                Instant
+                    .ofEpochMilli(date)
+                    .atZone(ZoneId.systemDefault())
+                    .withHour(timePickerState.hour)
+                    .withMinute(timePickerState.minute)
+                    .toEpochSecond() * 1000,
+            )
+        }
     }
 
     if (type == "time") {
         if (isInline) {
             TimePicker(state = timePickerState)
         } else if (isOpen) {
-            Dialog(
+            AlertDialog(
                 onDismissRequest = onCancel,
-            ) {
-                TimePicker(state = timePickerState)
-            }
+                confirmButton = {
+                    TextButton(onClick = onConfirm) {
+                        Text("Confirm")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = onCancel) {
+                        Text("Cancel")
+                    }
+                },
+                text = { TimePicker(state = timePickerState) },
+            )
         }
     } else {
         if (isInline) {

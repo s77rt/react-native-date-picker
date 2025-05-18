@@ -12,7 +12,8 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDateValue: DefaultDateValue = () => null;
+export const defaultDateValue: DefaultDateValue = (_type: string) => null;
+
 export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 	[
 		date.getFullYear(),

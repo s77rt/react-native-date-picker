@@ -26,7 +26,7 @@ function DatePicker({
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? defaultDateValue();
+		const date = valueProp ?? defaultDateValue(type);
 		if (date === null) {
 			return "";
 		}

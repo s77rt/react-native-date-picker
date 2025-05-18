@@ -12,7 +12,16 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDateValue: DefaultDateValue = () => null;
+export const defaultDateValue: DefaultDateValue = (type: string) => {
+	// TimePickerState`s hour and minute are non-nullable
+	// https://developer.android.com/reference/kotlin/androidx/compose/material3/TimePickerState#summary
+	if (type === "time") {
+		return new Date();
+	}
+
+	return null;
+};
+
 export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 	[
 		date.getFullYear(),
