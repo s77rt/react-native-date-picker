@@ -125,19 +125,14 @@ class RTNDatePickerViewModel : ViewModel() {
             }
 
         if (newValue != null) {
-            _timePickerState.value.hour =
+            val time =
                 Instant
                     .ofEpochMilli(newValue)
                     .atZone(ZoneId.systemDefault())
                     .toLocalTime()
-                    .getHour()
 
-            _timePickerState.value.minute =
-                Instant
-                    .ofEpochMilli(newValue)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalTime()
-                    .getMinute()
+            _timePickerState.value.hour = time.getHour()
+            _timePickerState.value.minute = time.getMinute()
         }
 
         syncDisplayedMonth()
