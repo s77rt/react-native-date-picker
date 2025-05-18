@@ -4,7 +4,12 @@
 
 ---
 
-@s77rt/react-native-date-picker is a cross-platform date picker built with SwiftUI (iOS) and Jetpack Compose (Android).
+@s77rt/react-native-date-picker is a cross-platform date/time picker built with SwiftUI (iOS) and Jetpack Compose (Android).
+
+-   📅 Date picker
+-   🕜 Time picker
+-   🔌 Supports Android, iOS and Web
+-   💎 Renders in modal and inline
 
 ## Installation
 
@@ -90,6 +95,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | Prop       | Type                            | Description                                         |
 | ---------- | ------------------------------- | --------------------------------------------------- |
 | `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                     |
+| `type`     | `"date" \| "time"`              | The type of the picker.                             |
 | `value`    | `Date \| null`                  | The selected date.                                  |
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.   |
 | `min`      | `Date`                          | The earliest selectable date.                       |

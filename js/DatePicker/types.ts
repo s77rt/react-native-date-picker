@@ -7,6 +7,7 @@ export type DatePickerHandle = {
 
 export type DatePickerProps = ViewProps & {
 	ref?: Ref<DatePickerHandle>;
+	type?: "date" | "time";
 	value?: Date | null;
 	onChange?: (value: Date | null) => void;
 	min?: Date;
