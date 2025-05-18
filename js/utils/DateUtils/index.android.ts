@@ -40,7 +40,7 @@ export const defaultSize: DefaultSize = (type: string, isInline: boolean) => {
 	}
 
 	if (type === "time" && isInline) {
-		return { width: 360, height: 524 };
+		return { width: 280, height: 372 };
 	}
 
 	return { width: 0, height: 0 };
