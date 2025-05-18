@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.Instant
+import java.time.ZoneId
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -103,7 +104,20 @@ class RTNDatePickerViewModel : ViewModel() {
     }
 
     fun updateValue(newValue: Long?) {
-        _datePickerState.value.selectedDateMillis = newValue
+        // The selected date is expected to be at the start of the day in UTC
+        // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
+        _datePickerState.value.selectedDateMillis =
+            if (newValue == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(newValue)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+
         syncDisplayedMonth()
     }
 
@@ -111,8 +125,30 @@ class RTNDatePickerViewModel : ViewModel() {
         newLowerBound: Long?,
         newUpperBound: Long?,
     ) {
-        lowerBound = newLowerBound
-        upperBound = newUpperBound
+        lowerBound =
+            if (newLowerBound == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(newLowerBound)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+
+        upperBound =
+            if (newUpperBound == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(newUpperBound)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+
         syncDisplayedMonth()
     }
 }
