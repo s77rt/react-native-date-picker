@@ -120,7 +120,7 @@ Imperative handle methods.
 | ------------ | ------------ | ----------------- |
 | `showPicker` | `() => void` | Shows the picker. |
 
-## Feeedback
+## Feedback
 
 Every code review, bug report and feature request is appreaciated! Please feel free to [share your feedback](https://github.com/s77rt/react-native-date-picker/issues/new).
 
