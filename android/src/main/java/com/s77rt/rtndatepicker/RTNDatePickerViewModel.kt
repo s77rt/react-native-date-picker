@@ -52,7 +52,7 @@ class RTNDatePickerViewModel : ViewModel() {
                 is24Hour = false,
             ),
         )
-    private val _confirmText = MutableStateFlow("Confirm")
+    private val _confirmText = MutableStateFlow("OK")
     private val _cancelText = MutableStateFlow("Cancel")
 
     val type: StateFlow<String> get() = _type
