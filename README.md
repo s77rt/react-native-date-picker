@@ -112,8 +112,6 @@ Various configuration options.
 | `confirmText` | `string` | The confirm button text. |
 | `cancelText`  | `string` | The cancel button text.  |
 
-Something is missing? [Submit an issue!](https://github.com/s77rt/react-native-date-picker/issues/new)
-
 ## Methods
 
 Imperative handle methods.
@@ -121,6 +119,10 @@ Imperative handle methods.
 | Method       | Type         | Description       |
 | ------------ | ------------ | ----------------- |
 | `showPicker` | `() => void` | Shows the picker. |
+
+## Feeedback
+
+Every code review, bug report and feature request is appreaciated! Please feel free to [share your feedback](https://github.com/s77rt/react-native-date-picker/issues/new).
 
 ## License
 
