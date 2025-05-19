@@ -42,6 +42,8 @@ fun RTNDatePickerView(
     val isInline by viewModel.isInline.collectAsState()
     val datePickerState by viewModel.datePickerState.collectAsState()
     val timePickerState by viewModel.timePickerState.collectAsState()
+    val confirmText by viewModel.confirmText.collectAsState()
+    val cancelText by viewModel.cancelText.collectAsState()
 
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
@@ -67,12 +69,12 @@ fun RTNDatePickerView(
                 onDismissRequest = onCancel,
                 confirmButton = {
                     TextButton(onClick = onConfirm) {
-                        Text("Confirm")
+                        Text(confirmText)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = onCancel) {
-                        Text("Cancel")
+                        Text(cancelText)
                     }
                 },
             ) {
@@ -87,12 +89,12 @@ fun RTNDatePickerView(
                 onDismissRequest = onCancel,
                 confirmButton = {
                     TextButton(onClick = onConfirm) {
-                        Text("Confirm")
+                        Text(confirmText)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = onCancel) {
-                        Text("Cancel")
+                        Text(cancelText)
                     }
                 },
             ) {
