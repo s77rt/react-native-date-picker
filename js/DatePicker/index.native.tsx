@@ -6,9 +6,12 @@ import React, {
 } from "react";
 import { StyleSheet } from "react-native";
 import type { NativeSyntheticEvent } from "react-native";
-import type { DatePickerProps } from "./types";
+import type {
+	DatePickerProps,
+	InternalChangeEvent,
+	InternalRange,
+} from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
-import type { ChangeEvent, Range } from "../RTNDatePickerNativeComponent";
 import {
 	defaultDateValue,
 	defaultSize,
@@ -24,12 +27,13 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	inline: isInline = false,
+	options: optionsProp,
 	style: styleProp,
 	...rest
 }: DatePickerProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const range = useMemo<Range>(
+	const range = useMemo<InternalRange>(
 		() => ({
 			lowerBound:
 				minProp === undefined
@@ -68,7 +72,7 @@ function DatePicker({
 	}
 
 	const onChange = useCallback(
-		(event: NativeSyntheticEvent<ChangeEvent>) => {
+		(event: NativeSyntheticEvent<InternalChangeEvent>) => {
 			setValue(event.nativeEvent.value);
 
 			// In inline mode every change is considered a confirmed change
@@ -97,6 +101,8 @@ function DatePicker({
 		setValue(initialValue);
 		setIsOpen(false);
 	}, [initialValue]);
+
+	const options = useMemo(() => optionsProp ?? {}, [optionsProp]);
 
 	const style = useMemo(
 		() =>
@@ -130,6 +136,7 @@ function DatePicker({
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
+			options={options}
 			style={style}
 			{...rest}
 		/>

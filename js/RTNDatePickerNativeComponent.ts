@@ -7,13 +7,18 @@ import type {
 	DirectEventHandler,
 } from "react-native/Libraries/Types/CodegenTypes";
 
-export interface ChangeEvent {
+interface ChangeEvent {
 	value: Double | null;
 }
 
-export interface Range {
+interface Range {
 	lowerBound?: Double;
 	upperBound?: Double;
+}
+
+interface Options {
+	confirmText?: string;
+	cancelText?: string;
 }
 
 export interface RTNDatePickerNativeProps extends ViewProps {
@@ -25,6 +30,7 @@ export interface RTNDatePickerNativeProps extends ViewProps {
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;
 	range: Range;
+	options: Options;
 }
 
 export default codegenNativeComponent<RTNDatePickerNativeProps>(

@@ -100,4 +100,22 @@ class RTNDatePicker : FrameLayout {
     ) {
         viewModel.updateRange(lowerBound, upperBound)
     }
+
+    public fun setConfirmText(confirmText: String?) {
+        if (confirmText == null) {
+            viewModel.updateConfirmText(reactContext.getString(android.R.string.ok))
+            return
+        }
+
+        viewModel.updateConfirmText(confirmText)
+    }
+
+    public fun setCancelText(cancelText: String?) {
+        if (cancelText == null) {
+            viewModel.updateCancelText(reactContext.getString(android.R.string.cancel))
+            return
+        }
+
+        viewModel.updateCancelText(cancelText)
+    }
 }

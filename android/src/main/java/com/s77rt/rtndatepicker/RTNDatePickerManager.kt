@@ -31,6 +31,7 @@ class RTNDatePickerManager(
         if (type == null) {
             return
         }
+
         view.setType(type)
     }
 
@@ -71,7 +72,6 @@ class RTNDatePickerManager(
         range: ReadableMap?,
     ) {
         if (range == null) {
-            view.setRange(null, null)
             return
         }
 
@@ -79,6 +79,19 @@ class RTNDatePickerManager(
         val upperBound = if (range.hasKey("upperBound")) range.getDouble("upperBound").toLong() else null
 
         view.setRange(lowerBound, upperBound)
+    }
+
+    @ReactProp(name = "options")
+    override fun setOptions(
+        view: RTNDatePicker,
+        options: ReadableMap?,
+    ) {
+        if (options == null) {
+            return
+        }
+
+        view.setConfirmText(options.getString("confirmText"))
+        view.setCancelText(options.getString("cancelText"))
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =
