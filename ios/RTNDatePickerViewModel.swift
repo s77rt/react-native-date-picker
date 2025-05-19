@@ -6,6 +6,8 @@ class RTNDatePickerViewModel: ObservableObject {
   @Published var isInline: Bool = false
   @Published var value: Date = Date()
   @Published var range: ClosedRange<Date> = Date.distantPast...Date.distantFuture
+  @Published var confirmText: String = "Confirm"
+  @Published var cancelText: String = "Cancel"
 
   init() {}
 }

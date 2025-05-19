@@ -15,5 +15,6 @@ RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onConfirm, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCancel, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(range, RTNDatePickerRangeStruct)
+RCT_EXPORT_VIEW_PROPERTY(options, RTNDatePickerOptionsStruct)
 
 @end

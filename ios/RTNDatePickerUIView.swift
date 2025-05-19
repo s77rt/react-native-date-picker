@@ -60,4 +60,14 @@ import SwiftUI
   @objc public func setRange(lowerBound: Date, upperBound: Date) {
     viewModel.range = lowerBound...upperBound
   }
+
+  @objc public func setConfirmText(confirmText: String?) {
+    let localizedKey = String.LocalizationValue(stringLiteral: confirmText ?? "Done")
+    viewModel.confirmText = String(localized: localizedKey)
+  }
+
+  @objc public func setCancelText(cancelText: String?) {
+    let localizedKey = String.LocalizationValue(stringLiteral: cancelText ?? "Cancel")
+    viewModel.cancelText = String(localized: localizedKey)
+  }
 }

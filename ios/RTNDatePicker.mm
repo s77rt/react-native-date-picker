@@ -39,30 +39,54 @@ using namespace facebook::react;
     _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
     _view.delegate = self;
 
-    [_view setTypeWithType:[NSString stringWithUTF8String:defaultViewProps.type
-                                                              .c_str()]];
+    {
+      [_view setTypeWithType:[NSString stringWithUTF8String:defaultViewProps
+                                                                .type.c_str()]];
+    }
 
-    [_view setIsOpenWithIsOpen:defaultViewProps.isOpen];
+    { [_view setIsOpenWithIsOpen:defaultViewProps.isOpen]; }
 
-    [_view setIsInlineWithIsInline:defaultViewProps.isInline];
+    { [_view setIsInlineWithIsInline:defaultViewProps.isInline]; }
 
-    [_view
-        setValueWithDate:[NSDate dateWithTimeIntervalSince1970:defaultViewProps
-                                                                   .value]];
+    {
+      [_view setValueWithDate:[NSDate
+                                  dateWithTimeIntervalSince1970:defaultViewProps
+                                                                    .value]];
+    }
 
-    // Codegen props are zero-initialized (undefined values are zeroed by
-    // default)
-    NSDate *lowerBound =
-        defaultViewProps.range.lowerBound == 0.0
-            ? NSDate.distantPast
-            : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
-                                                        .lowerBound];
-    NSDate *upperBound =
-        defaultViewProps.range.upperBound == 0.0
-            ? NSDate.distantFuture
-            : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
-                                                        .upperBound];
-    [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
+    {
+      // Codegen props of type double are zero-initialized (undefined values are
+      // zeroed by default)
+      NSDate *lowerBound =
+          defaultViewProps.range.lowerBound == 0.0
+              ? NSDate.distantPast
+              : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
+                                                          .lowerBound];
+      NSDate *upperBound =
+          defaultViewProps.range.upperBound == 0.0
+              ? NSDate.distantFuture
+              : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
+                                                          .upperBound];
+      [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
+    }
+
+    {
+      // Codegen props of type string are zero-initialized (undefined values are
+      // empty by default)
+      NSString *confirmText =
+          defaultViewProps.options.confirmText.empty()
+              ? nil
+              : [NSString stringWithUTF8String:defaultViewProps.options
+                                                   .confirmText.c_str()];
+      [_view setConfirmTextWithConfirmText:confirmText];
+
+      NSString *cancelText =
+          defaultViewProps.options.cancelText.empty()
+              ? nil
+              : [NSString stringWithUTF8String:defaultViewProps.options
+                                                   .cancelText.c_str()];
+      [_view setCancelTextWithCancelText:cancelText];
+    }
 
     self.contentView = _view;
   }
@@ -98,8 +122,8 @@ using namespace facebook::react;
 
   if (oldViewProps.range.lowerBound != newViewProps.range.lowerBound ||
       oldViewProps.range.upperBound != newViewProps.range.upperBound) {
-    // Codegen props are zero-initialized (undefined values are zeroed by
-    // default)
+    // Codegen props of type double are zero-initialized (undefined values are
+    // zeroed by default)
     NSDate *lowerBound =
         newViewProps.range.lowerBound == 0.0
             ? NSDate.distantPast
@@ -111,6 +135,25 @@ using namespace facebook::react;
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.upperBound];
     [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
+  }
+
+  if (oldViewProps.options.confirmText != newViewProps.options.confirmText ||
+      oldViewProps.options.cancelText != newViewProps.options.cancelText) {
+    // Codegen props of type string are zero-initialized (undefined values are
+    // empty by default)
+    NSString *confirmText =
+        newViewProps.options.confirmText.empty()
+            ? nil
+            : [NSString stringWithUTF8String:newViewProps.options.confirmText
+                                                 .c_str()];
+    [_view setConfirmTextWithConfirmText:confirmText];
+
+    NSString *cancelText =
+        newViewProps.options.cancelText.empty()
+            ? nil
+            : [NSString
+                  stringWithUTF8String:newViewProps.options.cancelText.c_str()];
+    [_view setCancelTextWithCancelText:cancelText];
   }
 
   [super updateProps:props oldProps:oldProps];
