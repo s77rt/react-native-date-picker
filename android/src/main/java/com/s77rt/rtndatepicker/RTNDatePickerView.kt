@@ -222,7 +222,7 @@ fun RTNDatePickerView(
         }
     } else {
         if (isInline) {
-            DatePicker(state = datePickerState, showModeToggle = false)
+            DatePicker(state = datePickerState, headline = null, title = null, showModeToggle = false)
         } else if (isOpen) {
             DatePickerDialog(
                 onDismissRequest = onCancel,

@@ -36,7 +36,7 @@ export const dateToHHmm: DateToHHmm = (date: Date) =>
 
 export const defaultSize: DefaultSize = (type: string, isInline: boolean) => {
 	if (type === "date" && isInline) {
-		return { width: 360, height: 524 };
+		return { width: 360, height: 392 };
 	}
 
 	if (type === "time" && isInline) {
