@@ -122,7 +122,7 @@ Imperative handle methods.
 
 ## Feedback
 
-Every code review, bug report and feature request is appreaciated! Please feel free to [share your feedback](https://github.com/s77rt/react-native-date-picker/issues/new).
+Every code review, bug report and feature request is appreciated! Please feel free to [share your feedback](https://github.com/s77rt/react-native-date-picker/issues/new).
 
 ## License
 
