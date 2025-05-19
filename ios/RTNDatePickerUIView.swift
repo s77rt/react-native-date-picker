@@ -1,11 +1,5 @@
 import SwiftUI
 
-@objc public protocol RTNDatePickerUIViewDelegate: NSObjectProtocol {
-  @objc func onChange(date: Date)
-  @objc func onConfirm()
-  @objc func onCancel()
-}
-
 @objc public class RTNDatePickerUIView: UIView {
   @objc public weak var delegate: RTNDatePickerUIViewDelegate?
 

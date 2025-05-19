@@ -1,174 +1,32 @@
 package com.s77rt.rtndatepicker
 
-import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SelectableDates
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
-import androidx.compose.material3.TimePickerSelectionMode
-import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import java.time.Instant
 import java.time.ZoneId
-import java.util.Locale
-
-@OptIn(ExperimentalMaterial3Api::class)
-class RTNDatePickerViewModel : ViewModel() {
-    private var lowerBound: Long? = null
-    private var upperBound: Long? = null
-
-    private val _type = MutableStateFlow("date")
-    private val _isOpen = MutableStateFlow(false)
-    private val _isInline = MutableStateFlow(false)
-    private val _datePickerState =
-        MutableStateFlow(
-            DatePickerState(
-                locale = Locale.getDefault(),
-                selectableDates =
-                    object : SelectableDates {
-                        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                            val lb = lowerBound
-                            val ub = upperBound
-
-                            if (lb != null && utcTimeMillis < lb) {
-                                return false
-                            }
-
-                            if (ub != null && utcTimeMillis > ub) {
-                                return false
-                            }
-
-                            return true
-                        }
-                    },
-            ),
-        )
-    private val _timePickerState =
-        MutableStateFlow(
-            TimePickerState(
-                initialHour = 0,
-                initialMinute = 0,
-                is24Hour = false,
-            ),
-        )
-
-    val type: StateFlow<String> get() = _type
-    val isOpen: StateFlow<Boolean> get() = _isOpen
-    val isInline: StateFlow<Boolean> get() = _isInline
-    val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
-    val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
-
-    fun syncDisplayedMonth() {
-        var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
-
-        if (newDisplayedMonthMillis == null) {
-            newDisplayedMonthMillis = Instant.now().toEpochMilli()
-        }
-
-        if (!_datePickerState.value.selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
-            val lb = lowerBound
-            val ub = upperBound
-
-            if (lb != null && newDisplayedMonthMillis < lb) {
-                newDisplayedMonthMillis = lb
-            } else if (ub != null && newDisplayedMonthMillis > ub) {
-                newDisplayedMonthMillis = ub
-            }
-        }
-
-        _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
-    }
-
-    fun resetTimeSelection() {
-        _timePickerState.value.selection = TimePickerSelectionMode.Hour
-    }
-
-    fun updateType(newType: String) {
-        _type.value = newType
-    }
-
-    fun updateIsOpen(newIsOpen: Boolean) {
-        if (newIsOpen) {
-            syncDisplayedMonth()
-            resetTimeSelection()
-        }
-        _isOpen.value = newIsOpen
-    }
-
-    fun updateIsInline(newIsInline: Boolean) {
-        _isInline.value = newIsInline
-    }
-
-    fun updateValue(newValue: Long?) {
-        // The selected date is expected to be at the start of the day in UTC
-        // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-        _datePickerState.value.selectedDateMillis =
-            if (newValue == null) {
-                null
-            } else {
-                Instant
-                    .ofEpochMilli(newValue)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate()
-                    .atStartOfDay(ZoneId.of("UTC"))
-                    .toEpochSecond() * 1000
-            }
-
-        if (newValue != null) {
-            val time =
-                Instant
-                    .ofEpochMilli(newValue)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalTime()
-
-            _timePickerState.value.hour = time.getHour()
-            _timePickerState.value.minute = time.getMinute()
-        }
-
-        syncDisplayedMonth()
-    }
-
-    fun updateRange(
-        newLowerBound: Long?,
-        newUpperBound: Long?,
-    ) {
-        lowerBound =
-            if (newLowerBound == null) {
-                null
-            } else {
-                Instant
-                    .ofEpochMilli(newLowerBound)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate()
-                    .atStartOfDay(ZoneId.of("UTC"))
-                    .toEpochSecond() * 1000
-            }
-
-        upperBound =
-            if (newUpperBound == null) {
-                null
-            } else {
-                Instant
-                    .ofEpochMilli(newUpperBound)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate()
-                    .atStartOfDay(ZoneId.of("UTC"))
-                    .toEpochSecond() * 1000
-            }
-
-        syncDisplayedMonth()
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
@@ -205,7 +63,7 @@ fun RTNDatePickerView(
         if (isInline) {
             TimePicker(state = timePickerState)
         } else if (isOpen) {
-            AlertDialog(
+            TimePickerDialog(
                 onDismissRequest = onCancel,
                 confirmButton = {
                     TextButton(onClick = onConfirm) {
@@ -217,12 +75,13 @@ fun RTNDatePickerView(
                         Text("Cancel")
                     }
                 },
-                text = { TimePicker(state = timePickerState) },
-            )
+            ) {
+                TimePicker(state = timePickerState)
+            }
         }
     } else {
         if (isInline) {
-            DatePicker(state = datePickerState, showModeToggle = false)
+            DatePicker(state = datePickerState, headline = null, title = null, showModeToggle = false)
         } else if (isOpen) {
             DatePickerDialog(
                 onDismissRequest = onCancel,
@@ -238,6 +97,49 @@ fun RTNDatePickerView(
                 },
             ) {
                 DatePicker(state = datePickerState)
+            }
+        }
+    }
+}
+
+// Based on compose/material3/material3/src/androidMain/kotlin/androidx/compose/material3/DatePickerDialog.android.kt
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
+@Composable
+fun TimePickerDialog(
+    onDismissRequest: () -> Unit,
+    confirmButton: @Composable () -> Unit,
+    dismissButton: @Composable () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    BasicAlertDialog(
+        onDismissRequest = onDismissRequest,
+        modifier = Modifier.wrapContentHeight(),
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+    ) {
+        Surface(
+            shape = DatePickerDefaults.shape,
+            tonalElevation = DatePickerDefaults.TonalElevation,
+            color = DatePickerDefaults.colors().containerColor,
+        ) {
+            Column(modifier = Modifier.padding(horizontal = 24.dp, vertical = 24.dp), verticalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    text = "Select time",
+                    modifier = Modifier.padding(bottom = 20.dp),
+                    style = MaterialTheme.typography.labelMedium,
+                )
+                Box(Modifier.weight(1f, fill = false)) {
+                    this@Column.content()
+                }
+                Box(
+                    modifier =
+                        Modifier.align(Alignment.End),
+                ) {
+                    Row {
+                        dismissButton()
+                        confirmButton()
+                    }
+                }
             }
         }
     }
