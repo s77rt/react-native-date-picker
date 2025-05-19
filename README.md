@@ -101,6 +101,14 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `min`      | `Date`                          | The earliest selectable date.                       |
 | `max`      | `Date`                          | The latest selectable date.                         |
 | `inline`   | `boolean`                       | Whether the date picker should be displayed inline. |
+| `options`  | [`Options`](#options)           | [Options](#options).                                |
+
+### Options
+
+| Option        | Type     | Description              |
+| ------------- | -------- | ------------------------ |
+| `confirmText` | `string` | The confirm button text. |
+| `cancelText`  | `string` | The cancel button text.  |
 
 ## Methods
 
