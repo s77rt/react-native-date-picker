@@ -50,12 +50,12 @@ struct RTNDatePickerView: View {
             HStack {
               Button(
                 action: onCancel,
-                label: { Text("Cancel") }
+                label: { Text(viewModel.cancelText) }
               )
               Spacer()
               Button(
                 action: onConfirm,
-                label: { Text("Confirm").bold() }
+                label: { Text(viewModel.confirmText).bold() }
               )
             }
           }

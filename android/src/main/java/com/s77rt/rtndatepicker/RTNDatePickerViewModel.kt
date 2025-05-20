@@ -52,12 +52,16 @@ class RTNDatePickerViewModel : ViewModel() {
                 is24Hour = false,
             ),
         )
+    private val _confirmText = MutableStateFlow("OK")
+    private val _cancelText = MutableStateFlow("Cancel")
 
     val type: StateFlow<String> get() = _type
     val isOpen: StateFlow<Boolean> get() = _isOpen
     val isInline: StateFlow<Boolean> get() = _isInline
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
     val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
+    val confirmText: StateFlow<String> get() = _confirmText
+    val cancelText: StateFlow<String> get() = _cancelText
 
     fun syncDisplayedMonth() {
         var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
@@ -158,5 +162,13 @@ class RTNDatePickerViewModel : ViewModel() {
             }
 
         syncDisplayedMonth()
+    }
+
+    fun updateConfirmText(newConfirmText: String) {
+        _confirmText.value = newConfirmText
+    }
+
+    fun updateCancelText(newCancelText: String) {
+        _cancelText.value = newCancelText
     }
 }

@@ -31,6 +31,7 @@ class RTNDatePickerManager(
         if (type == null) {
             return
         }
+
         view.setType(type)
     }
 
@@ -55,7 +56,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         value: Double,
     ) {
-        // Codegen passes null as 0f (0.0)
+        // Codegen passes null double as 0f (0.0)
         // https://github.com/facebook/react-native/blob/996be870713cd72df1f91db99e8f981bbc5406af/packages/react-native-codegen/src/generators/components/GeneratePropsJavaDelegate.js#L107
         if (value == 0.0) {
             view.setValue(null)
@@ -71,7 +72,6 @@ class RTNDatePickerManager(
         range: ReadableMap?,
     ) {
         if (range == null) {
-            view.setRange(null, null)
             return
         }
 
@@ -79,6 +79,19 @@ class RTNDatePickerManager(
         val upperBound = if (range.hasKey("upperBound")) range.getDouble("upperBound").toLong() else null
 
         view.setRange(lowerBound, upperBound)
+    }
+
+    @ReactProp(name = "options")
+    override fun setOptions(
+        view: RTNDatePicker,
+        options: ReadableMap?,
+    ) {
+        if (options == null) {
+            return
+        }
+
+        view.setConfirmText(options.getString("confirmText"))
+        view.setCancelText(options.getString("cancelText"))
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =

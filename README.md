@@ -92,21 +92,37 @@ function Example() {
 
 Inherits [View Props](https://reactnative.dev/docs/view#props).
 
-| Prop       | Type                            | Description                                         |
-| ---------- | ------------------------------- | --------------------------------------------------- |
-| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                     |
-| `type`     | `"date" \| "time"`              | The type of the picker.                             |
-| `value`    | `Date \| null`                  | The selected date.                                  |
-| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.   |
-| `min`      | `Date`                          | The earliest selectable date.                       |
-| `max`      | `Date`                          | The latest selectable date.                         |
-| `inline`   | `boolean`                       | Whether the date picker should be displayed inline. |
+| Prop       | Type                            | Description                                                                                   |
+| ---------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                                                               |
+| `type`     | `"date" \| "time"`              | The type of the picker.                                                                       |
+| `value`    | `Date \| null`                  | The selected date.                                                                            |
+| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                             |
+| `min`      | `Date`                          | The earliest selectable date.                                                                 |
+| `max`      | `Date`                          | The latest selectable date.                                                                   |
+| `inline`   | `boolean`                       | Whether the date picker should be displayed inline.                                           |
+| `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). |
+
+### Options
+
+Various configuration options.
+
+| Option        | Type     | Description              |
+| ------------- | -------- | ------------------------ |
+| `confirmText` | `string` | The confirm button text. |
+| `cancelText`  | `string` | The cancel button text.  |
 
 ## Methods
+
+Imperative handle methods.
 
 | Method       | Type         | Description       |
 | ------------ | ------------ | ----------------- |
 | `showPicker` | `() => void` | Shows the picker. |
+
+## Feedback
+
+Every code review, bug report and feature request is appreciated! Please feel free to [share your feedback](https://github.com/s77rt/react-native-date-picker/issues/new).
 
 ## License
 
