@@ -70,4 +70,8 @@ import SwiftUI
     let localizedKey = String.LocalizationValue(stringLiteral: cancelText ?? "Cancel")
     viewModel.cancelText = String(localized: localizedKey)
   }
+
+  @objc public func setMode(mode: String) {
+    viewModel.mode = mode
+  }
 }
