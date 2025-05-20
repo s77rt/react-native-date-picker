@@ -1,7 +1,7 @@
 import type {
 	NativeValueToMsEpoch,
 	NativeValueFromMsEpoch,
-	DefaultDateValue,
+	DefaultDate,
 	DateToISO8601Date,
 	DefaultSize,
 	DateToHHmm,
@@ -12,7 +12,7 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDateValue: DefaultDateValue = (type: string) => {
+export const defaultDate: DefaultDate = (type: string) => {
 	// TimePickerState`s hour and minute are non-nullable
 	// https://developer.android.com/reference/kotlin/androidx/compose/material3/TimePickerState#summary
 	if (type === "time") {

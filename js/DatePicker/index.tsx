@@ -10,7 +10,7 @@ import type { DatePickerProps } from "./types";
 import {
 	dateToHHmm,
 	dateToISO8601Date,
-	defaultDateValue,
+	defaultDate,
 	defaultSize,
 } from "../utils/DateUtils";
 
@@ -26,7 +26,7 @@ function DatePicker({
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? defaultDateValue(type);
+		const date = valueProp ?? defaultDate(type);
 		if (date === null) {
 			return "";
 		}

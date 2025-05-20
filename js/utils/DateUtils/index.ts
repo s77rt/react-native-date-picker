@@ -1,7 +1,7 @@
 import type {
 	NativeValueToMsEpoch,
 	NativeValueFromMsEpoch,
-	DefaultDateValue,
+	DefaultDate,
 	DateToISO8601Date,
 	DefaultSize,
 	DateToHHmm,
@@ -12,7 +12,7 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDateValue: DefaultDateValue = (_type: string) => null;
+export const defaultDate: DefaultDate = (_type: string) => null;
 
 export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 	[
