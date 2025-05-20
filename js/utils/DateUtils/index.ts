@@ -12,8 +12,6 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDate: DefaultDate = (_type: string) => null;
-
 export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
 	[
 		date.getFullYear(),
@@ -25,6 +23,8 @@ export const dateToHHmm: DateToHHmm = (date: Date) =>
 		("0" + date.getHours()).slice(-2),
 		("0" + date.getMinutes()).slice(-2),
 	].join(":");
+
+export const defaultDate: DefaultDate = (_type: string) => null;
 
 export const defaultSize: DefaultSize = (
 	_type: string,
