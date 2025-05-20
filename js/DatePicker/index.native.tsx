@@ -13,6 +13,7 @@ import type {
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import {
 	defaultDate,
+	defaultOptions,
 	defaultSize,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
@@ -101,7 +102,10 @@ function DatePicker({
 		setIsOpen(false);
 	}, [initialValue]);
 
-	const options = useMemo(() => optionsProp ?? {}, [optionsProp]);
+	const options = useMemo(
+		() => ({ ...defaultOptions(type), ...optionsProp }),
+		[type, optionsProp]
+	);
 
 	const style = useMemo(
 		() => [

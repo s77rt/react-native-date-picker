@@ -5,6 +5,7 @@ import type {
 	DateToISO8601Date,
 	DefaultSize,
 	DateToHHmm,
+	DefaultOptions,
 } from "./types";
 
 export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
@@ -12,19 +13,19 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
+export const dateToISO8601Date: DateToISO8601Date = (date) =>
 	[
 		date.getFullYear(),
 		("0" + (date.getMonth() + 1)).slice(-2),
 		("0" + date.getDate()).slice(-2),
 	].join("-");
-export const dateToHHmm: DateToHHmm = (date: Date) =>
+export const dateToHHmm: DateToHHmm = (date) =>
 	[
 		("0" + date.getHours()).slice(-2),
 		("0" + date.getMinutes()).slice(-2),
 	].join(":");
 
-export const defaultDate: DefaultDate = (type: string) => {
+export const defaultDate: DefaultDate = (type) => {
 	// TimePickerState`s hour and minute are non-nullable
 	// https://developer.android.com/reference/kotlin/androidx/compose/material3/TimePickerState#summary
 	if (type === "time") {
@@ -34,7 +35,7 @@ export const defaultDate: DefaultDate = (type: string) => {
 	return null;
 };
 
-export const defaultSize: DefaultSize = (type: string, isInline: boolean) => {
+export const defaultSize: DefaultSize = (type, isInline) => {
 	if (type === "date" && isInline) {
 		return { width: 360, height: 392 };
 	}
@@ -45,3 +46,5 @@ export const defaultSize: DefaultSize = (type: string, isInline: boolean) => {
 
 	return { width: 0, height: 0 };
 };
+
+export const defaultOptions: DefaultOptions = (_type) => ({});
