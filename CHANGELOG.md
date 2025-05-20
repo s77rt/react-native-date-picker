@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2025-05-20
+
+### Added
+
+-   Time picker ([#12](https://github.com/s77rt/react-native-date-picker/pull/12)).
+-   `options` prop ([#16](https://github.com/s77rt/react-native-date-picker/pull/16)).
+
+### Changed
+
+-   Android material 3 inline date picker ([#15](https://github.com/s77rt/react-native-date-picker/pull/15)).
+
 ## [1.2.0] - 2025-05-16
 
 ### Added
@@ -50,6 +61,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[1.3.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v1.0.0...v1.0.1
