@@ -12,12 +12,14 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -124,7 +126,7 @@ fun TimePickerDialog(
             tonalElevation = DatePickerDefaults.TonalElevation,
             color = DatePickerDefaults.colors().containerColor,
         ) {
-            Column(modifier = Modifier.padding(horizontal = 24.dp, vertical = 24.dp), verticalArrangement = Arrangement.SpaceBetween) {
+            Column(modifier = Modifier.padding(24.dp), verticalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     text = "Select time",
                     modifier = Modifier.padding(bottom = 20.dp),
@@ -138,8 +140,10 @@ fun TimePickerDialog(
                         Modifier.align(Alignment.End),
                 ) {
                     Row {
-                        dismissButton()
-                        confirmButton()
+                        CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
+                            dismissButton()
+                            confirmButton()
+                        }
                     }
                 }
             }
