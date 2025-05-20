@@ -4,7 +4,6 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from "react";
-import { StyleSheet } from "react-native";
 import type { NativeSyntheticEvent } from "react-native";
 import type {
 	DatePickerProps,
@@ -105,13 +104,12 @@ function DatePicker({
 	const options = useMemo(() => optionsProp ?? {}, [optionsProp]);
 
 	const style = useMemo(
-		() =>
-			StyleSheet.compose(
-				{
-					...defaultSize(type, isInline),
-				} as const,
-				styleProp
-			),
+		() => [
+			{
+				...defaultSize(type, isInline),
+			} as const,
+			styleProp,
+		],
 		[type, isInline, styleProp]
 	);
 
