@@ -17,6 +17,7 @@ export type InternalRange = {
 export type Options = {
 	confirmText?: string;
 	cancelText?: string;
+	mode?: "compact" | "graphical" | "wheel";
 };
 
 export type DatePickerProps = ViewProps & {

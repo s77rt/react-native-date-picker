@@ -8,12 +8,23 @@ struct RTNDatePickerView: View {
 
   @ViewBuilder
   var datePicker: some View {
-    if viewModel.type == "time" {
+    if viewModel.mode == "wheel" {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
-        displayedComponents: .hourAndMinute
+        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
       ).datePickerStyle(
         .wheel
+      ).labelsHidden().onChange(
+        of: viewModel.value
+      ) {
+        onChange(viewModel.value)
+      }
+    } else if viewModel.mode == "compact" {
+      DatePicker(
+        "", selection: $viewModel.value, in: viewModel.range,
+        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
+      ).datePickerStyle(
+        .compact
       ).labelsHidden().onChange(
         of: viewModel.value
       ) {
@@ -22,7 +33,7 @@ struct RTNDatePickerView: View {
     } else {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
-        displayedComponents: .date
+        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
       ).datePickerStyle(
         .graphical
       ).labelsHidden().onChange(

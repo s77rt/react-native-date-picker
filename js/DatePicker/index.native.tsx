@@ -4,7 +4,6 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from "react";
-import { StyleSheet } from "react-native";
 import type { NativeSyntheticEvent } from "react-native";
 import type {
 	DatePickerProps,
@@ -13,7 +12,8 @@ import type {
 } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import {
-	defaultDateValue,
+	defaultDate,
+	defaultOptions,
 	defaultSize,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
@@ -48,7 +48,7 @@ function DatePicker({
 	);
 
 	const initialValue = useMemo(() => {
-		const date = valueProp ?? defaultDateValue(type);
+		const date = valueProp ?? defaultDate(type);
 		if (date === null) {
 			return null;
 		}
@@ -102,17 +102,19 @@ function DatePicker({
 		setIsOpen(false);
 	}, [initialValue]);
 
-	const options = useMemo(() => optionsProp ?? {}, [optionsProp]);
+	const options = useMemo(
+		() => ({ ...defaultOptions(type), ...optionsProp }),
+		[type, optionsProp]
+	);
 
 	const style = useMemo(
-		() =>
-			StyleSheet.compose(
-				{
-					...defaultSize(type, isInline),
-				} as const,
-				styleProp
-			),
-		[type, isInline, styleProp]
+		() => [
+			{
+				...defaultSize(type, isInline, options),
+			} as const,
+			styleProp,
+		],
+		[type, isInline, options, styleProp]
 	);
 
 	useImperativeHandle(

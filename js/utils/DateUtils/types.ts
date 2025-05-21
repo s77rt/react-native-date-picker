@@ -1,14 +1,20 @@
+import type { Options } from "../../DatePicker/types";
+
 export type NativeValueToMsEpoch = (nativeValue: number) => number;
 export type NativeValueFromMsEpoch = (msEpoch: number) => number;
 
-export type DefaultDateValue = (type: string) => Date | null;
 export type DateToISO8601Date = (date: Date) => string;
 export type DateToHHmm = (date: Date) => string;
 
+export type DefaultDate = (type: "date" | "time") => Date | null;
+
 export type DefaultSize = (
-	type: string,
-	isInline: boolean
+	type: "date" | "time",
+	isInline: boolean,
+	options: Options
 ) => {
-	width: number;
-	height: number;
+	width: number | undefined;
+	height: number | undefined;
 };
+
+export type DefaultOptions = (type: "date" | "time") => Options;

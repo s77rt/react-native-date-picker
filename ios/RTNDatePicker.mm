@@ -36,7 +36,7 @@ using namespace facebook::react;
     const auto &defaultViewProps =
         *std::static_pointer_cast<RTNDatePickerProps const>(_props);
 
-    _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
+    _view = [[RTNDatePickerUIView alloc] initWithFrame:self.bounds];
     _view.delegate = self;
 
     {
@@ -86,6 +86,10 @@ using namespace facebook::react;
               : [NSString stringWithUTF8String:defaultViewProps.options
                                                    .cancelText.c_str()];
       [_view setCancelTextWithCancelText:cancelText];
+
+      [_view setModeWithMode:[NSString
+                                 stringWithUTF8String:defaultViewProps.options
+                                                          .mode.c_str()]];
     }
 
     self.contentView = _view;
@@ -138,7 +142,8 @@ using namespace facebook::react;
   }
 
   if (oldViewProps.options.confirmText != newViewProps.options.confirmText ||
-      oldViewProps.options.cancelText != newViewProps.options.cancelText) {
+      oldViewProps.options.cancelText != newViewProps.options.cancelText ||
+      oldViewProps.options.mode != newViewProps.options.mode) {
     // Codegen props of type string are zero-initialized (undefined values are
     // empty by default)
     NSString *confirmText =
@@ -154,6 +159,9 @@ using namespace facebook::react;
             : [NSString
                   stringWithUTF8String:newViewProps.options.cancelText.c_str()];
     [_view setCancelTextWithCancelText:cancelText];
+
+    [_view setModeWithMode:[NSString stringWithUTF8String:newViewProps.options
+                                                              .mode.c_str()]];
   }
 
   [super updateProps:props oldProps:oldProps];

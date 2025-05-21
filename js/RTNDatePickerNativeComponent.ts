@@ -19,6 +19,7 @@ interface Range {
 interface Options {
 	confirmText?: string;
 	cancelText?: string;
+	mode?: string;
 }
 
 export interface RTNDatePickerNativeProps extends ViewProps {

@@ -1,10 +1,11 @@
 import type {
 	NativeValueToMsEpoch,
 	NativeValueFromMsEpoch,
-	DefaultDateValue,
+	DefaultDate,
 	DateToISO8601Date,
 	DefaultSize,
 	DateToHHmm,
+	DefaultOptions,
 } from "./types";
 
 export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
@@ -12,24 +13,23 @@ export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
 export const nativeValueFromMsEpoch: NativeValueFromMsEpoch = (msEpoch) =>
 	msEpoch;
 
-export const defaultDateValue: DefaultDateValue = (_type: string) => null;
-
-export const dateToISO8601Date: DateToISO8601Date = (date: Date) =>
+export const dateToISO8601Date: DateToISO8601Date = (date) =>
 	[
 		date.getFullYear(),
 		("0" + (date.getMonth() + 1)).slice(-2),
 		("0" + date.getDate()).slice(-2),
 	].join("-");
-export const dateToHHmm: DateToHHmm = (date: Date) =>
+export const dateToHHmm: DateToHHmm = (date) =>
 	[
 		("0" + date.getHours()).slice(-2),
 		("0" + date.getMinutes()).slice(-2),
 	].join(":");
 
-export const defaultSize: DefaultSize = (
-	_type: string,
-	_isInline: boolean
-) => ({
+export const defaultDate: DefaultDate = (_type) => null;
+
+export const defaultSize: DefaultSize = (_type, _isInline, _options) => ({
 	width: 0,
 	height: 0,
 });
+
+export const defaultOptions: DefaultOptions = (_type) => ({});

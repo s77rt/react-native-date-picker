@@ -8,6 +8,7 @@ class RTNDatePickerViewModel: ObservableObject {
   @Published var range: ClosedRange<Date> = Date.distantPast...Date.distantFuture
   @Published var confirmText: String = "Done"
   @Published var cancelText: String = "Cancel"
+  @Published var mode: String = "graphical"
 
   init() {}
 }
