@@ -21,7 +21,6 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
-	inline: isInline = false,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -63,9 +62,9 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
-				...defaultSize(type, isInline, {}),
+				...defaultSize(type, false, {}),
 			} as const),
-		[type, isInline]
+		[type]
 	);
 
 	useImperativeHandle(
@@ -78,15 +77,6 @@ function DatePicker({
 		}),
 		[]
 	);
-
-	useEffect(() => {
-		if (!isInline) {
-			return;
-		}
-		console.warn(
-			"@s77rt/react-native-date-picker: inline is not supported on web."
-		);
-	}, [isInline]);
 
 	return (
 		<input
