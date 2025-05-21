@@ -27,7 +27,7 @@ export const dateToHHmm: DateToHHmm = (date) =>
 
 export const defaultDate: DefaultDate = (_type) => null;
 
-export const defaultSize: DefaultSize = (_type, _isInline) => ({
+export const defaultSize: DefaultSize = (_type, _isInline, _options) => ({
 	width: 0,
 	height: 0,
 });

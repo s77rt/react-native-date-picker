@@ -10,10 +10,11 @@ export type DefaultDate = (type: "date" | "time") => Date | null;
 
 export type DefaultSize = (
 	type: "date" | "time",
-	isInline: boolean
+	isInline: boolean,
+	options: Options
 ) => {
-	width: number;
-	height: number;
+	width: number | undefined;
+	height: number | undefined;
 };
 
 export type DefaultOptions = (type: "date" | "time") => Options;

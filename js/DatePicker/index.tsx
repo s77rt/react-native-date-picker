@@ -63,7 +63,7 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
-				...defaultSize(type, isInline),
+				...defaultSize(type, isInline, {}),
 			} as const),
 		[type, isInline]
 	);

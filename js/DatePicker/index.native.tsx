@@ -110,11 +110,11 @@ function DatePicker({
 	const style = useMemo(
 		() => [
 			{
-				...defaultSize(type, isInline),
+				...defaultSize(type, isInline, options),
 			} as const,
 			styleProp,
 		],
-		[type, isInline, styleProp]
+		[type, isInline, options, styleProp]
 	);
 
 	useImperativeHandle(
