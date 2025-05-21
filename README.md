@@ -107,10 +107,11 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 
 Various configuration options.
 
-| Option        | Type     | Description              |
-| ------------- | -------- | ------------------------ |
-| `confirmText` | `string` | The confirm button text. |
-| `cancelText`  | `string` | The cancel button text.  |
+| Option        | Type                                  | Description              |
+| ------------- | ------------------------------------- | ------------------------ |
+| `confirmText` | `string`                              | The confirm button text. |
+| `cancelText`  | `string`                              | The cancel button text.  |
+| `mode`        | `"compact" \| "graphical" \| "wheel"` | The display mode.        |
 
 ## Methods
 
