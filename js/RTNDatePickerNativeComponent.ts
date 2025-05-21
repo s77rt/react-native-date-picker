@@ -36,7 +36,5 @@ export interface RTNDatePickerNativeProps extends ViewProps {
 
 export default codegenNativeComponent<RTNDatePickerNativeProps>(
 	"RTNDatePicker",
-	{
-		interfaceOnly: true,
-	}
+	{ interfaceOnly: true }
 ) as HostComponent<RTNDatePickerNativeProps>;
