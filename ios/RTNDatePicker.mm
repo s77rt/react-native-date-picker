@@ -36,7 +36,7 @@ using namespace facebook::react;
     const auto &defaultViewProps =
         *std::static_pointer_cast<RTNDatePickerProps const>(_props);
 
-    _view = [[RTNDatePickerUIView alloc] initWithFrame:frame];
+    _view = [[RTNDatePickerUIView alloc] initWithFrame:self.bounds];
     _view.delegate = self;
 
     {

@@ -1,3 +1,4 @@
+import React
 import SwiftUI
 
 @objc public class RTNDatePickerUIView: UIView {
@@ -12,10 +13,17 @@ import SwiftUI
     let view = RTNDatePickerView(
       viewModel: viewModel, onChange: onChange, onConfirm: onConfirm, onCancel: onCancel)
     let hostingController = UIHostingController(rootView: view)
-    hostingController.view.frame = self.bounds
-    hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
     addSubview(hostingController.view)
+    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      hostingController.view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      hostingController.view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      hostingController.view.topAnchor.constraint(equalTo: self.topAnchor),
+      hostingController.view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+    ])
+
+    reactAddController(toClosestParent: hostingController)
   }
 
   required public init?(coder: NSCoder) {
