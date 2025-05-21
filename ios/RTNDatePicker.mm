@@ -1,6 +1,7 @@
 #import <React/RCTViewComponentView.h>
 
-#import <react/renderer/components/RTNDatePickerSpecs/ComponentDescriptors.h>
+#import "RTNDatePickerComponentDescriptor.h"
+
 #import <react/renderer/components/RTNDatePickerSpecs/EventEmitters.h>
 #import <react/renderer/components/RTNDatePickerSpecs/Props.h>
 #import <react/renderer/components/RTNDatePickerSpecs/RCTComponentViewHelpers.h>

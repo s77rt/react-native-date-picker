@@ -15,5 +15,13 @@ Pod::Spec.new do |s|
 
   s.source_files    = ["ios/**/*.{h,m,mm,swift}"]
 
+  s.subspec 'componentDescriptors' do |sp|
+    sp.source_files = ["cpp/**/*.{h,cpp}"]
+  end
+
+  s.pod_target_xcconfig = {
+    "CLANG_CXX_LANGUAGE_STANDARD" => "c++20"
+  }
+
   install_modules_dependencies(s)
 end
