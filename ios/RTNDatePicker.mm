@@ -1,4 +1,4 @@
-#import <React/RCTViewComponentView.h>
+#import "RTNDatePicker.h"
 
 #import "RTNDatePickerComponentDescriptor.h"
 
@@ -11,9 +11,6 @@
 #import "react_native_date_picker-Swift.h"
 
 using namespace facebook::react;
-
-@interface RTNDatePicker : RCTViewComponentView
-@end
 
 @interface RTNDatePicker () <RCTRTNDatePickerViewProtocol,
                              RTNDatePickerUIViewDelegate>
