@@ -19,7 +19,10 @@ public:
         static_cast<RTNDatePickerShadowNode &>(shadowNode);
     auto &datePickerStateDate = datePickerShadowNode.getStateData();
 
-    datePickerShadowNode.setSize(datePickerStateDate.contentSize);
+    if (datePickerStateDate.contentSize.width != 0 &&
+        datePickerStateDate.contentSize.height != 0) {
+      datePickerShadowNode.setSize(datePickerStateDate.contentSize);
+    }
 
     ConcreteComponentDescriptor::adopt(shadowNode);
   }
