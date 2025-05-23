@@ -14,7 +14,6 @@ import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import {
 	defaultDate,
 	defaultOptions,
-	defaultSize,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
@@ -28,7 +27,6 @@ function DatePicker({
 	max: maxProp,
 	inline: isInline = false,
 	options: optionsProp,
-	style: styleProp,
 	...rest
 }: DatePickerProps) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -107,16 +105,6 @@ function DatePicker({
 		[type, optionsProp]
 	);
 
-	const style = useMemo(
-		() => [
-			{
-				...defaultSize(type, isInline, options),
-			} as const,
-			styleProp,
-		],
-		[type, isInline, options, styleProp]
-	);
-
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -139,7 +127,6 @@ function DatePicker({
 			onCancel={onCancel}
 			range={range}
 			options={options}
-			style={style}
 			{...rest}
 		/>
 	);

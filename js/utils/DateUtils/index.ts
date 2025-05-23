@@ -3,7 +3,6 @@ import type {
 	NativeValueFromMsEpoch,
 	DefaultDate,
 	DateToISO8601Date,
-	DefaultSize,
 	DateToHHmm,
 	DefaultOptions,
 } from "./types";
@@ -26,10 +25,5 @@ export const dateToHHmm: DateToHHmm = (date) =>
 	].join(":");
 
 export const defaultDate: DefaultDate = (_type) => null;
-
-export const defaultSize: DefaultSize = (_type, _isInline, _options) => ({
-	width: 0,
-	height: 0,
-});
 
 export const defaultOptions: DefaultOptions = (_type) => ({});

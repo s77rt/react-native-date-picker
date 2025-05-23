@@ -3,7 +3,6 @@ import type {
 	NativeValueFromMsEpoch,
 	DefaultDate,
 	DateToISO8601Date,
-	DefaultSize,
 	DateToHHmm,
 	DefaultOptions,
 } from "./types";
@@ -33,22 +32,6 @@ export const defaultDate: DefaultDate = (type) => {
 	}
 
 	return null;
-};
-
-export const defaultSize: DefaultSize = (type, isInline, _options) => {
-	if (!isInline) {
-		return { width: 0, height: 0 };
-	}
-
-	if (type === "date") {
-		return { width: 360, height: 392 };
-	}
-
-	if (type === "time") {
-		return { width: 280, height: 372 };
-	}
-
-	return { width: undefined, height: undefined };
 };
 
 export const defaultOptions: DefaultOptions = (_type) => ({});
