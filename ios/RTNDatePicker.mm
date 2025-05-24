@@ -6,7 +6,7 @@
 #import <react/renderer/components/RTNDatePickerSpecs/Props.h>
 #import <react/renderer/components/RTNDatePickerSpecs/RCTComponentViewHelpers.h>
 
-#import "RCTConversions.h"
+#import <React/RCTConversions.h>
 
 #import "RCTFabricComponentsPlugins.h"
 
@@ -93,6 +93,11 @@ using namespace facebook::react;
                                                           .mode.c_str()]];
     }
 
+    {
+      [_view setAccentColorWithColor:RCTUIColorFromSharedColor(
+                                         defaultViewProps.styles.accentColor)];
+    }
+
     self.contentView = _view;
   }
 
@@ -171,6 +176,11 @@ using namespace facebook::react;
 
     [_view setModeWithMode:[NSString stringWithUTF8String:newViewProps.options
                                                               .mode.c_str()]];
+  }
+
+  if (oldViewProps.styles.accentColor != newViewProps.styles.accentColor) {
+    [_view setAccentColorWithColor:RCTUIColorFromSharedColor(
+                                       newViewProps.styles.accentColor)];
   }
 
   [super updateProps:props oldProps:oldProps];

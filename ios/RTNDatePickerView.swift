@@ -19,6 +19,7 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
+      .accentColor(viewModel.accentColor)
     } else if viewModel.mode == "compact" {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
@@ -30,6 +31,7 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
+      .accentColor(viewModel.accentColor)
     } else {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
@@ -41,6 +43,7 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
+      .accentColor(viewModel.accentColor)
     }
   }
 
