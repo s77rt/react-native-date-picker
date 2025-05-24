@@ -19,6 +19,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
+import androidx.compose.material3.TimePickerColors
+import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -47,6 +49,9 @@ fun RTNDatePickerView(
     val timePickerState by viewModel.timePickerState.collectAsState()
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
+    val containerColor by viewModel.containerColor.collectAsState()
+    val datePickerColors = DatePickerDefaults.colors(containerColor = containerColor)
+    val timePickerColors = TimePickerDefaults.colors(containerColor = containerColor)
 
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
@@ -66,7 +71,7 @@ fun RTNDatePickerView(
 
     if (type == "time") {
         if (isInline) {
-            TimePicker(state = timePickerState)
+            TimePicker(state = timePickerState, colors = timePickerColors)
         } else if (isOpen) {
             TimePickerDialog(
                 onDismissRequest = onCancel,
@@ -80,14 +85,16 @@ fun RTNDatePickerView(
                         Text(cancelText)
                     }
                 },
+                colors = timePickerColors,
             ) {
-                TimePicker(state = timePickerState)
+                TimePicker(state = timePickerState, colors = timePickerColors)
             }
         }
     } else {
         if (isInline) {
             DatePicker(
                 state = datePickerState,
+                colors = datePickerColors,
                 // Explicitly set requiredWidth because DatePicker uses LazyRow
                 // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
                 modifier = Modifier.requiredWidth(360.dp),
@@ -108,8 +115,9 @@ fun RTNDatePickerView(
                         Text(cancelText)
                     }
                 },
+                colors = datePickerColors,
             ) {
-                DatePicker(state = datePickerState)
+                DatePicker(state = datePickerState, colors = datePickerColors)
             }
         }
     }
@@ -123,6 +131,7 @@ fun TimePickerDialog(
     onDismissRequest: () -> Unit,
     confirmButton: @Composable () -> Unit,
     dismissButton: @Composable () -> Unit,
+    colors: TimePickerColors,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     BasicAlertDialog(
@@ -133,7 +142,7 @@ fun TimePickerDialog(
         Surface(
             shape = DatePickerDefaults.shape,
             tonalElevation = DatePickerDefaults.TonalElevation,
-            color = DatePickerDefaults.colors().containerColor,
+            color = colors.containerColor,
         ) {
             Column(modifier = Modifier.padding(24.dp), verticalArrangement = Arrangement.SpaceBetween) {
                 Text(

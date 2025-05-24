@@ -22,6 +22,7 @@ export type Options = {
 
 export type Styles = {
 	accentColor?: ColorValue;
+	containerColor?: ColorValue;
 };
 
 export type DatePickerProps = ViewProps & {

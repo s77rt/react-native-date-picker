@@ -6,6 +6,7 @@ import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TimePickerSelectionMode
 import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -54,6 +55,7 @@ class RTNDatePickerViewModel : ViewModel() {
         )
     private val _confirmText = MutableStateFlow("OK")
     private val _cancelText = MutableStateFlow("Cancel")
+    private val _containerColor = MutableStateFlow(Color.Unspecified)
 
     val type: StateFlow<String> get() = _type
     val isOpen: StateFlow<Boolean> get() = _isOpen
@@ -62,6 +64,7 @@ class RTNDatePickerViewModel : ViewModel() {
     val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
+    val containerColor: StateFlow<Color> get() = _containerColor
 
     fun syncDisplayedMonth() {
         var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
@@ -170,5 +173,9 @@ class RTNDatePickerViewModel : ViewModel() {
 
     fun updateCancelText(newCancelText: String) {
         _cancelText.value = newCancelText
+    }
+
+    fun updateContainerColor(newContainerColor: Color) {
+        _containerColor.value = newContainerColor
     }
 }

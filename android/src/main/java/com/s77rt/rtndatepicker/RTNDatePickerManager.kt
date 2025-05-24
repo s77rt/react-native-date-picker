@@ -96,6 +96,20 @@ class RTNDatePickerManager(
         view.setCancelText(options.getString("cancelText"))
     }
 
+    @ReactProp(name = "styles")
+    override fun setStyles(
+        view: RTNDatePicker,
+        styles: ReadableMap?,
+    ) {
+        if (styles == null) {
+            return
+        }
+
+        val containerColor = if (styles.hasKey("containerColor")) styles.getInt("containerColor") else null
+
+        view.setContainerColor(containerColor)
+    }
+
     public override fun updateState(
         view: RTNDatePicker,
         props: ReactStylesDiffMap,

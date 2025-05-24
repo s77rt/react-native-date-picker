@@ -24,6 +24,7 @@ interface Options {
 
 interface Styles {
 	accentColor?: ColorValue;
+	containerColor?: ColorValue;
 }
 
 export interface RTNDatePickerNativeProps extends ViewProps {

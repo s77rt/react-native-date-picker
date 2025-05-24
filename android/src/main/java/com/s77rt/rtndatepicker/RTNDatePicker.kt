@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.facebook.react.bridge.Arguments
@@ -143,5 +144,14 @@ class RTNDatePicker : FrameLayout {
         }
 
         viewModel.updateCancelText(cancelText)
+    }
+
+    public fun setContainerColor(containerColor: Int?) {
+        if (containerColor == null) {
+            viewModel.updateContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateContainerColor(Color(containerColor))
     }
 }
