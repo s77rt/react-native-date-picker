@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2025-05-24
+
+### Added
+
+-   Shadow node ([#20](https://github.com/s77rt/react-native-date-picker/pull/20)).
+
 ## [1.4.0] - 2025-05-21
 
 ### Added
@@ -67,6 +73,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.1.0...v1.2.0
