@@ -1,5 +1,5 @@
 import type { Ref } from "react";
-import type { ViewProps } from "react-native";
+import type { ViewProps, ColorValue } from "react-native";
 
 export type DatePickerHandle = {
 	showPicker: () => void;
@@ -20,6 +20,10 @@ export type Options = {
 	mode?: "compact" | "graphical" | "wheel";
 };
 
+export type Styles = {
+	accentColor?: ColorValue;
+};
+
 export type DatePickerProps = ViewProps & {
 	ref?: Ref<DatePickerHandle>;
 	type?: "date" | "time";
@@ -29,4 +33,5 @@ export type DatePickerProps = ViewProps & {
 	max?: Date;
 	inline?: boolean;
 	options?: Options;
+	styles?: Styles;
 };
