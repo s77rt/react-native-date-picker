@@ -11,6 +11,7 @@
 		"android",
 		"ios",
 		"react-native-date-picker.podspec",
+		"react-native.config.js",
 		"!android/build",
 		"!ios/build",
 		"!**/__tests__",
