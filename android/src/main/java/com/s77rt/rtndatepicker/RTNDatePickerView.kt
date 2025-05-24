@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DatePicker
@@ -88,9 +88,9 @@ fun RTNDatePickerView(
         if (isInline) {
             DatePicker(
                 state = datePickerState,
-                // Setting max width is required because DatePicker uses LazyRow
-                // and measuring it with no constraints results in an infinite width.
-                modifier = Modifier.widthIn(max = 360.dp),
+                // Explicitly set requiredWidth because DatePicker uses LazyRow
+                // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
+                modifier = Modifier.requiredWidth(360.dp),
                 title = null,
                 headline = null,
                 showModeToggle = false,
