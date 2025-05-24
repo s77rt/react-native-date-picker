@@ -1,4 +1,4 @@
-import type { Options } from "../../DatePicker/types";
+import type { Options, Styles } from "../../DatePicker/types";
 
 export type NativeValueToMsEpoch = (nativeValue: number) => number;
 export type NativeValueFromMsEpoch = (msEpoch: number) => number;
@@ -9,3 +9,5 @@ export type DateToHHmm = (date: Date) => string;
 export type DefaultDate = (type: "date" | "time") => Date | null;
 
 export type DefaultOptions = (type: "date" | "time") => Options;
+
+export type DefaultStyles = () => Styles;

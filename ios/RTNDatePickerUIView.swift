@@ -96,4 +96,13 @@ import SwiftUI
   @objc public func setMode(mode: String) {
     viewModel.mode = mode
   }
+
+  @objc public func setAccentColor(color: UIColor?) {
+    if let uiColor = color {
+      viewModel.accentColor = Color(uiColor)
+      return
+    }
+
+    viewModel.accentColor = Color.accentColor
+  }
 }

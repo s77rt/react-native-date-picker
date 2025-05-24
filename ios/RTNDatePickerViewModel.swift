@@ -9,6 +9,7 @@ class RTNDatePickerViewModel: ObservableObject {
   @Published var confirmText: String = "Done"
   @Published var cancelText: String = "Cancel"
   @Published var mode: String = "graphical"
+  @Published var accentColor: Color = Color.accentColor
 
   init() {}
 }

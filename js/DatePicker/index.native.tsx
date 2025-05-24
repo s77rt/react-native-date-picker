@@ -4,6 +4,7 @@ import React, {
 	useState,
 	useImperativeHandle,
 } from "react";
+import { processColor } from "react-native";
 import type { NativeSyntheticEvent } from "react-native";
 import type {
 	DatePickerProps,
@@ -14,6 +15,7 @@ import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
 import {
 	defaultDate,
 	defaultOptions,
+	defaultStyles,
 	nativeValueFromMsEpoch,
 	nativeValueToMsEpoch,
 } from "../utils/DateUtils";
@@ -27,6 +29,7 @@ function DatePicker({
 	max: maxProp,
 	inline: isInline = false,
 	options: optionsProp,
+	styles: stylesProp,
 	...rest
 }: DatePickerProps) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -105,6 +108,19 @@ function DatePicker({
 		[type, optionsProp]
 	);
 
+	const styles = useMemo(() => {
+		const stylesToProcess = { ...defaultStyles(), ...stylesProp };
+
+		Object.keys(stylesToProcess).forEach((key) => {
+			if (["accentColor"].includes(key)) {
+				stylesToProcess[key] = processColor(stylesToProcess[key]);
+				return;
+			}
+		});
+
+		return stylesToProcess;
+	}, [stylesProp]);
+
 	useImperativeHandle(
 		ref,
 		() => ({
@@ -127,6 +143,7 @@ function DatePicker({
 			onCancel={onCancel}
 			range={range}
 			options={options}
+			styles={styles}
 			{...rest}
 		/>
 	);

@@ -1,5 +1,5 @@
 import type { ViewProps } from "react-native/Libraries/Components/View/ViewPropTypes";
-import type { HostComponent } from "react-native";
+import type { HostComponent, ColorValue } from "react-native";
 import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNativeComponent";
 import type {
 	Double,
@@ -22,6 +22,10 @@ interface Options {
 	mode?: string;
 }
 
+interface Styles {
+	accentColor?: ColorValue;
+}
+
 export interface RTNDatePickerNativeProps extends ViewProps {
 	type: string;
 	isOpen: boolean;
@@ -32,6 +36,7 @@ export interface RTNDatePickerNativeProps extends ViewProps {
 	onCancel: DirectEventHandler<null>;
 	range: Range;
 	options: Options;
+	styles: Styles;
 }
 
 export default codegenNativeComponent<RTNDatePickerNativeProps>(
