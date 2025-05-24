@@ -2,14 +2,20 @@ package com.s77rt.rtndatepicker
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.PixelUtil
+import com.facebook.react.uimanager.StateWrapper
 import com.facebook.react.uimanager.UIManagerHelper
 
 class RTNDatePicker : FrameLayout {
     private lateinit var reactContext: ReactContext
+
+    internal var stateWrapper: StateWrapper? = null
 
     private val viewModel = RTNDatePickerViewModel()
     private var lastValueUpdate: Long? = null // Default value in the view model
@@ -44,6 +50,26 @@ class RTNDatePicker : FrameLayout {
 
             addView(it)
         }
+    }
+
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int,
+    ) {
+        val content = getChildAt(0)
+        content.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+
+        val width = PixelUtil.toDIPFromPixel(content.getMeasuredWidth().toFloat())
+        val height = PixelUtil.toDIPFromPixel(content.getMeasuredHeight().toFloat())
+
+        stateWrapper?.updateState(
+            Arguments.createMap().apply {
+                putDouble("width", width.toDouble())
+                putDouble("height", height.toDouble())
+            },
+        )
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
     private fun onChange(date: Long?) {
