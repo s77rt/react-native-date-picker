@@ -5,6 +5,7 @@ import type {
 	DateToISO8601Date,
 	DateToHHmm,
 	DefaultOptions,
+	DefaultStyles,
 } from "./types";
 
 export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
@@ -29,3 +30,5 @@ export const defaultDate: DefaultDate = (_type) => new Date();
 export const defaultOptions: DefaultOptions = (type) => ({
 	mode: type === "date" ? "graphical" : "wheel",
 });
+
+export const defaultStyles: DefaultStyles = () => ({});
