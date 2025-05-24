@@ -3,7 +3,9 @@ package com.s77rt.rtndatepicker
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.module.annotations.ReactModule
+import com.facebook.react.uimanager.ReactStylesDiffMap
 import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.uimanager.StateWrapper
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -92,6 +94,15 @@ class RTNDatePickerManager(
 
         view.setConfirmText(options.getString("confirmText"))
         view.setCancelText(options.getString("cancelText"))
+    }
+
+    public override fun updateState(
+        view: RTNDatePicker,
+        props: ReactStylesDiffMap,
+        stateWrapper: StateWrapper,
+    ): Any? {
+        view.stateWrapper = stateWrapper
+        return null
     }
 
     public override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> =

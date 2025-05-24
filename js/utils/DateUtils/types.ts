@@ -8,13 +8,4 @@ export type DateToHHmm = (date: Date) => string;
 
 export type DefaultDate = (type: "date" | "time") => Date | null;
 
-export type DefaultSize = (
-	type: "date" | "time",
-	isInline: boolean,
-	options: Options
-) => {
-	width: number | undefined;
-	height: number | undefined;
-};
-
 export type DefaultOptions = (type: "date" | "time") => Options;

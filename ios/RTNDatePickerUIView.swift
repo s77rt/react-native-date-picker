@@ -4,6 +4,8 @@ import SwiftUI
 @objc public class RTNDatePickerUIView: UIView {
   @objc public weak var delegate: RTNDatePickerUIViewDelegate?
 
+  private var hostingController: UIHostingController<RTNDatePickerView>?
+
   private let viewModel = RTNDatePickerViewModel()
   private var lastValueUpdate: Date = Date()  // Default value in the view model
 
@@ -12,22 +14,34 @@ import SwiftUI
 
     let view = RTNDatePickerView(
       viewModel: viewModel, onChange: onChange, onConfirm: onConfirm, onCancel: onCancel)
-    let hostingController = UIHostingController(rootView: view)
 
-    addSubview(hostingController.view)
-    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      hostingController.view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      hostingController.view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      hostingController.view.topAnchor.constraint(equalTo: self.topAnchor),
-      hostingController.view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-    ])
+    self.hostingController = UIHostingController(rootView: view)
 
-    reactAddController(toClosestParent: hostingController)
+    if let hostingController = self.hostingController {
+      addSubview(hostingController.view)
+      hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        hostingController.view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        hostingController.view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        hostingController.view.topAnchor.constraint(equalTo: self.topAnchor),
+        hostingController.view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      ])
+
+      reactAddController(toClosestParent: hostingController)
+    }
   }
 
   required public init?(coder: NSCoder) {
     fatalError("init?(coder: NSCoder) is not implemented")
+  }
+
+  override public var intrinsicContentSize: CGSize {
+    if let hostingController = self.hostingController {
+      return hostingController.view.intrinsicContentSize
+    }
+
+    return CGSize(
+      width: RTNDatePickerUIView.noIntrinsicMetric, height: RTNDatePickerUIView.noIntrinsicMetric)
   }
 
   private func onChange(date: Date) {

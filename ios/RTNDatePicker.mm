@@ -1,9 +1,12 @@
-#import <React/RCTViewComponentView.h>
+#import "RTNDatePicker.h"
 
-#import <react/renderer/components/RTNDatePickerSpecs/ComponentDescriptors.h>
+#import "RTNDatePickerComponentDescriptor.h"
+
 #import <react/renderer/components/RTNDatePickerSpecs/EventEmitters.h>
 #import <react/renderer/components/RTNDatePickerSpecs/Props.h>
 #import <react/renderer/components/RTNDatePickerSpecs/RCTComponentViewHelpers.h>
+
+#import "RCTConversions.h"
 
 #import "RCTFabricComponentsPlugins.h"
 
@@ -11,15 +14,13 @@
 
 using namespace facebook::react;
 
-@interface RTNDatePicker : RCTViewComponentView
-@end
-
 @interface RTNDatePicker () <RCTRTNDatePickerViewProtocol,
                              RTNDatePickerUIViewDelegate>
 @end
 
 @implementation RTNDatePicker {
   RTNDatePickerUIView *_view;
+  RTNDatePickerShadowNode::ConcreteState::Shared _state;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider {
@@ -98,6 +99,14 @@ using namespace facebook::react;
   return self;
 }
 
+- (void)layoutSubviews {
+  [super layoutSubviews];
+
+  auto stateData =
+      RTNDatePickerState{RCTSizeFromCGSize(_view.intrinsicContentSize)};
+  _state->updateState(std::move(stateData));
+}
+
 - (void)updateProps:(Props::Shared const &)props
            oldProps:(Props::Shared const &)oldProps {
   const auto &oldViewProps =
@@ -165,6 +174,13 @@ using namespace facebook::react;
   }
 
   [super updateProps:props oldProps:oldProps];
+}
+
+- (void)updateState:(const State::Shared &)state
+           oldState:(const State::Shared &)oldState {
+  _state =
+      std::static_pointer_cast<const RTNDatePickerShadowNode::ConcreteState>(
+          state);
 }
 
 - (void)onChangeWithDate:(NSDate *_Nonnull)date {

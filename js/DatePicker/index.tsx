@@ -3,16 +3,10 @@ import React, {
 	useMemo,
 	useCallback,
 	useImperativeHandle,
-	useEffect,
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import {
-	dateToHHmm,
-	dateToISO8601Date,
-	defaultDate,
-	defaultSize,
-} from "../utils/DateUtils";
+import { dateToHHmm, dateToISO8601Date, defaultDate } from "../utils/DateUtils";
 
 function DatePicker({
 	ref,
@@ -62,9 +56,10 @@ function DatePicker({
 				opacity: 0,
 				zIndex: -9999,
 				pointerEvents: "none",
-				...defaultSize(type, false, {}),
+				width: 0,
+				height: 0,
 			} as const),
-		[type]
+		[]
 	);
 
 	useImperativeHandle(

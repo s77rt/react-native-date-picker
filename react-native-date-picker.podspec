@@ -13,7 +13,21 @@ Pod::Spec.new do |s|
   s.author          = package["author"]
   s.source          = { :git => "", :tag => "#{s.version}" }
 
-  s.source_files    = ["ios/**/*.{h,m,mm,swift}"]
+  s.source_files    = ["ios/**/*.{mm,swift}"]
+
+  s.subspec 'componentDescriptors' do |sp|
+    sp.source_files = ["cpp/**/*.{cpp}"]
+  end
+
+  s.preserve_paths = [
+    "ios/**/*.h",
+    "cpp/**/*.h"
+  ]
+
+  s.pod_target_xcconfig = {
+    "CLANG_CXX_LANGUAGE_STANDARD" => "c++20",
+    "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/cpp/\"/** "
+  }
 
   install_modules_dependencies(s)
 end
