@@ -154,4 +154,328 @@ class RTNDatePicker : FrameLayout {
 
         viewModel.updateContainerColor(Color(containerColor))
     }
+
+    public fun setTitleContentColor(titleContentColor: Int?) {
+        if (titleContentColor == null) {
+            viewModel.updateTitleContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTitleContentColor(Color(titleContentColor))
+    }
+
+    public fun setHeadlineContentColor(headlineContentColor: Int?) {
+        if (headlineContentColor == null) {
+            viewModel.updateHeadlineContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateHeadlineContentColor(Color(headlineContentColor))
+    }
+
+    public fun setWeekdayContentColor(weekdayContentColor: Int?) {
+        if (weekdayContentColor == null) {
+            viewModel.updateWeekdayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateWeekdayContentColor(Color(weekdayContentColor))
+    }
+
+    public fun setSubheadContentColor(subheadContentColor: Int?) {
+        if (subheadContentColor == null) {
+            viewModel.updateSubheadContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSubheadContentColor(Color(subheadContentColor))
+    }
+
+    public fun setNavigationContentColor(navigationContentColor: Int?) {
+        if (navigationContentColor == null) {
+            viewModel.updateNavigationContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateNavigationContentColor(Color(navigationContentColor))
+    }
+
+    public fun setYearContentColor(yearContentColor: Int?) {
+        if (yearContentColor == null) {
+            viewModel.updateYearContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateYearContentColor(Color(yearContentColor))
+    }
+
+    public fun setDisabledYearContentColor(disabledYearContentColor: Int?) {
+        if (disabledYearContentColor == null) {
+            viewModel.updateDisabledYearContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledYearContentColor(Color(disabledYearContentColor))
+    }
+
+    public fun setCurrentYearContentColor(currentYearContentColor: Int?) {
+        if (currentYearContentColor == null) {
+            viewModel.updateCurrentYearContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateCurrentYearContentColor(Color(currentYearContentColor))
+    }
+
+    public fun setSelectedYearContentColor(selectedYearContentColor: Int?) {
+        if (selectedYearContentColor == null) {
+            viewModel.updateSelectedYearContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSelectedYearContentColor(Color(selectedYearContentColor))
+    }
+
+    public fun setDisabledSelectedYearContentColor(disabledSelectedYearContentColor: Int?) {
+        if (disabledSelectedYearContentColor == null) {
+            viewModel.updateDisabledSelectedYearContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledSelectedYearContentColor(Color(disabledSelectedYearContentColor))
+    }
+
+    public fun setSelectedYearContainerColor(selectedYearContainerColor: Int?) {
+        if (selectedYearContainerColor == null) {
+            viewModel.updateSelectedYearContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSelectedYearContainerColor(Color(selectedYearContainerColor))
+    }
+
+    public fun setDisabledSelectedYearContainerColor(disabledSelectedYearContainerColor: Int?) {
+        if (disabledSelectedYearContainerColor == null) {
+            viewModel.updateDisabledSelectedYearContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledSelectedYearContainerColor(Color(disabledSelectedYearContainerColor))
+    }
+
+    public fun setDayContentColor(dayContentColor: Int?) {
+        if (dayContentColor == null) {
+            viewModel.updateDayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDayContentColor(Color(dayContentColor))
+    }
+
+    public fun setDisabledDayContentColor(disabledDayContentColor: Int?) {
+        if (disabledDayContentColor == null) {
+            viewModel.updateDisabledDayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledDayContentColor(Color(disabledDayContentColor))
+    }
+
+    public fun setSelectedDayContentColor(selectedDayContentColor: Int?) {
+        if (selectedDayContentColor == null) {
+            viewModel.updateSelectedDayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSelectedDayContentColor(Color(selectedDayContentColor))
+    }
+
+    public fun setDisabledSelectedDayContentColor(disabledSelectedDayContentColor: Int?) {
+        if (disabledSelectedDayContentColor == null) {
+            viewModel.updateDisabledSelectedDayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledSelectedDayContentColor(Color(disabledSelectedDayContentColor))
+    }
+
+    public fun setSelectedDayContainerColor(selectedDayContainerColor: Int?) {
+        if (selectedDayContainerColor == null) {
+            viewModel.updateSelectedDayContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSelectedDayContainerColor(Color(selectedDayContainerColor))
+    }
+
+    public fun setDisabledSelectedDayContainerColor(disabledSelectedDayContainerColor: Int?) {
+        if (disabledSelectedDayContainerColor == null) {
+            viewModel.updateDisabledSelectedDayContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDisabledSelectedDayContainerColor(Color(disabledSelectedDayContainerColor))
+    }
+
+    public fun setTodayContentColor(todayContentColor: Int?) {
+        if (todayContentColor == null) {
+            viewModel.updateTodayContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTodayContentColor(Color(todayContentColor))
+    }
+
+    public fun setTodayDateBorderColor(todayDateBorderColor: Int?) {
+        if (todayDateBorderColor == null) {
+            viewModel.updateTodayDateBorderColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTodayDateBorderColor(Color(todayDateBorderColor))
+    }
+
+    public fun setDayInSelectionRangeContainerColor(dayInSelectionRangeContainerColor: Int?) {
+        if (dayInSelectionRangeContainerColor == null) {
+            viewModel.updateDayInSelectionRangeContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDayInSelectionRangeContainerColor(Color(dayInSelectionRangeContainerColor))
+    }
+
+    public fun setDayInSelectionRangeContentColor(dayInSelectionRangeContentColor: Int?) {
+        if (dayInSelectionRangeContentColor == null) {
+            viewModel.updateDayInSelectionRangeContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDayInSelectionRangeContentColor(Color(dayInSelectionRangeContentColor))
+    }
+
+    public fun setDividerColor(dividerColor: Int?) {
+        if (dividerColor == null) {
+            viewModel.updateDividerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateDividerColor(Color(dividerColor))
+    }
+
+    public fun setClockDialColor(clockDialColor: Int?) {
+        if (clockDialColor == null) {
+            viewModel.updateClockDialColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateClockDialColor(Color(clockDialColor))
+    }
+
+    public fun setSelectorColor(selectorColor: Int?) {
+        if (selectorColor == null) {
+            viewModel.updateSelectorColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateSelectorColor(Color(selectorColor))
+    }
+
+    public fun setPeriodSelectorBorderColor(periodSelectorBorderColor: Int?) {
+        if (periodSelectorBorderColor == null) {
+            viewModel.updatePeriodSelectorBorderColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updatePeriodSelectorBorderColor(Color(periodSelectorBorderColor))
+    }
+
+    public fun setClockDialSelectedContentColor(clockDialSelectedContentColor: Int?) {
+        if (clockDialSelectedContentColor == null) {
+            viewModel.updateClockDialSelectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateClockDialSelectedContentColor(Color(clockDialSelectedContentColor))
+    }
+
+    public fun setClockDialUnselectedContentColor(clockDialUnselectedContentColor: Int?) {
+        if (clockDialUnselectedContentColor == null) {
+            viewModel.updateClockDialUnselectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateClockDialUnselectedContentColor(Color(clockDialUnselectedContentColor))
+    }
+
+    public fun setPeriodSelectorSelectedContainerColor(periodSelectorSelectedContainerColor: Int?) {
+        if (periodSelectorSelectedContainerColor == null) {
+            viewModel.updatePeriodSelectorSelectedContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updatePeriodSelectorSelectedContainerColor(Color(periodSelectorSelectedContainerColor))
+    }
+
+    public fun setPeriodSelectorUnselectedContainerColor(periodSelectorUnselectedContainerColor: Int?) {
+        if (periodSelectorUnselectedContainerColor == null) {
+            viewModel.updatePeriodSelectorUnselectedContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updatePeriodSelectorUnselectedContainerColor(Color(periodSelectorUnselectedContainerColor))
+    }
+
+    public fun setPeriodSelectorSelectedContentColor(periodSelectorSelectedContentColor: Int?) {
+        if (periodSelectorSelectedContentColor == null) {
+            viewModel.updatePeriodSelectorSelectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updatePeriodSelectorSelectedContentColor(Color(periodSelectorSelectedContentColor))
+    }
+
+    public fun setPeriodSelectorUnselectedContentColor(periodSelectorUnselectedContentColor: Int?) {
+        if (periodSelectorUnselectedContentColor == null) {
+            viewModel.updatePeriodSelectorUnselectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updatePeriodSelectorUnselectedContentColor(Color(periodSelectorUnselectedContentColor))
+    }
+
+    public fun setTimeSelectorSelectedContainerColor(timeSelectorSelectedContainerColor: Int?) {
+        if (timeSelectorSelectedContainerColor == null) {
+            viewModel.updateTimeSelectorSelectedContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTimeSelectorSelectedContainerColor(Color(timeSelectorSelectedContainerColor))
+    }
+
+    public fun setTimeSelectorUnselectedContainerColor(timeSelectorUnselectedContainerColor: Int?) {
+        if (timeSelectorUnselectedContainerColor == null) {
+            viewModel.updateTimeSelectorUnselectedContainerColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTimeSelectorUnselectedContainerColor(Color(timeSelectorUnselectedContainerColor))
+    }
+
+    public fun setTimeSelectorSelectedContentColor(timeSelectorSelectedContentColor: Int?) {
+        if (timeSelectorSelectedContentColor == null) {
+            viewModel.updateTimeSelectorSelectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTimeSelectorSelectedContentColor(Color(timeSelectorSelectedContentColor))
+    }
+
+    public fun setTimeSelectorUnselectedContentColor(timeSelectorUnselectedContentColor: Int?) {
+        if (timeSelectorUnselectedContentColor == null) {
+            viewModel.updateTimeSelectorUnselectedContentColor(Color.Unspecified)
+            return
+        }
+
+        viewModel.updateTimeSelectorUnselectedContentColor(Color(timeSelectorUnselectedContentColor))
+    }
 }

@@ -106,8 +106,216 @@ class RTNDatePickerManager(
         }
 
         val containerColor = if (styles.hasKey("containerColor")) styles.getInt("containerColor") else null
+        val titleContentColor = if (styles.hasKey("titleContentColor")) styles.getInt("titleContentColor") else null
+        val headlineContentColor = if (styles.hasKey("headlineContentColor")) styles.getInt("headlineContentColor") else null
+        val weekdayContentColor = if (styles.hasKey("weekdayContentColor")) styles.getInt("weekdayContentColor") else null
+        val subheadContentColor = if (styles.hasKey("subheadContentColor")) styles.getInt("subheadContentColor") else null
+        val navigationContentColor = if (styles.hasKey("navigationContentColor")) styles.getInt("navigationContentColor") else null
+        val yearContentColor = if (styles.hasKey("yearContentColor")) styles.getInt("yearContentColor") else null
+        val disabledYearContentColor = if (styles.hasKey("disabledYearContentColor")) styles.getInt("disabledYearContentColor") else null
+        val currentYearContentColor = if (styles.hasKey("currentYearContentColor")) styles.getInt("currentYearContentColor") else null
+        val selectedYearContentColor = if (styles.hasKey("selectedYearContentColor")) styles.getInt("selectedYearContentColor") else null
+        val disabledSelectedYearContentColor =
+            if (styles.hasKey(
+                    "disabledSelectedYearContentColor",
+                )
+            ) {
+                styles.getInt("disabledSelectedYearContentColor")
+            } else {
+                null
+            }
+        val selectedYearContainerColor =
+            if (styles.hasKey(
+                    "selectedYearContainerColor",
+                )
+            ) {
+                styles.getInt("selectedYearContainerColor")
+            } else {
+                null
+            }
+        val disabledSelectedYearContainerColor =
+            if (styles.hasKey(
+                    "disabledSelectedYearContainerColor",
+                )
+            ) {
+                styles.getInt("disabledSelectedYearContainerColor")
+            } else {
+                null
+            }
+        val dayContentColor = if (styles.hasKey("dayContentColor")) styles.getInt("dayContentColor") else null
+        val disabledDayContentColor = if (styles.hasKey("disabledDayContentColor")) styles.getInt("disabledDayContentColor") else null
+        val selectedDayContentColor = if (styles.hasKey("selectedDayContentColor")) styles.getInt("selectedDayContentColor") else null
+        val disabledSelectedDayContentColor =
+            if (styles.hasKey(
+                    "disabledSelectedDayContentColor",
+                )
+            ) {
+                styles.getInt("disabledSelectedDayContentColor")
+            } else {
+                null
+            }
+        val selectedDayContainerColor = if (styles.hasKey("selectedDayContainerColor")) styles.getInt("selectedDayContainerColor") else null
+        val disabledSelectedDayContainerColor =
+            if (styles.hasKey(
+                    "disabledSelectedDayContainerColor",
+                )
+            ) {
+                styles.getInt("disabledSelectedDayContainerColor")
+            } else {
+                null
+            }
+        val todayContentColor = if (styles.hasKey("todayContentColor")) styles.getInt("todayContentColor") else null
+        val todayDateBorderColor = if (styles.hasKey("todayDateBorderColor")) styles.getInt("todayDateBorderColor") else null
+        val dayInSelectionRangeContainerColor =
+            if (styles.hasKey(
+                    "dayInSelectionRangeContainerColor",
+                )
+            ) {
+                styles.getInt("dayInSelectionRangeContainerColor")
+            } else {
+                null
+            }
+        val dayInSelectionRangeContentColor =
+            if (styles.hasKey(
+                    "dayInSelectionRangeContentColor",
+                )
+            ) {
+                styles.getInt("dayInSelectionRangeContentColor")
+            } else {
+                null
+            }
+        val dividerColor = if (styles.hasKey("dividerColor")) styles.getInt("dividerColor") else null
+        val clockDialColor = if (styles.hasKey("clockDialColor")) styles.getInt("clockDialColor") else null
+        val selectorColor = if (styles.hasKey("selectorColor")) styles.getInt("selectorColor") else null
+        val periodSelectorBorderColor = if (styles.hasKey("periodSelectorBorderColor")) styles.getInt("periodSelectorBorderColor") else null
+        val clockDialSelectedContentColor =
+            if (styles.hasKey(
+                    "clockDialSelectedContentColor",
+                )
+            ) {
+                styles.getInt("clockDialSelectedContentColor")
+            } else {
+                null
+            }
+        val clockDialUnselectedContentColor =
+            if (styles.hasKey(
+                    "clockDialUnselectedContentColor",
+                )
+            ) {
+                styles.getInt("clockDialUnselectedContentColor")
+            } else {
+                null
+            }
+        val periodSelectorSelectedContainerColor =
+            if (styles.hasKey(
+                    "periodSelectorSelectedContainerColor",
+                )
+            ) {
+                styles.getInt("periodSelectorSelectedContainerColor")
+            } else {
+                null
+            }
+        val periodSelectorUnselectedContainerColor =
+            if (styles.hasKey(
+                    "periodSelectorUnselectedContainerColor",
+                )
+            ) {
+                styles.getInt("periodSelectorUnselectedContainerColor")
+            } else {
+                null
+            }
+        val periodSelectorSelectedContentColor =
+            if (styles.hasKey(
+                    "periodSelectorSelectedContentColor",
+                )
+            ) {
+                styles.getInt("periodSelectorSelectedContentColor")
+            } else {
+                null
+            }
+        val periodSelectorUnselectedContentColor =
+            if (styles.hasKey(
+                    "periodSelectorUnselectedContentColor",
+                )
+            ) {
+                styles.getInt("periodSelectorUnselectedContentColor")
+            } else {
+                null
+            }
+        val timeSelectorSelectedContainerColor =
+            if (styles.hasKey(
+                    "timeSelectorSelectedContainerColor",
+                )
+            ) {
+                styles.getInt("timeSelectorSelectedContainerColor")
+            } else {
+                null
+            }
+        val timeSelectorUnselectedContainerColor =
+            if (styles.hasKey(
+                    "timeSelectorUnselectedContainerColor",
+                )
+            ) {
+                styles.getInt("timeSelectorUnselectedContainerColor")
+            } else {
+                null
+            }
+        val timeSelectorSelectedContentColor =
+            if (styles.hasKey(
+                    "timeSelectorSelectedContentColor",
+                )
+            ) {
+                styles.getInt("timeSelectorSelectedContentColor")
+            } else {
+                null
+            }
+        val timeSelectorUnselectedContentColor =
+            if (styles.hasKey(
+                    "timeSelectorUnselectedContentColor",
+                )
+            ) {
+                styles.getInt("timeSelectorUnselectedContentColor")
+            } else {
+                null
+            }
 
         view.setContainerColor(containerColor)
+        view.setTitleContentColor(titleContentColor)
+        view.setHeadlineContentColor(headlineContentColor)
+        view.setWeekdayContentColor(weekdayContentColor)
+        view.setSubheadContentColor(subheadContentColor)
+        view.setNavigationContentColor(navigationContentColor)
+        view.setYearContentColor(yearContentColor)
+        view.setDisabledYearContentColor(disabledYearContentColor)
+        view.setCurrentYearContentColor(currentYearContentColor)
+        view.setSelectedYearContentColor(selectedYearContentColor)
+        view.setDisabledSelectedYearContentColor(disabledSelectedYearContentColor)
+        view.setSelectedYearContainerColor(selectedYearContainerColor)
+        view.setDisabledSelectedYearContainerColor(disabledSelectedYearContainerColor)
+        view.setDayContentColor(dayContentColor)
+        view.setDisabledDayContentColor(disabledDayContentColor)
+        view.setSelectedDayContentColor(selectedDayContentColor)
+        view.setDisabledSelectedDayContentColor(disabledSelectedDayContentColor)
+        view.setSelectedDayContainerColor(selectedDayContainerColor)
+        view.setDisabledSelectedDayContainerColor(disabledSelectedDayContainerColor)
+        view.setTodayContentColor(todayContentColor)
+        view.setTodayDateBorderColor(todayDateBorderColor)
+        view.setDayInSelectionRangeContainerColor(dayInSelectionRangeContainerColor)
+        view.setDayInSelectionRangeContentColor(dayInSelectionRangeContentColor)
+        view.setDividerColor(dividerColor)
+        view.setClockDialColor(clockDialColor)
+        view.setSelectorColor(selectorColor)
+        view.setPeriodSelectorBorderColor(periodSelectorBorderColor)
+        view.setClockDialSelectedContentColor(clockDialSelectedContentColor)
+        view.setClockDialUnselectedContentColor(clockDialUnselectedContentColor)
+        view.setPeriodSelectorSelectedContainerColor(periodSelectorSelectedContainerColor)
+        view.setPeriodSelectorUnselectedContainerColor(periodSelectorUnselectedContainerColor)
+        view.setPeriodSelectorSelectedContentColor(periodSelectorSelectedContentColor)
+        view.setPeriodSelectorUnselectedContentColor(periodSelectorUnselectedContentColor)
+        view.setTimeSelectorSelectedContainerColor(timeSelectorSelectedContainerColor)
+        view.setTimeSelectorUnselectedContainerColor(timeSelectorUnselectedContainerColor)
+        view.setTimeSelectorSelectedContentColor(timeSelectorSelectedContentColor)
+        view.setTimeSelectorUnselectedContentColor(timeSelectorUnselectedContentColor)
     }
 
     public override fun updateState(

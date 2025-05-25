@@ -50,8 +50,87 @@ fun RTNDatePickerView(
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
     val containerColor by viewModel.containerColor.collectAsState()
-    val datePickerColors = DatePickerDefaults.colors(containerColor = containerColor)
-    val timePickerColors = TimePickerDefaults.colors(containerColor = containerColor)
+    val titleContentColor by viewModel.titleContentColor.collectAsState()
+    val headlineContentColor by viewModel.headlineContentColor.collectAsState()
+    val weekdayContentColor by viewModel.weekdayContentColor.collectAsState()
+    val subheadContentColor by viewModel.subheadContentColor.collectAsState()
+    val navigationContentColor by viewModel.navigationContentColor.collectAsState()
+    val yearContentColor by viewModel.yearContentColor.collectAsState()
+    val disabledYearContentColor by viewModel.disabledYearContentColor.collectAsState()
+    val currentYearContentColor by viewModel.currentYearContentColor.collectAsState()
+    val selectedYearContentColor by viewModel.selectedYearContentColor.collectAsState()
+    val disabledSelectedYearContentColor by viewModel.disabledSelectedYearContentColor.collectAsState()
+    val selectedYearContainerColor by viewModel.selectedYearContainerColor.collectAsState()
+    val disabledSelectedYearContainerColor by viewModel.disabledSelectedYearContainerColor.collectAsState()
+    val dayContentColor by viewModel.dayContentColor.collectAsState()
+    val disabledDayContentColor by viewModel.disabledDayContentColor.collectAsState()
+    val selectedDayContentColor by viewModel.selectedDayContentColor.collectAsState()
+    val disabledSelectedDayContentColor by viewModel.disabledSelectedDayContentColor.collectAsState()
+    val selectedDayContainerColor by viewModel.selectedDayContainerColor.collectAsState()
+    val disabledSelectedDayContainerColor by viewModel.disabledSelectedDayContainerColor.collectAsState()
+    val todayContentColor by viewModel.todayContentColor.collectAsState()
+    val todayDateBorderColor by viewModel.todayDateBorderColor.collectAsState()
+    val dayInSelectionRangeContainerColor by viewModel.dayInSelectionRangeContainerColor.collectAsState()
+    val dayInSelectionRangeContentColor by viewModel.dayInSelectionRangeContentColor.collectAsState()
+    val dividerColor by viewModel.dividerColor.collectAsState()
+    val clockDialColor by viewModel.clockDialColor.collectAsState()
+    val selectorColor by viewModel.selectorColor.collectAsState()
+    val periodSelectorBorderColor by viewModel.periodSelectorBorderColor.collectAsState()
+    val clockDialSelectedContentColor by viewModel.clockDialSelectedContentColor.collectAsState()
+    val clockDialUnselectedContentColor by viewModel.clockDialUnselectedContentColor.collectAsState()
+    val periodSelectorSelectedContainerColor by viewModel.periodSelectorSelectedContainerColor.collectAsState()
+    val periodSelectorUnselectedContainerColor by viewModel.periodSelectorUnselectedContainerColor.collectAsState()
+    val periodSelectorSelectedContentColor by viewModel.periodSelectorSelectedContentColor.collectAsState()
+    val periodSelectorUnselectedContentColor by viewModel.periodSelectorUnselectedContentColor.collectAsState()
+    val timeSelectorSelectedContainerColor by viewModel.timeSelectorSelectedContainerColor.collectAsState()
+    val timeSelectorUnselectedContainerColor by viewModel.timeSelectorUnselectedContainerColor.collectAsState()
+    val timeSelectorSelectedContentColor by viewModel.timeSelectorSelectedContentColor.collectAsState()
+    val timeSelectorUnselectedContentColor by viewModel.timeSelectorUnselectedContentColor.collectAsState()
+
+    val datePickerColors =
+        DatePickerDefaults.colors(
+            containerColor = containerColor,
+            titleContentColor = titleContentColor,
+            headlineContentColor = headlineContentColor,
+            weekdayContentColor = weekdayContentColor,
+            subheadContentColor = subheadContentColor,
+            navigationContentColor = navigationContentColor,
+            yearContentColor = yearContentColor,
+            disabledYearContentColor = disabledYearContentColor,
+            currentYearContentColor = currentYearContentColor,
+            selectedYearContentColor = selectedYearContentColor,
+            disabledSelectedYearContentColor = disabledSelectedYearContentColor,
+            selectedYearContainerColor = selectedYearContainerColor,
+            disabledSelectedYearContainerColor = disabledSelectedYearContainerColor,
+            dayContentColor = dayContentColor,
+            disabledDayContentColor = disabledDayContentColor,
+            selectedDayContentColor = selectedDayContentColor,
+            disabledSelectedDayContentColor = disabledSelectedDayContentColor,
+            selectedDayContainerColor = selectedDayContainerColor,
+            disabledSelectedDayContainerColor = disabledSelectedDayContainerColor,
+            todayContentColor = todayContentColor,
+            todayDateBorderColor = todayDateBorderColor,
+            dayInSelectionRangeContainerColor = dayInSelectionRangeContainerColor,
+            dayInSelectionRangeContentColor = dayInSelectionRangeContentColor,
+            dividerColor = dividerColor,
+        )
+    val timePickerColors =
+        TimePickerDefaults.colors(
+            clockDialColor = clockDialColor,
+            selectorColor = selectorColor,
+            containerColor = containerColor,
+            periodSelectorBorderColor = periodSelectorBorderColor,
+            clockDialSelectedContentColor = clockDialSelectedContentColor,
+            clockDialUnselectedContentColor = clockDialUnselectedContentColor,
+            periodSelectorSelectedContainerColor = periodSelectorSelectedContainerColor,
+            periodSelectorUnselectedContainerColor = periodSelectorUnselectedContainerColor,
+            periodSelectorSelectedContentColor = periodSelectorSelectedContentColor,
+            periodSelectorUnselectedContentColor = periodSelectorUnselectedContentColor,
+            timeSelectorSelectedContainerColor = timeSelectorSelectedContainerColor,
+            timeSelectorUnselectedContainerColor = timeSelectorUnselectedContainerColor,
+            timeSelectorSelectedContentColor = timeSelectorSelectedContentColor,
+            timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
+        )
 
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis

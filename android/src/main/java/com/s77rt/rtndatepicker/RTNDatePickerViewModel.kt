@@ -56,6 +56,42 @@ class RTNDatePickerViewModel : ViewModel() {
     private val _confirmText = MutableStateFlow("OK")
     private val _cancelText = MutableStateFlow("Cancel")
     private val _containerColor = MutableStateFlow(Color.Unspecified)
+    private val _titleContentColor = MutableStateFlow(Color.Unspecified)
+    private val _headlineContentColor = MutableStateFlow(Color.Unspecified)
+    private val _weekdayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _subheadContentColor = MutableStateFlow(Color.Unspecified)
+    private val _navigationContentColor = MutableStateFlow(Color.Unspecified)
+    private val _yearContentColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledYearContentColor = MutableStateFlow(Color.Unspecified)
+    private val _currentYearContentColor = MutableStateFlow(Color.Unspecified)
+    private val _selectedYearContentColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledSelectedYearContentColor = MutableStateFlow(Color.Unspecified)
+    private val _selectedYearContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledSelectedYearContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _dayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledDayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _selectedDayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledSelectedDayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _selectedDayContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _disabledSelectedDayContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _todayContentColor = MutableStateFlow(Color.Unspecified)
+    private val _todayDateBorderColor = MutableStateFlow(Color.Unspecified)
+    private val _dayInSelectionRangeContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _dayInSelectionRangeContentColor = MutableStateFlow(Color.Unspecified)
+    private val _dividerColor = MutableStateFlow(Color.Unspecified)
+    private val _clockDialColor = MutableStateFlow(Color.Unspecified)
+    private val _selectorColor = MutableStateFlow(Color.Unspecified)
+    private val _periodSelectorBorderColor = MutableStateFlow(Color.Unspecified)
+    private val _clockDialSelectedContentColor = MutableStateFlow(Color.Unspecified)
+    private val _clockDialUnselectedContentColor = MutableStateFlow(Color.Unspecified)
+    private val _periodSelectorSelectedContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _periodSelectorUnselectedContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _periodSelectorSelectedContentColor = MutableStateFlow(Color.Unspecified)
+    private val _periodSelectorUnselectedContentColor = MutableStateFlow(Color.Unspecified)
+    private val _timeSelectorSelectedContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _timeSelectorUnselectedContainerColor = MutableStateFlow(Color.Unspecified)
+    private val _timeSelectorSelectedContentColor = MutableStateFlow(Color.Unspecified)
+    private val _timeSelectorUnselectedContentColor = MutableStateFlow(Color.Unspecified)
 
     val type: StateFlow<String> get() = _type
     val isOpen: StateFlow<Boolean> get() = _isOpen
@@ -65,6 +101,42 @@ class RTNDatePickerViewModel : ViewModel() {
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
     val containerColor: StateFlow<Color> get() = _containerColor
+    val titleContentColor: StateFlow<Color> get() = _titleContentColor
+    val headlineContentColor: StateFlow<Color> get() = _headlineContentColor
+    val weekdayContentColor: StateFlow<Color> get() = _weekdayContentColor
+    val subheadContentColor: StateFlow<Color> get() = _subheadContentColor
+    val navigationContentColor: StateFlow<Color> get() = _navigationContentColor
+    val yearContentColor: StateFlow<Color> get() = _yearContentColor
+    val disabledYearContentColor: StateFlow<Color> get() = _disabledYearContentColor
+    val currentYearContentColor: StateFlow<Color> get() = _currentYearContentColor
+    val selectedYearContentColor: StateFlow<Color> get() = _selectedYearContentColor
+    val disabledSelectedYearContentColor: StateFlow<Color> get() = _disabledSelectedYearContentColor
+    val selectedYearContainerColor: StateFlow<Color> get() = _selectedYearContainerColor
+    val disabledSelectedYearContainerColor: StateFlow<Color> get() = _disabledSelectedYearContainerColor
+    val dayContentColor: StateFlow<Color> get() = _dayContentColor
+    val disabledDayContentColor: StateFlow<Color> get() = _disabledDayContentColor
+    val selectedDayContentColor: StateFlow<Color> get() = _selectedDayContentColor
+    val disabledSelectedDayContentColor: StateFlow<Color> get() = _disabledSelectedDayContentColor
+    val selectedDayContainerColor: StateFlow<Color> get() = _selectedDayContainerColor
+    val disabledSelectedDayContainerColor: StateFlow<Color> get() = _disabledSelectedDayContainerColor
+    val todayContentColor: StateFlow<Color> get() = _todayContentColor
+    val todayDateBorderColor: StateFlow<Color> get() = _todayDateBorderColor
+    val dayInSelectionRangeContainerColor: StateFlow<Color> get() = _dayInSelectionRangeContainerColor
+    val dayInSelectionRangeContentColor: StateFlow<Color> get() = _dayInSelectionRangeContentColor
+    val dividerColor: StateFlow<Color> get() = _dividerColor
+    val clockDialColor: StateFlow<Color> get() = _clockDialColor
+    val selectorColor: StateFlow<Color> get() = _selectorColor
+    val periodSelectorBorderColor: StateFlow<Color> get() = _periodSelectorBorderColor
+    val clockDialSelectedContentColor: StateFlow<Color> get() = _clockDialSelectedContentColor
+    val clockDialUnselectedContentColor: StateFlow<Color> get() = _clockDialUnselectedContentColor
+    val periodSelectorSelectedContainerColor: StateFlow<Color> get() = _periodSelectorSelectedContainerColor
+    val periodSelectorUnselectedContainerColor: StateFlow<Color> get() = _periodSelectorUnselectedContainerColor
+    val periodSelectorSelectedContentColor: StateFlow<Color> get() = _periodSelectorSelectedContentColor
+    val periodSelectorUnselectedContentColor: StateFlow<Color> get() = _periodSelectorUnselectedContentColor
+    val timeSelectorSelectedContainerColor: StateFlow<Color> get() = _timeSelectorSelectedContainerColor
+    val timeSelectorUnselectedContainerColor: StateFlow<Color> get() = _timeSelectorUnselectedContainerColor
+    val timeSelectorSelectedContentColor: StateFlow<Color> get() = _timeSelectorSelectedContentColor
+    val timeSelectorUnselectedContentColor: StateFlow<Color> get() = _timeSelectorUnselectedContentColor
 
     fun syncDisplayedMonth() {
         var newDisplayedMonthMillis = _datePickerState.value.selectedDateMillis
@@ -177,5 +249,149 @@ class RTNDatePickerViewModel : ViewModel() {
 
     fun updateContainerColor(newContainerColor: Color) {
         _containerColor.value = newContainerColor
+    }
+
+    fun updateTitleContentColor(newTitleContentColor: Color) {
+        _titleContentColor.value = newTitleContentColor
+    }
+
+    fun updateHeadlineContentColor(newHeadlineContentColor: Color) {
+        _headlineContentColor.value = newHeadlineContentColor
+    }
+
+    fun updateWeekdayContentColor(newWeekdayContentColor: Color) {
+        _weekdayContentColor.value = newWeekdayContentColor
+    }
+
+    fun updateSubheadContentColor(newSubheadContentColor: Color) {
+        _subheadContentColor.value = newSubheadContentColor
+    }
+
+    fun updateNavigationContentColor(newNavigationContentColor: Color) {
+        _navigationContentColor.value = newNavigationContentColor
+    }
+
+    fun updateYearContentColor(newYearContentColor: Color) {
+        _yearContentColor.value = newYearContentColor
+    }
+
+    fun updateDisabledYearContentColor(newDisabledYearContentColor: Color) {
+        _disabledYearContentColor.value = newDisabledYearContentColor
+    }
+
+    fun updateCurrentYearContentColor(newCurrentYearContentColor: Color) {
+        _currentYearContentColor.value = newCurrentYearContentColor
+    }
+
+    fun updateSelectedYearContentColor(newSelectedYearContentColor: Color) {
+        _selectedYearContentColor.value = newSelectedYearContentColor
+    }
+
+    fun updateDisabledSelectedYearContentColor(newDisabledSelectedYearContentColor: Color) {
+        _disabledSelectedYearContentColor.value = newDisabledSelectedYearContentColor
+    }
+
+    fun updateSelectedYearContainerColor(newSelectedYearContainerColor: Color) {
+        _selectedYearContainerColor.value = newSelectedYearContainerColor
+    }
+
+    fun updateDisabledSelectedYearContainerColor(newDisabledSelectedYearContainerColor: Color) {
+        _disabledSelectedYearContainerColor.value = newDisabledSelectedYearContainerColor
+    }
+
+    fun updateDayContentColor(newDayContentColor: Color) {
+        _dayContentColor.value = newDayContentColor
+    }
+
+    fun updateDisabledDayContentColor(newDisabledDayContentColor: Color) {
+        _disabledDayContentColor.value = newDisabledDayContentColor
+    }
+
+    fun updateSelectedDayContentColor(newSelectedDayContentColor: Color) {
+        _selectedDayContentColor.value = newSelectedDayContentColor
+    }
+
+    fun updateDisabledSelectedDayContentColor(newDisabledSelectedDayContentColor: Color) {
+        _disabledSelectedDayContentColor.value = newDisabledSelectedDayContentColor
+    }
+
+    fun updateSelectedDayContainerColor(newSelectedDayContainerColor: Color) {
+        _selectedDayContainerColor.value = newSelectedDayContainerColor
+    }
+
+    fun updateDisabledSelectedDayContainerColor(newDisabledSelectedDayContainerColor: Color) {
+        _disabledSelectedDayContainerColor.value = newDisabledSelectedDayContainerColor
+    }
+
+    fun updateTodayContentColor(newTodayContentColor: Color) {
+        _todayContentColor.value = newTodayContentColor
+    }
+
+    fun updateTodayDateBorderColor(newTodayDateBorderColor: Color) {
+        _todayDateBorderColor.value = newTodayDateBorderColor
+    }
+
+    fun updateDayInSelectionRangeContainerColor(newDayInSelectionRangeContainerColor: Color) {
+        _dayInSelectionRangeContainerColor.value = newDayInSelectionRangeContainerColor
+    }
+
+    fun updateDayInSelectionRangeContentColor(newDayInSelectionRangeContentColor: Color) {
+        _dayInSelectionRangeContentColor.value = newDayInSelectionRangeContentColor
+    }
+
+    fun updateDividerColor(newDividerColor: Color) {
+        _dividerColor.value = newDividerColor
+    }
+
+    fun updateClockDialColor(newClockDialColor: Color) {
+        _clockDialColor.value = newClockDialColor
+    }
+
+    fun updateSelectorColor(newSelectorColor: Color) {
+        _selectorColor.value = newSelectorColor
+    }
+
+    fun updatePeriodSelectorBorderColor(newPeriodSelectorBorderColor: Color) {
+        _periodSelectorBorderColor.value = newPeriodSelectorBorderColor
+    }
+
+    fun updateClockDialSelectedContentColor(newClockDialSelectedContentColor: Color) {
+        _clockDialSelectedContentColor.value = newClockDialSelectedContentColor
+    }
+
+    fun updateClockDialUnselectedContentColor(newClockDialUnselectedContentColor: Color) {
+        _clockDialUnselectedContentColor.value = newClockDialUnselectedContentColor
+    }
+
+    fun updatePeriodSelectorSelectedContainerColor(newPeriodSelectorSelectedContainerColor: Color) {
+        _periodSelectorSelectedContainerColor.value = newPeriodSelectorSelectedContainerColor
+    }
+
+    fun updatePeriodSelectorUnselectedContainerColor(newPeriodSelectorUnselectedContainerColor: Color) {
+        _periodSelectorUnselectedContainerColor.value = newPeriodSelectorUnselectedContainerColor
+    }
+
+    fun updatePeriodSelectorSelectedContentColor(newPeriodSelectorSelectedContentColor: Color) {
+        _periodSelectorSelectedContentColor.value = newPeriodSelectorSelectedContentColor
+    }
+
+    fun updatePeriodSelectorUnselectedContentColor(newPeriodSelectorUnselectedContentColor: Color) {
+        _periodSelectorUnselectedContentColor.value = newPeriodSelectorUnselectedContentColor
+    }
+
+    fun updateTimeSelectorSelectedContainerColor(newTimeSelectorSelectedContainerColor: Color) {
+        _timeSelectorSelectedContainerColor.value = newTimeSelectorSelectedContainerColor
+    }
+
+    fun updateTimeSelectorUnselectedContainerColor(newTimeSelectorUnselectedContainerColor: Color) {
+        _timeSelectorUnselectedContainerColor.value = newTimeSelectorUnselectedContainerColor
+    }
+
+    fun updateTimeSelectorSelectedContentColor(newTimeSelectorSelectedContentColor: Color) {
+        _timeSelectorSelectedContentColor.value = newTimeSelectorSelectedContentColor
+    }
+
+    fun updateTimeSelectorUnselectedContentColor(newTimeSelectorUnselectedContentColor: Color) {
+        _timeSelectorUnselectedContentColor.value = newTimeSelectorUnselectedContentColor
     }
 }

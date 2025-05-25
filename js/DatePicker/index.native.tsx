@@ -112,7 +112,7 @@ function DatePicker({
 		const stylesToProcess = { ...defaultStyles(), ...stylesProp };
 
 		Object.keys(stylesToProcess).forEach((key) => {
-			if (["accentColor", "containerColor"].includes(key)) {
+			if (key.endsWith("Color")) {
 				stylesToProcess[key] = processColor(stylesToProcess[key]);
 				return;
 			}
