@@ -5,6 +5,7 @@ import type {
 	DateToISO8601Date,
 	DateToHHmm,
 	DefaultOptions,
+	DefaultStyles,
 } from "./types";
 
 export const nativeValueToMsEpoch: NativeValueToMsEpoch = (nativeValue) =>
@@ -35,3 +36,5 @@ export const defaultDate: DefaultDate = (type) => {
 };
 
 export const defaultOptions: DefaultOptions = (_type) => ({});
+
+export const defaultStyles: DefaultStyles = () => ({});

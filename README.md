@@ -10,6 +10,7 @@
 -   🕜 Time picker
 -   🔌 Supports Android, iOS and Web
 -   💎 Renders in modal and inline
+-   ✨ Highly customizable
 
 ## Installation
 
@@ -102,6 +103,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `max`      | `Date`                          | The latest selectable date.                                                                        |
 | `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
 | `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
+| `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
 
 ### Options
 
@@ -112,6 +114,51 @@ Various configuration options.
 | `confirmText` | `string`                              | The confirm button text. |
 | `cancelText`  | `string`                              | The cancel button text.  |
 | `mode`        | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫     |
+
+### Styles
+
+Look and feel styles.
+
+| Style                                    | Type         | Description                                   |
+| ---------------------------------------- | ------------ | --------------------------------------------- |
+| `accentColor`                            | `ColorValue` | The accent color. ⚫                          |
+| `containerColor`                         | `ColorValue` | The container color. 🟢                       |
+| `titleContentColor`                      | `ColorValue` | The title color. 🟢                           |
+| `headlineContentColor`                   | `ColorValue` | The headline color. 🟢                        |
+| `weekdayContentColor`                    | `ColorValue` | The weekday letters color. 🟢                 |
+| `subheadContentColor`                    | `ColorValue` | The month and year subhead labels color. 🟢   |
+| `navigationContentColor`                 | `ColorValue` | The year and arrow buttons color. 🟢          |
+| `yearContentColor`                       | `ColorValue` | The year color. 🟢                            |
+| `disabledYearContentColor`               | `ColorValue` | The disabled year color. 🟢                   |
+| `currentYearContentColor`                | `ColorValue` | The current year color. 🟢                    |
+| `selectedYearContentColor`               | `ColorValue` | The selected year color. 🟢                   |
+| `disabledSelectedYearContentColor`       | `ColorValue` | The disabled selected year color. 🟢          |
+| `selectedYearContainerColor`             | `ColorValue` | The selected year container color. 🟢         |
+| `disabledSelectedYearContainerColor`     | `ColorValue` | The disabled selected container color. 🟢     |
+| `dayContentColor`                        | `ColorValue` | The day color. 🟢                             |
+| `disabledDayContentColor`                | `ColorValue` | The disabled day color. 🟢                    |
+| `selectedDayContentColor`                | `ColorValue` | The selected day color. 🟢                    |
+| `disabledSelectedDayContentColor`        | `ColorValue` | The disabled selected day color. 🟢           |
+| `selectedDayContainerColor`              | `ColorValue` | The selected day container color. 🟢          |
+| `disabledSelectedDayContainerColor`      | `ColorValue` | The disabled selected day container color. 🟢 |
+| `todayContentColor`                      | `ColorValue` | The today color. 🟢                           |
+| `todayDateBorderColor`                   | `ColorValue` | The today border color. 🟢                    |
+| `dayInSelectionRangeContainerColor`      | `ColorValue` | The selected days container color. 🟢         |
+| `dayInSelectionRangeContentColor`        | `ColorValue` | The selected days color. 🟢                   |
+| `dividerColor`                           | `ColorValue` | The divider color. 🟢                         |
+| `clockDialColor`                         | `ColorValue` | The clock dial color. 🟢                      |
+| `selectorColor`                          | `ColorValue` | The clock dial selector color. 🟢             |
+| `periodSelectorBorderColor`              | `ColorValue` | The period selector border color. 🟢          |
+| `clockDialSelectedContentColor`          | `ColorValue` | The selected number color. 🟢                 |
+| `clockDialUnselectedContentColor`        | `ColorValue` | The unselected number color. 🟢               |
+| `periodSelectorSelectedContainerColor`   | `ColorValue` | The selected period container color. 🟢       |
+| `periodSelectorUnselectedContainerColor` | `ColorValue` | The unselected period container color. 🟢     |
+| `periodSelectorSelectedContentColor`     | `ColorValue` | The selected period color. 🟢                 |
+| `periodSelectorUnselectedContentColor`   | `ColorValue` | The unselected period color. 🟢               |
+| `timeSelectorSelectedContainerColor`     | `ColorValue` | The selected time container color. 🟢         |
+| `timeSelectorUnselectedContainerColor`   | `ColorValue` | The unselected time container color. 🟢       |
+| `timeSelectorSelectedContentColor`       | `ColorValue` | The selected time color. 🟢                   |
+| `timeSelectorUnselectedContentColor`     | `ColorValue` | The unselected time color. 🟢                 |
 
 ## Methods
 
