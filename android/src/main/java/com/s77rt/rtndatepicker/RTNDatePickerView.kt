@@ -149,6 +149,17 @@ fun RTNDatePickerView(
                 )
             }
         }
+    val timePickerTitle =
+        if (titleValue == null) {
+            null
+        } else {
+            @Composable {
+                TimePickerTitle(
+                    title = titleValue,
+                    contentColor = datePickerColors.titleContentColor,
+                )
+            }
+        }
 
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
@@ -183,6 +194,7 @@ fun RTNDatePickerView(
                     }
                 },
                 colors = timePickerColors,
+                title = timePickerTitle,
             ) {
                 TimePicker(state = timePickerState, colors = timePickerColors)
             }
@@ -247,6 +259,21 @@ fun DatePickerTitle(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
+@Composable
+fun TimePickerTitle(
+    title: String,
+    contentColor: Color,
+) {
+    Text(
+        text = if (title.isEmpty()) "Select time" else title,
+        modifier = Modifier.padding(bottom = 20.dp),
+        style = MaterialTheme.typography.labelMedium,
+        color = contentColor,
+    )
+}
+
 // Based on compose/material3/material3/src/androidMain/kotlin/androidx/compose/material3/DatePickerDialog.android.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
@@ -256,6 +283,7 @@ fun TimePickerDialog(
     confirmButton: @Composable () -> Unit,
     dismissButton: @Composable () -> Unit,
     colors: TimePickerColors,
+    title: (@Composable () -> Unit)?,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     BasicAlertDialog(
@@ -269,11 +297,9 @@ fun TimePickerDialog(
             color = colors.containerColor,
         ) {
             Column(modifier = Modifier.padding(24.dp), verticalArrangement = Arrangement.SpaceBetween) {
-                Text(
-                    text = "Select time",
-                    modifier = Modifier.padding(bottom = 20.dp),
-                    style = MaterialTheme.typography.labelMedium,
-                )
+                if (title != null) {
+                    title()
+                }
                 Box(Modifier.weight(1f, fill = false)) {
                     this@Column.content()
                 }
