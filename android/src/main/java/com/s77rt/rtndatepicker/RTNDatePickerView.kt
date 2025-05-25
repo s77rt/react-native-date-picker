@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
@@ -12,6 +13,7 @@ import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +30,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import java.time.Instant
@@ -49,6 +52,7 @@ fun RTNDatePickerView(
     val timePickerState by viewModel.timePickerState.collectAsState()
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
+    val title by viewModel.title.collectAsState()
     val containerColor by viewModel.containerColor.collectAsState()
     val titleContentColor by viewModel.titleContentColor.collectAsState()
     val headlineContentColor by viewModel.headlineContentColor.collectAsState()
@@ -132,6 +136,20 @@ fun RTNDatePickerView(
             timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
         )
 
+    val titleValue = title
+    val datePickerTitle =
+        if (titleValue == null) {
+            null
+        } else {
+            @Composable {
+                DatePickerTitle(
+                    title = titleValue,
+                    displayMode = datePickerState.displayMode,
+                    contentColor = datePickerColors.titleContentColor,
+                )
+            }
+        }
+
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
         if (date == null) {
@@ -177,7 +195,7 @@ fun RTNDatePickerView(
                 // Explicitly set requiredWidth because DatePicker uses LazyRow
                 // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
                 modifier = Modifier.requiredWidth(360.dp),
-                title = null,
+                title = datePickerTitle,
                 headline = null,
                 showModeToggle = false,
             )
@@ -196,9 +214,36 @@ fun RTNDatePickerView(
                 },
                 colors = datePickerColors,
             ) {
-                DatePicker(state = datePickerState, colors = datePickerColors)
+                DatePicker(state = datePickerState, colors = datePickerColors, title = datePickerTitle)
             }
         }
+    }
+}
+
+// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DatePicker.kt
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
+@Composable
+fun DatePickerTitle(
+    title: String,
+    displayMode: DisplayMode,
+    contentColor: Color,
+) {
+    val modifier = Modifier.padding(PaddingValues(start = 24.dp, end = 12.dp, top = 16.dp))
+
+    if (title.isEmpty()) {
+        DatePickerDefaults.DatePickerTitle(
+            displayMode = displayMode,
+            modifier = modifier,
+            // TODO: Pass contentColor after upgrading material 3 to v1.4.0+
+            // contentColor = contentColor,
+        )
+    } else {
+        Text(
+            text = title,
+            modifier = modifier,
+            color = contentColor,
+        )
     }
 }
 

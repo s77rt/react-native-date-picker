@@ -17,6 +17,7 @@ export type InternalRange = {
 export type Options = {
 	confirmText?: string;
 	cancelText?: string;
+	title?: string;
 	mode?: "compact" | "graphical" | "wheel";
 };
 

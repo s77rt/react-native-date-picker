@@ -146,6 +146,23 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateCancelText(cancelText)
     }
 
+    public fun setTitle(title: String?) {
+        // Title is null if not provided by js. Use empty string to signify the use of the default title.
+        if (title == null) {
+            viewModel.updateTitle("")
+            return
+        }
+
+        // On the other hand, if the user specified an empty string, the intention is to clear the title.
+        if (title.isEmpty()) {
+            viewModel.updateTitle(null)
+            return
+        }
+
+        // Otherwise use the provided title as is.
+        viewModel.updateTitle(title)
+    }
+
     public fun setContainerColor(containerColor: Int?) {
         if (containerColor == null) {
             viewModel.updateContainerColor(Color.Unspecified)
