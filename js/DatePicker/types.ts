@@ -18,6 +18,7 @@ export type Options = {
 	confirmText?: string;
 	cancelText?: string;
 	title?: string;
+	headline?: string;
 	mode?: "compact" | "graphical" | "wheel";
 };
 

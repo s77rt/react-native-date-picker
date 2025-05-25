@@ -13,6 +13,7 @@ import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DatePickerFormatter
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
@@ -28,6 +29,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,6 +55,7 @@ fun RTNDatePickerView(
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
     val title by viewModel.title.collectAsState()
+    val headline by viewModel.headline.collectAsState()
     val containerColor by viewModel.containerColor.collectAsState()
     val titleContentColor by viewModel.titleContentColor.collectAsState()
     val headlineContentColor by viewModel.headlineContentColor.collectAsState()
@@ -90,6 +93,8 @@ fun RTNDatePickerView(
     val timeSelectorUnselectedContainerColor by viewModel.timeSelectorUnselectedContainerColor.collectAsState()
     val timeSelectorSelectedContentColor by viewModel.timeSelectorSelectedContentColor.collectAsState()
     val timeSelectorUnselectedContentColor by viewModel.timeSelectorUnselectedContentColor.collectAsState()
+
+    val datePickerFormatter = remember { DatePickerDefaults.dateFormatter() }
 
     val datePickerColors =
         DatePickerDefaults.colors(
@@ -161,6 +166,22 @@ fun RTNDatePickerView(
             }
         }
 
+    val headlineValue = headline
+    val datePickerHeadline =
+        if (headlineValue == null) {
+            null
+        } else {
+            @Composable {
+                DatePickerHeadline(
+                    headline = headlineValue,
+                    selectedDateMillis = datePickerState.selectedDateMillis,
+                    displayMode = datePickerState.displayMode,
+                    dateFormatter = datePickerFormatter,
+                    contentColor = datePickerColors.headlineContentColor,
+                )
+            }
+        }
+
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
         if (date == null) {
@@ -203,12 +224,13 @@ fun RTNDatePickerView(
         if (isInline) {
             DatePicker(
                 state = datePickerState,
+                dateFormatter = datePickerFormatter,
                 colors = datePickerColors,
                 // Explicitly set requiredWidth because DatePicker uses LazyRow
                 // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
                 modifier = Modifier.requiredWidth(360.dp),
                 title = datePickerTitle,
-                headline = null,
+                headline = datePickerHeadline,
                 showModeToggle = false,
             )
         } else if (isOpen) {
@@ -226,7 +248,13 @@ fun RTNDatePickerView(
                 },
                 colors = datePickerColors,
             ) {
-                DatePicker(state = datePickerState, colors = datePickerColors, title = datePickerTitle)
+                DatePicker(
+                    state = datePickerState,
+                    dateFormatter = datePickerFormatter,
+                    colors = datePickerColors,
+                    title = datePickerTitle,
+                    headline = datePickerHeadline,
+                )
             }
         }
     }
@@ -255,6 +283,38 @@ fun DatePickerTitle(
             text = title,
             modifier = modifier,
             color = contentColor,
+        )
+    }
+}
+
+// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DatePicker.kt
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
+@Composable
+fun DatePickerHeadline(
+    headline: String,
+    selectedDateMillis: Long?,
+    displayMode: DisplayMode,
+    dateFormatter: DatePickerFormatter,
+    contentColor: Color,
+) {
+    val modifier = Modifier.padding(PaddingValues(start = 24.dp, end = 12.dp, bottom = 12.dp))
+
+    if (headline.isEmpty()) {
+        DatePickerDefaults.DatePickerHeadline(
+            selectedDateMillis = selectedDateMillis,
+            displayMode = displayMode,
+            dateFormatter = dateFormatter,
+            modifier = modifier,
+            // TODO: Pass contentColor after upgrading material 3 to v1.4.0+
+            // contentColor = contentColor,
+        )
+    } else {
+        Text(
+            text = headline,
+            modifier = modifier,
+            color = contentColor,
+            maxLines = 1,
         )
     }
 }

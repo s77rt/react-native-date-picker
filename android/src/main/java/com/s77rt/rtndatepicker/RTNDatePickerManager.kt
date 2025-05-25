@@ -95,10 +95,12 @@ class RTNDatePickerManager(
         val confirmText = options.getString("confirmText")
         val cancelText = options.getString("cancelText")
         val title = options.getString("title")
+        val headline = options.getString("headline")
 
         view.setConfirmText(confirmText)
         view.setCancelText(cancelText)
         view.setTitle(title)
+        view.setHeadline(headline)
     }
 
     @ReactProp(name = "styles")

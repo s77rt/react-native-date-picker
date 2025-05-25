@@ -20,6 +20,7 @@ interface Options {
 	confirmText?: string;
 	cancelText?: string;
 	title?: string;
+	headline?: string;
 	mode?: string;
 }
 

@@ -56,6 +56,7 @@ class RTNDatePickerViewModel : ViewModel() {
     private val _confirmText = MutableStateFlow("OK")
     private val _cancelText = MutableStateFlow("Cancel")
     private val _title = MutableStateFlow<String?>("")
+    private val _headline = MutableStateFlow<String?>("")
     private val _containerColor = MutableStateFlow(Color.Unspecified)
     private val _titleContentColor = MutableStateFlow(Color.Unspecified)
     private val _headlineContentColor = MutableStateFlow(Color.Unspecified)
@@ -102,6 +103,7 @@ class RTNDatePickerViewModel : ViewModel() {
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
     val title: StateFlow<String?> get() = _title
+    val headline: StateFlow<String?> get() = _headline
     val containerColor: StateFlow<Color> get() = _containerColor
     val titleContentColor: StateFlow<Color> get() = _titleContentColor
     val headlineContentColor: StateFlow<Color> get() = _headlineContentColor
@@ -251,6 +253,10 @@ class RTNDatePickerViewModel : ViewModel() {
 
     fun updateTitle(newTitle: String?) {
         _title.value = newTitle
+    }
+
+    fun updateHeadline(newHeadline: String?) {
+        _headline.value = newHeadline
     }
 
     fun updateContainerColor(newContainerColor: Color) {

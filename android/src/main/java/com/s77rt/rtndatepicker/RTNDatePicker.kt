@@ -163,6 +163,23 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateTitle(title)
     }
 
+    public fun setHeadline(headline: String?) {
+        // Headline is null if not provided by js. Use empty string to signify the use of the default headline.
+        if (headline == null) {
+            viewModel.updateHeadline("")
+            return
+        }
+
+        // On the other hand, if the user specified an empty string, the intention is to clear the headline.
+        if (headline.isEmpty()) {
+            viewModel.updateHeadline(null)
+            return
+        }
+
+        // Otherwise use the provided headline as is.
+        viewModel.updateHeadline(headline)
+    }
+
     public fun setContainerColor(containerColor: Int?) {
         if (containerColor == null) {
             viewModel.updateContainerColor(Color.Unspecified)
