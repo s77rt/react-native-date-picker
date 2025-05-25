@@ -1,0 +1,2 @@
+[{*.kt, *.kts}]
+max-line-length = off
