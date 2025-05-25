@@ -10,6 +10,7 @@
 -   🕜 Time picker
 -   🔌 Supports Android, iOS and Web
 -   💎 Renders in modal and inline
+-   ✨ Highly customizable
 
 ## Installation
 
