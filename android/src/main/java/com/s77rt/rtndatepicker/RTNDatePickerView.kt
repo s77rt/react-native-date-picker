@@ -56,6 +56,7 @@ fun RTNDatePickerView(
     val cancelText by viewModel.cancelText.collectAsState()
     val title by viewModel.title.collectAsState()
     val headline by viewModel.headline.collectAsState()
+    val showModeToggle by viewModel.showModeToggle.collectAsState()
     val containerColor by viewModel.containerColor.collectAsState()
     val titleContentColor by viewModel.titleContentColor.collectAsState()
     val headlineContentColor by viewModel.headlineContentColor.collectAsState()
@@ -231,7 +232,7 @@ fun RTNDatePickerView(
                 modifier = Modifier.requiredWidth(360.dp),
                 title = datePickerTitle,
                 headline = datePickerHeadline,
-                showModeToggle = false,
+                showModeToggle = showModeToggle,
             )
         } else if (isOpen) {
             DatePickerDialog(
@@ -254,6 +255,7 @@ fun RTNDatePickerView(
                     colors = datePickerColors,
                     title = datePickerTitle,
                     headline = datePickerHeadline,
+                    showModeToggle = showModeToggle,
                 )
             }
         }

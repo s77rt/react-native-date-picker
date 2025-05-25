@@ -21,6 +21,7 @@ interface Options {
 	cancelText?: string;
 	title?: string;
 	headline?: string;
+	showModeToggle?: boolean;
 	mode?: string;
 }
 

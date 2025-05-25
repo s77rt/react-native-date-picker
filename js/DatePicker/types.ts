@@ -19,6 +19,7 @@ export type Options = {
 	cancelText?: string;
 	title?: string;
 	headline?: string;
+	showModeToggle?: boolean;
 	mode?: "compact" | "graphical" | "wheel";
 };
 

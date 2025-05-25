@@ -96,11 +96,13 @@ class RTNDatePickerManager(
         val cancelText = options.getString("cancelText")
         val title = options.getString("title")
         val headline = options.getString("headline")
+        val showModeToggle = if (options.hasKey("showModeToggle")) options.getBoolean("showModeToggle") else false
 
         view.setConfirmText(confirmText)
         view.setCancelText(cancelText)
         view.setTitle(title)
         view.setHeadline(headline)
+        view.setShowModeToggle(showModeToggle)
     }
 
     @ReactProp(name = "styles")

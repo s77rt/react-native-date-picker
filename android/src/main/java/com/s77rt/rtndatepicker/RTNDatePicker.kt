@@ -180,6 +180,10 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateHeadline(headline)
     }
 
+    public fun setShowModeToggle(showModeToggle: Boolean) {
+        viewModel.updateShowModeToggle(showModeToggle)
+    }
+
     public fun setContainerColor(containerColor: Int?) {
         if (containerColor == null) {
             viewModel.updateContainerColor(Color.Unspecified)
