@@ -27,7 +27,7 @@ export const dateToHHmm: DateToHHmm = (date) =>
 
 export const defaultDate: DefaultDate = (_type) => new Date();
 
-export const defaultOptions: DefaultOptions = (type) => ({
+export const defaultOptions: DefaultOptions = (type, _isInline) => ({
 	mode: type === "date" ? "graphical" : "wheel",
 });
 

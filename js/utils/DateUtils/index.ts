@@ -27,6 +27,6 @@ export const dateToHHmm: DateToHHmm = (date) =>
 
 export const defaultDate: DefaultDate = (_type) => null;
 
-export const defaultOptions: DefaultOptions = (_type) => ({});
+export const defaultOptions: DefaultOptions = (_type, _isInline) => ({});
 
 export const defaultStyles: DefaultStyles = () => ({});

@@ -35,6 +35,10 @@ export const defaultDate: DefaultDate = (type) => {
 	return null;
 };
 
-export const defaultOptions: DefaultOptions = (_type) => ({});
+export const defaultOptions: DefaultOptions = (_type, isInline) => ({
+	title: isInline ? "" : undefined,
+	headline: isInline ? "" : undefined,
+	showModeToggle: !isInline,
+});
 
 export const defaultStyles: DefaultStyles = () => ({});

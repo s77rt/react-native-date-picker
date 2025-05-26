@@ -8,6 +8,9 @@ export type DateToHHmm = (date: Date) => string;
 
 export type DefaultDate = (type: "date" | "time") => Date | null;
 
-export type DefaultOptions = (type: "date" | "time") => Options;
+export type DefaultOptions = (
+	type: "date" | "time",
+	isInline: boolean
+) => Options;
 
 export type DefaultStyles = () => Styles;
