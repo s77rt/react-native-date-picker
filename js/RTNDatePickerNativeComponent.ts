@@ -19,11 +19,11 @@ interface Range {
 interface Options {
 	confirmText?: string;
 	cancelText?: string;
+	mode?: string;
 	title?: string;
 	headline?: string;
 	showModeToggle?: boolean;
 	is24Hour?: boolean;
-	mode?: string;
 }
 
 interface Styles {
