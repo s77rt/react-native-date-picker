@@ -109,11 +109,15 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 
 Various configuration options.
 
-| Option        | Type                                  | Description              |
-| ------------- | ------------------------------------- | ------------------------ |
-| `confirmText` | `string`                              | The confirm button text. |
-| `cancelText`  | `string`                              | The cancel button text.  |
-| `mode`        | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫     |
+| Option           | Type                                  | Description                                 |
+| ---------------- | ------------------------------------- | ------------------------------------------- |
+| `confirmText`    | `string`                              | The confirm button text.                    |
+| `cancelText`     | `string`                              | The cancel button text.                     |
+| `mode`           | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫                        |
+| `title`          | `string`                              | The title. 🟢                               |
+| `headline`       | `string`                              | The headline. 🟢                            |
+| `showModeToggle` | `boolean`                             | Whether the mode toggle should be shown. 🟢 |
+| `is24Hour`       | `boolean`                             | Whether the time should be in 24-hour. 🟢   |
 
 ### Styles
 

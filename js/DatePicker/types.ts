@@ -18,6 +18,10 @@ export type Options = {
 	confirmText?: string;
 	cancelText?: string;
 	mode?: "compact" | "graphical" | "wheel";
+	title?: string;
+	headline?: string;
+	showModeToggle?: boolean;
+	is24Hour?: boolean;
 };
 
 export type Styles = {

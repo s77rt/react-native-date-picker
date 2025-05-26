@@ -146,6 +146,48 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateCancelText(cancelText)
     }
 
+    public fun setTitle(title: String?) {
+        // Title is null if not provided by js. Use empty string to signify the use of the default title.
+        if (title == null) {
+            viewModel.updateTitle("")
+            return
+        }
+
+        // On the other hand, if the user specified an empty string, the intention is to clear the title.
+        if (title.isEmpty()) {
+            viewModel.updateTitle(null)
+            return
+        }
+
+        // Otherwise use the provided title as is.
+        viewModel.updateTitle(title)
+    }
+
+    public fun setHeadline(headline: String?) {
+        // Headline is null if not provided by js. Use empty string to signify the use of the default headline.
+        if (headline == null) {
+            viewModel.updateHeadline("")
+            return
+        }
+
+        // On the other hand, if the user specified an empty string, the intention is to clear the headline.
+        if (headline.isEmpty()) {
+            viewModel.updateHeadline(null)
+            return
+        }
+
+        // Otherwise use the provided headline as is.
+        viewModel.updateHeadline(headline)
+    }
+
+    public fun setShowModeToggle(showModeToggle: Boolean) {
+        viewModel.updateShowModeToggle(showModeToggle)
+    }
+
+    public fun setIs24Hour(is24Hour: Boolean) {
+        viewModel.updateIs24Hour(is24Hour)
+    }
+
     public fun setContainerColor(containerColor: Int?) {
         if (containerColor == null) {
             viewModel.updateContainerColor(Color.Unspecified)
