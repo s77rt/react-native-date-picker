@@ -29,23 +29,31 @@ https://github.com/user-attachments/assets/f46f5132-3385-48c9-8d1b-ee478b60fba8
 
 1. Install the package
 
-    Using `npm`
+    - Using `npm`
 
-    ```bash
-    npm install @s77rt/react-native-date-picker
-    ```
+        ```bash
+        npm install @s77rt/react-native-date-picker
+        ```
 
-    Or `yarn`
+    - Using `yarn`
 
-    ```bash
-    yarn add @s77rt/react-native-date-picker
-    ```
+        ```bash
+        yarn add @s77rt/react-native-date-picker
+        ```
 
 2. Install pods (iOS)
 
-    ```bash
-    cd ios && pod install && cd ..
-    ```
+    - Using bare React Native
+
+        ```bash
+        cd ios && pod install && cd ..
+        ```
+
+    - Using Expo
+
+        ```bash
+        npx expo prebuild
+        ```
 
 ## Usage
 
