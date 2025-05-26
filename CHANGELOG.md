@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.1] - 2025-05-26
+
+### Fixed
+
+-   iOS: build failing when using frameworks ([#24](https://github.com/s77rt/react-native-date-picker/issues/24)).
+
 ## [2.2.0] - 2025-05-26
 
 ### Added
@@ -91,6 +97,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.2.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.0.0...v2.0.1
