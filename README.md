@@ -8,19 +8,9 @@
 
 -   📅 Date picker
 -   🕜 Time picker
--   🔌 Supports Android, iOS and Web
+-   🔌 Supports iOS, Android and Web
 -   💎 Renders in modal and inline
 -   ✨ Highly customizable
-
-## Installation
-
-```bash
-npm install @s77rt/react-native-date-picker
-```
-
-## Demo
-
-### Screenshots
 
 |                                                                      iOS                                                                      |                                                                        Android                                                                        | mWeb - Safari                                                                                                                                                 | mWeb - Chrome                                                                                                                                                 | Web - Chrome                                                                                                                                                |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -32,6 +22,28 @@ npm install @s77rt/react-native-date-picker
 https://github.com/user-attachments/assets/f46f5132-3385-48c9-8d1b-ee478b60fba8
 
 </details>
+
+## Installation
+
+1. Install the package
+
+    Using `npm`
+
+    ```bash
+    npm install @s77rt/react-native-date-picker
+    ```
+
+    Or `yarn`
+
+    ```bash
+    yarn add @s77rt/react-native-date-picker
+    ```
+
+2. Install pods (iOS)
+
+    ```bash
+    cd ios && pod install && cd ..
+    ```
 
 ## Usage
 
