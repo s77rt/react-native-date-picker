@@ -12,6 +12,12 @@
 
 #import "react_native_date_picker-Swift.h"
 
+#if __has_include(<react_native_date_picker/react_native_date_picker-Swift.h>)
+#import <react_native_date_picker/react_native_date_picker-Swift.h> // Framework target
+#else
+#import "react_native_date_picker-Swift.h" // App target
+#endif
+
 using namespace facebook::react;
 
 @interface RTNDatePicker () <RCTRTNDatePickerViewProtocol,
