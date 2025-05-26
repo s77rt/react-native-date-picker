@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2025-05-26
+
+### Added
+
+-   `title`, `headline`, `showModeToggle`, and `is24Hour` options ([#23](https://github.com/s77rt/react-native-date-picker/pull/23)).
+
 ## [2.1.0] - 2025-05-25
 
 ### Added
@@ -85,6 +91,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v1.4.0...v2.0.0
