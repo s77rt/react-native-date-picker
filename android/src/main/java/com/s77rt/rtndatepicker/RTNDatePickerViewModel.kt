@@ -265,6 +265,10 @@ class RTNDatePickerViewModel : ViewModel() {
         _showModeToggle.value = newShowModeToggle
     }
 
+    fun updateIs24Hour(newIs24Hour: Boolean) {
+        _timePickerState.value.is24hour = newIs24Hour
+    }
+
     fun updateContainerColor(newContainerColor: Color) {
         _containerColor.value = newContainerColor
     }

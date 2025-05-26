@@ -22,6 +22,7 @@ interface Options {
 	title?: string;
 	headline?: string;
 	showModeToggle?: boolean;
+	is24Hour?: boolean;
 	mode?: string;
 }
 

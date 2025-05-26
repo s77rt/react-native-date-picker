@@ -97,12 +97,14 @@ class RTNDatePickerManager(
         val title = options.getString("title")
         val headline = options.getString("headline")
         val showModeToggle = if (options.hasKey("showModeToggle")) options.getBoolean("showModeToggle") else false
+        val is24Hour = if (options.hasKey("is24Hour")) options.getBoolean("is24Hour") else false
 
         view.setConfirmText(confirmText)
         view.setCancelText(cancelText)
         view.setTitle(title)
         view.setHeadline(headline)
         view.setShowModeToggle(showModeToggle)
+        view.setIs24Hour(is24Hour)
     }
 
     @ReactProp(name = "styles")

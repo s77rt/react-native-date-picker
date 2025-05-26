@@ -20,6 +20,7 @@ export type Options = {
 	title?: string;
 	headline?: string;
 	showModeToggle?: boolean;
+	is24Hour?: boolean;
 	mode?: "compact" | "graphical" | "wheel";
 };
 

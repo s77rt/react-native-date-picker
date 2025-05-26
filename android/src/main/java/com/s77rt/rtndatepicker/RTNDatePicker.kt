@@ -184,6 +184,10 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateShowModeToggle(showModeToggle)
     }
 
+    public fun setIs24Hour(is24Hour: Boolean) {
+        viewModel.updateIs24Hour(is24Hour)
+    }
+
     public fun setContainerColor(containerColor: Int?) {
         if (containerColor == null) {
             viewModel.updateContainerColor(Color.Unspecified)
