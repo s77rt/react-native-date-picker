@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
@@ -142,6 +143,9 @@ fun RTNDatePickerView(
             timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
         )
 
+    val datePickerTextButtonColors = ButtonDefaults.textButtonColors(contentColor = datePickerColors.selectedDayContainerColor)
+    val timePickerTextButtonColors = ButtonDefaults.textButtonColors(contentColor = timePickerColors.selectorColor)
+
     val titleValue = title
     val datePickerTitle =
         if (titleValue == null) {
@@ -206,12 +210,12 @@ fun RTNDatePickerView(
             TimePickerDialog(
                 onDismissRequest = onCancel,
                 confirmButton = {
-                    TextButton(onClick = onConfirm) {
+                    TextButton(onClick = onConfirm, colors = timePickerTextButtonColors) {
                         Text(confirmText)
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = onCancel) {
+                    TextButton(onClick = onCancel, colors = timePickerTextButtonColors) {
                         Text(cancelText)
                     }
                 },
@@ -238,12 +242,12 @@ fun RTNDatePickerView(
             DatePickerDialog(
                 onDismissRequest = onCancel,
                 confirmButton = {
-                    TextButton(onClick = onConfirm) {
+                    TextButton(onClick = onConfirm, colors = datePickerTextButtonColors) {
                         Text(confirmText)
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = onCancel) {
+                    TextButton(onClick = onCancel, colors = datePickerTextButtonColors) {
                         Text(cancelText)
                     }
                 },
