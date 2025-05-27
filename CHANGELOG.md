@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.2] - 2025-05-27
+
+### Fixed
+
+-   Modal buttons color did not change ([#22](https://github.com/s77rt/react-native-date-picker/issues/22)).
+
 ## [2.2.1] - 2025-05-26
 
 ### Fixed
@@ -97,6 +103,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.2.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.0.1...v2.1.0
