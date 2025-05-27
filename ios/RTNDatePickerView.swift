@@ -19,7 +19,6 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
-      .accentColor(viewModel.accentColor)
     } else if viewModel.mode == "compact" {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
@@ -31,7 +30,6 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
-      .accentColor(viewModel.accentColor)
     } else {
       DatePicker(
         "", selection: $viewModel.value, in: viewModel.range,
@@ -43,14 +41,14 @@ struct RTNDatePickerView: View {
       ) {
         onChange(viewModel.value)
       }
-      .accentColor(viewModel.accentColor)
+
     }
   }
 
   @ViewBuilder
   var body: some View {
     if viewModel.isInline {
-      datePicker
+      datePicker.accentColor(viewModel.accentColor)
     } else {
       ZStack {}.fullScreenCover(isPresented: $viewModel.isOpen) {
         ZStack {
@@ -77,6 +75,7 @@ struct RTNDatePickerView: View {
           .padding()
           .presentationBackground(Color.black.opacity(0.3))
           .background(Color(UIColor.systemBackground).cornerRadius(20))
+          .accentColor(viewModel.accentColor)
         }
       }.transaction({ transaction in
         transaction.disablesAnimations = true
