@@ -11,6 +11,9 @@ struct RTNDatePickerView: View {
     if viewModel.type == "yearmonth" {
       YearMonthPicker(selection: $viewModel.value, in: viewModel.range)
         .onChange(of: viewModel.value) { onChange(viewModel.value) }
+    } else if viewModel.type == "datetime" {
+      DateTimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
+        .onChange(of: viewModel.value) { onChange(viewModel.value) }
     } else if viewModel.type == "time" {
       TimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
         .onChange(of: viewModel.value) { onChange(viewModel.value) }
