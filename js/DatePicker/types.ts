@@ -14,6 +14,8 @@ export type InternalRange = {
 	upperBound?: number;
 };
 
+export type Type = "date" | "time" | "datetime" | "yearmonth";
+
 export type Options = {
 	confirmText?: string;
 	cancelText?: string;
@@ -67,7 +69,7 @@ export type Styles = {
 
 export type DatePickerProps = ViewProps & {
 	ref?: Ref<DatePickerHandle>;
-	type?: "date" | "time";
+	type?: Type;
 	value?: Date | null;
 	onChange?: (value: Date | null) => void;
 	min?: Date;
