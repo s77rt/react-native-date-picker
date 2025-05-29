@@ -8,40 +8,18 @@ struct RTNDatePickerView: View {
 
   @ViewBuilder
   var datePicker: some View {
-    if viewModel.mode == "wheel" {
-      DatePicker(
-        "", selection: $viewModel.value, in: viewModel.range,
-        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
-      ).datePickerStyle(
-        .wheel
-      ).labelsHidden().onChange(
-        of: viewModel.value
-      ) {
-        onChange(viewModel.value)
-      }
-    } else if viewModel.mode == "compact" {
-      DatePicker(
-        "", selection: $viewModel.value, in: viewModel.range,
-        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
-      ).datePickerStyle(
-        .compact
-      ).labelsHidden().onChange(
-        of: viewModel.value
-      ) {
-        onChange(viewModel.value)
-      }
+    if viewModel.type == "yearmonth" {
+      YearMonthPicker(selection: $viewModel.value, in: viewModel.range)
+        .onChange(of: viewModel.value) { onChange(viewModel.value) }
+    } else if viewModel.type == "datetime" {
+      DateTimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
+        .onChange(of: viewModel.value) { onChange(viewModel.value) }
+    } else if viewModel.type == "time" {
+      TimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
+        .onChange(of: viewModel.value) { onChange(viewModel.value) }
     } else {
-      DatePicker(
-        "", selection: $viewModel.value, in: viewModel.range,
-        displayedComponents: viewModel.type == "time" ? .hourAndMinute : .date
-      ).datePickerStyle(
-        .graphical
-      ).labelsHidden().onChange(
-        of: viewModel.value
-      ) {
-        onChange(viewModel.value)
-      }
-
+      DatePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
+        .onChange(of: viewModel.value) { onChange(viewModel.value) }
     }
   }
 

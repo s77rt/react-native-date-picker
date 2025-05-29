@@ -4,10 +4,12 @@
 
 ---
 
-@s77rt/react-native-date-picker is a cross-platform date/time picker built with SwiftUI (iOS) and Jetpack Compose (Android).
+@s77rt/react-native-date-picker is a cross-platform date, time, datetime and yearmonth picker built with SwiftUI (iOS) and Jetpack Compose (Android).
 
 -   📅 Date picker
 -   🕜 Time picker
+-   🗓️ Datetime picker
+-   🌙 Yearmonth picker
 -   🔌 Supports iOS, Android and Web
 -   💎 Renders in modal and inline
 -   ✨ Highly customizable
@@ -80,6 +82,7 @@ function Example() {
 					onPress={() => datePicker.current?.showPicker()}
 				/>
 				<DatePicker
+					type="date"
 					ref={datePicker}
 					value={selectedDate}
 					onChange={setSelectedDate}
@@ -102,6 +105,7 @@ function Example() {
 		<>
 			<Text>Selected date: {selectedDate?.toLocaleDateString()}</Text>
 			<DatePicker
+				type="date"
 				value={selectedDate}
 				onChange={setSelectedDate}
 				inline
@@ -118,7 +122,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | Prop       | Type                            | Description                                                                                        |
 | ---------- | ------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                                                                    |
-| `type`     | `"date" \| "time"`              | The type of the picker.                                                                            |
+| `type`     | [`Type`](#type)                 | The type of the picker.                                                                            |
 | `value`    | `Date \| null`                  | The selected date.                                                                                 |
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                                  |
 | `min`      | `Date`                          | The earliest selectable date.                                                                      |
@@ -126,6 +130,15 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
 | `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
 | `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
+
+### Type
+
+The type of the picker and can be one of the following:
+
+-   `date`
+-   `time`
+-   `datetime` ⚫🔵
+-   `yearmonth` ⚫🔵
 
 ### Options
 
@@ -204,4 +217,4 @@ Every code review, bug report and feature request is appreciated! Please feel fr
 
 ---
 
-⚫ iOS - 🟢 Android - ⚫🟢 iOS/Android
+⚫ iOS - 🟢 Android - 🔵 Web
