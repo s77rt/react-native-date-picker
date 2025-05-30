@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2025-05-30
+
+### Fixed
+
+-   Android: Weird onChange behavior ([#31](https://github.com/s77rt/react-native-date-picker/issues/31)).
+
 ## [2.3.0] - 2025-05-29
 
 ### Added
@@ -110,6 +116,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.3.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.2...v2.3.0
 [2.2.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.0...v2.2.1
