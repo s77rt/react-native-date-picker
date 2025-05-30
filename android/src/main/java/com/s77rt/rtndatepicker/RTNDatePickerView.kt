@@ -176,7 +176,9 @@ fun RTNDatePickerView(
             onChange(
                 Instant
                     .ofEpochMilli(date)
-                    .atZone(ZoneId.systemDefault())
+                    .atZone(ZoneId.of("UTC"))
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.systemDefault())
                     .withHour(timePickerState.hour)
                     .withMinute(timePickerState.minute)
                     .toEpochSecond() * 1000,
