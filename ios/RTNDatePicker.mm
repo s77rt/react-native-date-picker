@@ -111,8 +111,11 @@ using namespace facebook::react;
 - (void)layoutSubviews {
   [super layoutSubviews];
 
-  auto stateData =
-      RTNDatePickerState{RCTSizeFromCGSize(_view.intrinsicContentSize)};
+  // Ensure any pending layout is performed
+  [_view layoutIfNeeded];
+
+  auto stateData = RTNDatePickerState{
+      RCTSizeFromCGSize([_view sizeThatFits:self.bounds.size])};
   _state->updateState(std::move(stateData));
 }
 

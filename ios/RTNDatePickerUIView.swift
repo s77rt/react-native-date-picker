@@ -35,13 +35,12 @@ import SwiftUI
     fatalError("init?(coder: NSCoder) is not implemented")
   }
 
-  override public var intrinsicContentSize: CGSize {
+  override public func sizeThatFits(_ size: CGSize) -> CGSize {
     if let hostingController = self.hostingController {
-      return hostingController.view.intrinsicContentSize
+      return hostingController.view.sizeThatFits(size)
     }
 
-    return CGSize(
-      width: RTNDatePickerUIView.noIntrinsicMetric, height: RTNDatePickerUIView.noIntrinsicMetric)
+    return CGSize.zero
   }
 
   private func onChange(date: Date) {
