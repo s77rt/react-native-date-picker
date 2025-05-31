@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.2] - 2025-05-31
+
+### Changed
+
+-   iOS sizing logic from intrinsicContentSize to sizeThatFits
+
 ## [2.3.1] - 2025-05-30
 
 ### Fixed
@@ -116,6 +122,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.3.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.2...v2.3.0
 [2.2.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.1...v2.2.2
