@@ -146,8 +146,8 @@ Various configuration options.
 
 | Option           | Type                                  | Description                                 |
 | ---------------- | ------------------------------------- | ------------------------------------------- |
-| `confirmText`    | `string`                              | The confirm button text.                    |
-| `cancelText`     | `string`                              | The cancel button text.                     |
+| `confirmText`    | `string`                              | The confirm button text. ⚫🟢               |
+| `cancelText`     | `string`                              | The cancel button text. ⚫🟢                |
 | `mode`           | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫                        |
 | `title`          | `string`                              | The title. 🟢                               |
 | `headline`       | `string`                              | The headline. 🟢                            |
