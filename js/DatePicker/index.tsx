@@ -6,13 +6,8 @@ import React, {
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import {
-	dateToHHmm,
-	dateToISO8601Date,
-	dateToISO8601DateTime,
-	dateToYYMM,
-	defaultDate,
-} from "../utils/DateUtils";
+import DateFormat from "../utils/DateFormat";
+import Defaults from "../utils/Defaults";
 
 function DatePicker({
 	ref,
@@ -38,20 +33,20 @@ function DatePicker({
 	}, [type]);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? defaultDate(type);
+		const date = valueProp ?? Defaults.defaultValue(type);
 		if (date === null) {
 			return "";
 		}
 
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, valueProp]);
 
@@ -75,13 +70,13 @@ function DatePicker({
 
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, minProp]);
 
@@ -93,13 +88,13 @@ function DatePicker({
 
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, maxProp]);
 
