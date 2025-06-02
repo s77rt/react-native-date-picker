@@ -37,7 +37,6 @@ function DatePicker({
 		if (date === null) {
 			return "";
 		}
-
 		switch (type) {
 			case "date":
 				return DateFormat.dateToISO8601Date(date);
@@ -67,7 +66,6 @@ function DatePicker({
 		if (date === undefined) {
 			return undefined;
 		}
-
 		switch (type) {
 			case "date":
 				return DateFormat.dateToISO8601Date(date);
@@ -85,7 +83,6 @@ function DatePicker({
 		if (date === undefined) {
 			return undefined;
 		}
-
 		switch (type) {
 			case "date":
 				return DateFormat.dateToISO8601Date(date);
