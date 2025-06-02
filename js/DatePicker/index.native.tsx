@@ -22,6 +22,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	step: stepProp,
 	inline: isInline = false,
 	options: optionsProp,
 	styles: stylesProp,
@@ -108,6 +109,14 @@ function DatePicker({
 		setIsOpen(false);
 	}, [initialValue]);
 
+	const step = useMemo(
+		() =>
+			stepProp === undefined
+				? undefined
+				: NativeValues.nativeStepFromSeconds(stepProp, type),
+		[type, stepProp]
+	);
+
 	const options = useMemo(
 		() => ({ ...Defaults.defaultOptions(type, isInline), ...optionsProp }),
 		[type, isInline, optionsProp]
@@ -147,6 +156,7 @@ function DatePicker({
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
+			step={step}
 			options={options}
 			styles={styles}
 			{...rest}

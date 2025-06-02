@@ -2,6 +2,7 @@ import type { ViewProps } from "react-native/Libraries/Components/View/ViewPropT
 import type { HostComponent, ColorValue } from "react-native";
 import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNativeComponent";
 import type {
+	Int32,
 	Double,
 	BubblingEventHandler,
 	DirectEventHandler,
@@ -76,6 +77,7 @@ export interface RTNDatePickerNativeProps extends ViewProps {
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;
 	range: Range;
+	step: Int32 | undefined;
 	options: Options;
 	styles: Styles;
 }
