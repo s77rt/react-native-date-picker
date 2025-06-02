@@ -127,6 +127,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                                  |
 | `min`      | `Date`                          | The earliest selectable date.                                                                      |
 | `max`      | `Date`                          | The latest selectable date.                                                                        |
+| `step`     | `number`                        | The stepping interval, in seconds. ⚫🔵                                                            |
 | `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
 | `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
 | `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
