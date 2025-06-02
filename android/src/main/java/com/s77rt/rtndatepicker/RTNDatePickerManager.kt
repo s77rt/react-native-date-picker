@@ -83,6 +83,15 @@ class RTNDatePickerManager(
         view.setRange(lowerBound, upperBound)
     }
 
+    @ReactProp(name = "step")
+    override fun setStep(
+        view: RTNDatePicker,
+        step: Int,
+    ) {
+        // Unimplemented
+        return
+    }
+
     @ReactProp(name = "options")
     override fun setOptions(
         view: RTNDatePicker,

@@ -10,7 +10,7 @@ const nativeValues: NativeValues = {
 	},
 
 	nativeStepFromSeconds(_seconds, _type) {
-		return NaN; // Not supported
+		return -1; // Not supported
 	},
 };
 
