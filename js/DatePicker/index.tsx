@@ -8,6 +8,7 @@ import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
 import DateFormat from "../utils/DateFormat";
 import Defaults from "../utils/Defaults";
+import NativeValues from "../utils/NativeValues";
 
 function DatePicker({
 	ref,
@@ -16,6 +17,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	step: stepProp,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -95,6 +97,14 @@ function DatePicker({
 		}
 	}, [type, maxProp]);
 
+	const step = useMemo(
+		() =>
+			stepProp === undefined
+				? undefined
+				: NativeValues.nativeStepFromSeconds(stepProp, type),
+		[type, stepProp]
+	);
+
 	const style = useMemo(
 		() =>
 			({
@@ -127,6 +137,7 @@ function DatePicker({
 			onChange={onChange}
 			min={min}
 			max={max}
+			step={step}
 			style={style}
 			tabIndex={-1}
 		/>
