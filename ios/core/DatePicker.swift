@@ -61,15 +61,13 @@ struct DatePicker: UIViewRepresentable {
     _ proposal: ProposedViewSize,
     uiView: UIDatePicker, context: Context
   ) -> CGSize? {
-    if let proposedWidth = proposal.width, let proposedHeight = proposal.height {
-      let datePickerSize = uiView.sizeThatFits(CGSize(width: proposedWidth, height: proposedHeight))
+    let proposedWidth = proposal.width ?? 0
+    let proposedHeight = proposal.height ?? 0
+    let datePickerSize = uiView.sizeThatFits(CGSize(width: proposedWidth, height: proposedHeight))
 
-      return CGSize(
-        width: max(proposedWidth, datePickerSize.width),
-        height: max(proposedHeight, datePickerSize.height))
-    }
-
-    return nil
+    return CGSize(
+      width: max(proposedWidth, datePickerSize.width),
+      height: max(proposedHeight, datePickerSize.height))
   }
 
   func makeCoordinator() -> DatePicker.Coordinator {

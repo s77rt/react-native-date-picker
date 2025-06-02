@@ -30,7 +30,7 @@ struct RTNDatePickerView: View {
               onCancel()
             }
           VStack {
-            datePicker.frame(width: 320)
+            datePicker.fixedSize(horizontal: false, vertical: true)
             Divider()
             HStack {
               Button(
