@@ -75,6 +75,8 @@ using namespace facebook::react;
       [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
     }
 
+    { [_view setStepWithStep:defaultViewProps.step]; }
+
     {
       // Codegen props of type string are zero-initialized (undefined values are
       // empty by default)
@@ -160,6 +162,10 @@ using namespace facebook::react;
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.upperBound];
     [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
+  }
+
+  if (oldViewProps.step != newViewProps.step) {
+    [_view setStepWithStep:newViewProps.step];
   }
 
   if (oldViewProps.options.confirmText != newViewProps.options.confirmText ||

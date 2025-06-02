@@ -82,6 +82,16 @@ import SwiftUI
     viewModel.range = lowerBound...upperBound
   }
 
+  @objc public func setStep(step: Int) {
+    // Step is zero if no value is provided. Use default (1)
+    if step == 0 {
+      viewModel.minuteInterval = 1
+      return
+    }
+
+    viewModel.minuteInterval = step
+  }
+
   @objc public func setConfirmText(confirmText: String?) {
     let localizedKey = String.LocalizationValue(stringLiteral: confirmText ?? "Done")
     viewModel.confirmText = String(localized: localizedKey)

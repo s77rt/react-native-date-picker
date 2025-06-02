@@ -13,7 +13,9 @@ struct RTNDatePickerView: View {
       type: viewModel.type == "yearmonth"
         ? .yearmonth
         : viewModel.type == "datetime" ? .datetime : viewModel.type == "time" ? .time : .date,
-      mode: viewModel.mode == "wheel" ? .wheel : viewModel.mode == "compact" ? .compact : .graphical
+      mode: viewModel.mode == "wheel"
+        ? .wheel : viewModel.mode == "compact" ? .compact : .graphical,
+      minuteInterval: viewModel.minuteInterval
     )
     .onChange(of: viewModel.value) { onChange(viewModel.value) }
   }
