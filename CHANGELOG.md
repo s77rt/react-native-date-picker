@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2025-06-04
+
+### Added
+
+-   `step` prop ([#34](https://github.com/s77rt/react-native-date-picker/pull/34)).
+
+### Fixed
+
+-   Android: Crash when using react-native-screens ([#35](https://github.com/s77rt/react-native-date-picker/issues/35)).
+-   iOS: Weird view recycling when rendering multiple date pickers ([#37](https://github.com/s77rt/react-native-date-picker/issues/37)).
+
 ## [2.3.2] - 2025-05-31
 
 ### Changed
@@ -122,6 +133,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.4.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.2...v2.4.0
 [2.3.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.2.2...v2.3.0
