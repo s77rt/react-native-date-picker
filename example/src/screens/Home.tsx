@@ -42,12 +42,12 @@ function Home({navigation}: {navigation: any}) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Min / Max')}>
         <Text style={styles.buttonText}>Min / Max</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Step')}>
         <Text style={styles.buttonText}>Step</Text>
       </TouchableOpacity>
 

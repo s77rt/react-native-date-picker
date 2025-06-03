@@ -7,6 +7,8 @@ import Datetime from './screens/Datetime';
 import Time from './screens/Time';
 import Yearmonth from './screens/Yearmonth';
 import Mode from './screens/Mode';
+import MinMax from './screens/MinMax';
+import Step from './screens/Step';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ function App() {
           <Stack.Screen name="Time" component={Time} />
           <Stack.Screen name="Yearmonth" component={Yearmonth} />
           <Stack.Screen name="Mode" component={Mode} />
+          <Stack.Screen name="Min / Max" component={MinMax} />
+          <Stack.Screen name="Step" component={Step} />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
