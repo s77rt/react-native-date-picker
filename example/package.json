@@ -14,7 +14,7 @@
     "@react-navigation/elements": "^2.4.3",
     "@react-navigation/native": "^6.x",
     "@react-navigation/native-stack": "^6.x",
-    "@s77rt/react-native-date-picker": "../",
+    "@s77rt/react-native-date-picker": "link:../",
     "babel-loader": "^10.0.0",
     "babel-plugin-react-native-web": "^0.20.0",
     "html-webpack-plugin": "^5.6.3",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
-    "@babel/runtime": "^7.25.0",
+    "@babel/runtime": "^7.27.4",
     "@react-native-community/cli": "18.0.0",
     "@react-native-community/cli-platform-android": "18.0.0",
     "@react-native-community/cli-platform-ios": "18.0.0",
