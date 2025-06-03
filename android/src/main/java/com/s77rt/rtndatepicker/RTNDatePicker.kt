@@ -15,6 +15,7 @@ import com.facebook.react.uimanager.UIManagerHelper
 
 class RTNDatePicker : FrameLayout {
     private lateinit var reactContext: ReactContext
+    private var isAttached = false
 
     internal var stateWrapper: StateWrapper? = null
 
@@ -53,10 +54,37 @@ class RTNDatePicker : FrameLayout {
         }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        isAttached = true
+
+        // Workaround: We need to re-trigger onMeasure. Tried both requestLayout() and forceLayout() but didn't help.
+        // Ref 1: https://github.com/RevenueCat/react-native-purchases/pull/1274
+        // Ref 2: https://github.com/react-native-community/discussions-and-proposals/issues/446
+        stateWrapper?.updateState(
+            Arguments.createMap().apply {
+                putDouble("width", 1.0)
+                putDouble("height", 1.0)
+            },
+        )
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        isAttached = false
+    }
+
     override fun onMeasure(
         widthMeasureSpec: Int,
         heightMeasureSpec: Int,
     ) {
+        if (!isAttached) {
+            return setMeasuredDimension(
+                View.MeasureSpec.getSize(widthMeasureSpec),
+                View.MeasureSpec.getSize(heightMeasureSpec),
+            )
+        }
+
         val content = getChildAt(0)
         content.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
 
