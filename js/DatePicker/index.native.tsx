@@ -12,13 +12,8 @@ import type {
 	InternalRange,
 } from "./types";
 import RTNDatePickerNativeComponent from "../RTNDatePickerNativeComponent";
-import {
-	defaultDate,
-	defaultOptions,
-	defaultStyles,
-	nativeValueFromMsEpoch,
-	nativeValueToMsEpoch,
-} from "../utils/DateUtils";
+import Defaults from "../utils/Defaults";
+import NativeValues from "../utils/NativeValues";
 
 function DatePicker({
 	ref,
@@ -27,6 +22,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	step: stepProp,
 	inline: isInline = false,
 	options: optionsProp,
 	styles: stylesProp,
@@ -39,21 +35,27 @@ function DatePicker({
 			lowerBound:
 				minProp === undefined
 					? undefined
-					: nativeValueFromMsEpoch(minProp.getTime()),
+					: NativeValues.nativeEpochFromMilliseconds(
+							minProp.getTime()
+					  ),
 			upperBound:
 				maxProp === undefined
 					? undefined
-					: nativeValueFromMsEpoch(maxProp.getTime()),
+					: NativeValues.nativeEpochFromMilliseconds(
+							maxProp.getTime()
+					  ),
 		}),
 		[minProp, maxProp]
 	);
 
 	const initialValue = useMemo(() => {
-		const date = valueProp ?? defaultDate(type);
+		const date = valueProp ?? Defaults.defaultValue(type);
 		if (date === null) {
 			return null;
 		}
-		const dateValue = nativeValueFromMsEpoch(date.getTime());
+		const dateValue = NativeValues.nativeEpochFromMilliseconds(
+			date.getTime()
+		);
 		if (range.lowerBound !== undefined && dateValue < range.lowerBound) {
 			return range.lowerBound;
 		}
@@ -83,7 +85,9 @@ function DatePicker({
 					event.nativeEvent.value === null
 						? null
 						: new Date(
-								nativeValueToMsEpoch(event.nativeEvent.value)
+								NativeValues.nativeEpochToMilliseconds(
+									event.nativeEvent.value
+								)
 						  );
 				onChangeProp?.(date);
 			}
@@ -93,7 +97,9 @@ function DatePicker({
 
 	const onConfirm = useCallback(() => {
 		const date =
-			value === null ? null : new Date(nativeValueToMsEpoch(value));
+			value === null
+				? null
+				: new Date(NativeValues.nativeEpochToMilliseconds(value));
 		onChangeProp?.(date);
 		setIsOpen(false);
 	}, [value, onChangeProp]);
@@ -103,13 +109,21 @@ function DatePicker({
 		setIsOpen(false);
 	}, [initialValue]);
 
+	const step = useMemo(
+		() =>
+			stepProp === undefined
+				? undefined
+				: NativeValues.nativeStepFromSeconds(stepProp, type),
+		[type, stepProp]
+	);
+
 	const options = useMemo(
-		() => ({ ...defaultOptions(type, isInline), ...optionsProp }),
+		() => ({ ...Defaults.defaultOptions(type, isInline), ...optionsProp }),
 		[type, isInline, optionsProp]
 	);
 
 	const styles = useMemo(() => {
-		const stylesToProcess = { ...defaultStyles(), ...stylesProp };
+		const stylesToProcess = { ...Defaults.defaultStyles(), ...stylesProp };
 
 		Object.keys(stylesToProcess).forEach((key) => {
 			if (key.endsWith("Color")) {
@@ -142,6 +156,7 @@ function DatePicker({
 			onConfirm={onConfirm}
 			onCancel={onCancel}
 			range={range}
+			step={step}
 			options={options}
 			styles={styles}
 			{...rest}

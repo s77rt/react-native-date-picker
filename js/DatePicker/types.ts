@@ -74,6 +74,7 @@ export type DatePickerProps = ViewProps & {
 	onChange?: (value: Date | null) => void;
 	min?: Date;
 	max?: Date;
+	step?: number;
 	inline?: boolean;
 	options?: Options;
 	styles?: Styles;

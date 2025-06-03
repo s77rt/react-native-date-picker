@@ -29,33 +29,17 @@ https://github.com/user-attachments/assets/f46f5132-3385-48c9-8d1b-ee478b60fba8
 
 ## Installation
 
-1. Install the package
+-   Using `npm`
 
-    - Using `npm`
+    ```bash
+    npm install @s77rt/react-native-date-picker
+    ```
 
-        ```bash
-        npm install @s77rt/react-native-date-picker
-        ```
+-   Using `yarn`
 
-    - Using `yarn`
-
-        ```bash
-        yarn add @s77rt/react-native-date-picker
-        ```
-
-2. Install pods (iOS)
-
-    - Using bare React Native
-
-        ```bash
-        cd ios && pod install && cd ..
-        ```
-
-    - Using Expo
-
-        ```bash
-        npx expo prebuild
-        ```
+    ```bash
+    yarn add @s77rt/react-native-date-picker
+    ```
 
 ## Usage
 
@@ -82,8 +66,8 @@ function Example() {
 					onPress={() => datePicker.current?.showPicker()}
 				/>
 				<DatePicker
-					type="date"
 					ref={datePicker}
+					type="date"
 					value={selectedDate}
 					onChange={setSelectedDate}
 				/>
@@ -127,6 +111,7 @@ Inherits [View Props](https://reactnative.dev/docs/view#props).
 | `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                                  |
 | `min`      | `Date`                          | The earliest selectable date.                                                                      |
 | `max`      | `Date`                          | The latest selectable date.                                                                        |
+| `step`     | `number`                        | The stepping interval, in seconds. ⚫🔵                                                            |
 | `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
 | `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
 | `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
@@ -146,8 +131,8 @@ Various configuration options.
 
 | Option           | Type                                  | Description                                 |
 | ---------------- | ------------------------------------- | ------------------------------------------- |
-| `confirmText`    | `string`                              | The confirm button text.                    |
-| `cancelText`     | `string`                              | The cancel button text.                     |
+| `confirmText`    | `string`                              | The confirm button text. ⚫🟢               |
+| `cancelText`     | `string`                              | The cancel button text. ⚫🟢                |
 | `mode`           | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫                        |
 | `title`          | `string`                              | The title. 🟢                               |
 | `headline`       | `string`                              | The headline. 🟢                            |

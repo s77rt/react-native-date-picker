@@ -8,19 +8,16 @@ struct RTNDatePickerView: View {
 
   @ViewBuilder
   var datePicker: some View {
-    if viewModel.type == "yearmonth" {
-      YearMonthPicker(selection: $viewModel.value, in: viewModel.range)
-        .onChange(of: viewModel.value) { onChange(viewModel.value) }
-    } else if viewModel.type == "datetime" {
-      DateTimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
-        .onChange(of: viewModel.value) { onChange(viewModel.value) }
-    } else if viewModel.type == "time" {
-      TimePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
-        .onChange(of: viewModel.value) { onChange(viewModel.value) }
-    } else {
-      DatePicker(selection: $viewModel.value, in: viewModel.range, style: viewModel.mode)
-        .onChange(of: viewModel.value) { onChange(viewModel.value) }
-    }
+    DatePicker(
+      selection: $viewModel.value, in: viewModel.range,
+      type: viewModel.type == "yearmonth"
+        ? .yearmonth
+        : viewModel.type == "datetime" ? .datetime : viewModel.type == "time" ? .time : .date,
+      mode: viewModel.mode == "wheel"
+        ? .wheel : viewModel.mode == "compact" ? .compact : .graphical,
+      minuteInterval: viewModel.minuteInterval
+    )
+    .onChange(of: viewModel.value) { onChange(viewModel.value) }
   }
 
   @ViewBuilder
@@ -35,7 +32,7 @@ struct RTNDatePickerView: View {
               onCancel()
             }
           VStack {
-            datePicker.frame(width: 320)
+            datePicker.fixedSize(horizontal: false, vertical: true)
             Divider()
             HStack {
               Button(

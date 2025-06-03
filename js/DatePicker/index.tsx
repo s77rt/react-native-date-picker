@@ -6,13 +6,9 @@ import React, {
 } from "react";
 import type { ChangeEvent } from "react";
 import type { DatePickerProps } from "./types";
-import {
-	dateToHHmm,
-	dateToISO8601Date,
-	dateToISO8601DateTime,
-	dateToYYMM,
-	defaultDate,
-} from "../utils/DateUtils";
+import DateFormat from "../utils/DateFormat";
+import Defaults from "../utils/Defaults";
+import NativeValues from "../utils/NativeValues";
 
 function DatePicker({
 	ref,
@@ -21,6 +17,7 @@ function DatePicker({
 	onChange: onChangeProp,
 	min: minProp,
 	max: maxProp,
+	step: stepProp,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -38,20 +35,19 @@ function DatePicker({
 	}, [type]);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? defaultDate(type);
+		const date = valueProp ?? Defaults.defaultValue(type);
 		if (date === null) {
 			return "";
 		}
-
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, valueProp]);
 
@@ -72,16 +68,15 @@ function DatePicker({
 		if (date === undefined) {
 			return undefined;
 		}
-
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, minProp]);
 
@@ -90,18 +85,25 @@ function DatePicker({
 		if (date === undefined) {
 			return undefined;
 		}
-
 		switch (type) {
 			case "date":
-				return dateToISO8601Date(date);
+				return DateFormat.dateToISO8601Date(date);
 			case "time":
-				return dateToHHmm(date);
+				return DateFormat.dateToHHmm(date);
 			case "datetime":
-				return dateToISO8601DateTime(date);
+				return DateFormat.dateToISO8601DateTime(date);
 			case "yearmonth":
-				return dateToYYMM(date);
+				return DateFormat.dateToYYYYMM(date);
 		}
 	}, [type, maxProp]);
+
+	const step = useMemo(
+		() =>
+			stepProp === undefined
+				? undefined
+				: NativeValues.nativeStepFromSeconds(stepProp, type),
+		[type, stepProp]
+	);
 
 	const style = useMemo(
 		() =>
@@ -135,6 +137,7 @@ function DatePicker({
 			onChange={onChange}
 			min={min}
 			max={max}
+			step={step}
 			style={style}
 			tabIndex={-1}
 		/>
