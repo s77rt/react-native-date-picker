@@ -66,8 +66,8 @@ function Example() {
 					onPress={() => datePicker.current?.showPicker()}
 				/>
 				<DatePicker
-					type="date"
 					ref={datePicker}
+					type="date"
 					value={selectedDate}
 					onChange={setSelectedDate}
 				/>
