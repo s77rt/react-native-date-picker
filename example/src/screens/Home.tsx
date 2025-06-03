@@ -56,12 +56,12 @@ function Home({navigation}: {navigation: any}) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Title & Headline')}>
         <Text style={styles.buttonText}>Title & Headline</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Time 24H')}>
         <Text style={styles.buttonText}>Time 24H</Text>
       </TouchableOpacity>
 
@@ -70,12 +70,12 @@ function Home({navigation}: {navigation: any}) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Styled Date')}>
         <Text style={styles.buttonText}>Styled Date</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
+        onPress={() => navigation.navigate('Styled Time')}>
         <Text style={styles.buttonText}>Styled Time</Text>
       </TouchableOpacity>
     </ScrollView>
