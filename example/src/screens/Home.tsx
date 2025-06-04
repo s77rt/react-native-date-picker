@@ -37,6 +37,11 @@ function Home({navigation}: {navigation: any}) {
 
       <TouchableOpacity
         style={styles.button}
+        onPress={() => navigation.navigate('Locale')}>
+        <Text style={styles.buttonText}>Locale</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('Mode')}>
         <Text style={styles.buttonText}>Mode</Text>
       </TouchableOpacity>
