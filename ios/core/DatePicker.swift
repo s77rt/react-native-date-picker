@@ -19,6 +19,7 @@ struct DatePicker: UIViewRepresentable {
   var type: DatePickerType  // DatePickerType is used as UIDatePicker.Mode
   var mode: DatePickerMode  // Not to be confused with UIDatePicker.Mode. DatePickerMode is used as UIDatePickerStyle
   var minuteInterval: Int
+  var locale: Locale?
 
   func makeUIView(context: Context) -> UIDatePicker {
     let datePicker = UIDatePicker()
@@ -58,6 +59,8 @@ struct DatePicker: UIViewRepresentable {
     datePicker.maximumDate = `in`.upperBound
 
     datePicker.minuteInterval = minuteInterval
+
+    datePicker.locale = locale
   }
 
   func sizeThatFits(

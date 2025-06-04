@@ -15,7 +15,8 @@ struct RTNDatePickerView: View {
         : viewModel.type == "datetime" ? .datetime : viewModel.type == "time" ? .time : .date,
       mode: viewModel.mode == "wheel"
         ? .wheel : viewModel.mode == "compact" ? .compact : .graphical,
-      minuteInterval: viewModel.minuteInterval
+      minuteInterval: viewModel.minuteInterval,
+      locale: viewModel.locale
     )
     .id("\(viewModel.type)-\(viewModel.mode)")
     .onChange(of: viewModel.value) { onChange(viewModel.value) }

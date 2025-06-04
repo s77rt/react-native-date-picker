@@ -80,6 +80,13 @@ using namespace facebook::react;
     {
       // Codegen props of type string are zero-initialized (undefined values are
       // empty by default)
+      NSString *locale =
+          defaultViewProps.options.locale.empty()
+              ? nil
+              : [NSString stringWithUTF8String:defaultViewProps.options.locale
+                                                   .c_str()];
+      [_view setLocaleWithIdentifier:locale];
+
       NSString *confirmText =
           defaultViewProps.options.confirmText.empty()
               ? nil
@@ -168,11 +175,19 @@ using namespace facebook::react;
     [_view setStepWithStep:newViewProps.step];
   }
 
-  if (oldViewProps.options.confirmText != newViewProps.options.confirmText ||
+  if (oldViewProps.options.locale != newViewProps.options.locale ||
+      oldViewProps.options.confirmText != newViewProps.options.confirmText ||
       oldViewProps.options.cancelText != newViewProps.options.cancelText ||
       oldViewProps.options.mode != newViewProps.options.mode) {
     // Codegen props of type string are zero-initialized (undefined values are
     // empty by default)
+    NSString *locale =
+        newViewProps.options.locale.empty()
+            ? nil
+            : [NSString
+                  stringWithUTF8String:newViewProps.options.locale.c_str()];
+    [_view setLocaleWithIdentifier:locale];
+
     NSString *confirmText =
         newViewProps.options.confirmText.empty()
             ? nil

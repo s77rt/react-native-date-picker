@@ -92,6 +92,15 @@ import SwiftUI
     viewModel.minuteInterval = step
   }
 
+  @objc public func setLocale(identifier: String?) {
+    if let localeIdentifier = identifier {
+      viewModel.locale = Locale(identifier: localeIdentifier)
+      return
+    }
+
+    viewModel.locale = nil
+  }
+
   @objc public func setConfirmText(confirmText: String?) {
     let localizedKey = String.LocalizationValue(stringLiteral: confirmText ?? "Done")
     viewModel.confirmText = String(localized: localizedKey)
