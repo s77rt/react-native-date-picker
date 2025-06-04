@@ -18,6 +18,7 @@ interface Range {
 }
 
 interface Options {
+	locale?: string;
 	confirmText?: string;
 	cancelText?: string;
 	mode?: string;
