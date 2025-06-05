@@ -2,9 +2,11 @@
 	<img alt="hero" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/hero.png" />
 </div>
 
----
+<div align="center">
+Native Date, Time, Datetime and Yearmonth Picker
+</div>
 
-@s77rt/react-native-date-picker is a cross-platform date, time, datetime and yearmonth picker built with SwiftUI (iOS) and Jetpack Compose (Android).
+## Features
 
 -   📅 Date picker
 -   🕜 Time picker
@@ -14,7 +16,7 @@
 -   💎 Renders in modal and inline
 -   ✨ Highly customizable
 
----
+## Screenshots
 
 |                                                                      iOS                                                                      |                                                                        Android                                                                        | mWeb - Safari                                                                                                                                                 | mWeb - Chrome                                                                                                                                                 | Web - Chrome                                                                                                                                                |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -131,6 +133,7 @@ Various configuration options.
 
 | Option           | Type                                  | Description                                 |
 | ---------------- | ------------------------------------- | ------------------------------------------- |
+| `locale`         | `string`                              | The locale BCP-47 identifier. ⚫            |
 | `confirmText`    | `string`                              | The confirm button text. ⚫🟢               |
 | `cancelText`     | `string`                              | The cancel button text. ⚫🟢                |
 | `mode`           | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫                        |

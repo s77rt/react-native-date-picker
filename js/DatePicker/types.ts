@@ -17,6 +17,7 @@ export type InternalRange = {
 export type Type = "date" | "time" | "datetime" | "yearmonth";
 
 export type Options = {
+	locale?: string;
 	confirmText?: string;
 	cancelText?: string;
 	mode?: "compact" | "graphical" | "wheel";

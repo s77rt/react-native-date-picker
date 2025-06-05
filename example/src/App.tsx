@@ -13,6 +13,7 @@ import TitleHeadline from './screens/TitleHeadline';
 import Time24H from './screens/Time24H';
 import StyledDate from './screens/StyledDate';
 import StyledTime from './screens/StyledTime';
+import Locale from './screens/Locale';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ function App() {
           <Stack.Screen name="Datetime" component={Datetime} />
           <Stack.Screen name="Time" component={Time} />
           <Stack.Screen name="Yearmonth" component={Yearmonth} />
+          <Stack.Screen name="Locale" component={Locale} />
           <Stack.Screen name="Mode" component={Mode} />
           <Stack.Screen name="Min / Max" component={MinMax} />
           <Stack.Screen name="Step" component={Step} />
