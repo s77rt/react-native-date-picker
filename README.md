@@ -29,9 +29,17 @@ https://github.com/user-attachments/assets/f46f5132-3385-48c9-8d1b-ee478b60fba8
 
 ## Installation
 
-```bash
-npm install @s77rt/react-native-date-picker
-```
+-   Using `npm`
+
+    ```bash
+    npm install @s77rt/react-native-date-picker
+    ```
+
+-   Using `yarn`
+
+    ```bash
+    yarn add @s77rt/react-native-date-picker
+    ```
 
 ## Usage
 
