@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.1] - 2025-06-05
+
+### Added
+
+-   iOS: `locale` option ([#38](https://github.com/s77rt/react-native-date-picker/pull/38)).
+
 ## [2.4.0] - 2025-06-04
 
 ### Added
@@ -133,6 +139,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[2.4.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.0...v2.4.1
 [2.4.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.2...v2.4.0
 [2.3.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.0...v2.3.1
