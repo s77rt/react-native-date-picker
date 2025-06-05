@@ -6,6 +6,8 @@
 
 @s77rt/react-native-date-picker is a cross-platform date, time, datetime and yearmonth picker built with SwiftUI (iOS) and Jetpack Compose (Android).
 
+## Features
+
 -   📅 Date picker
 -   🕜 Time picker
 -   🗓️ Datetime picker
