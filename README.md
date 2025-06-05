@@ -29,17 +29,9 @@ https://github.com/user-attachments/assets/f46f5132-3385-48c9-8d1b-ee478b60fba8
 
 ## Installation
 
--   Using `npm`
-
-    ```bash
-    npm install @s77rt/react-native-date-picker
-    ```
-
--   Using `yarn`
-
-    ```bash
-    yarn add @s77rt/react-native-date-picker
-    ```
+```bash
+npm install @s77rt/react-native-date-picker
+```
 
 ## Usage
 
@@ -131,6 +123,7 @@ Various configuration options.
 
 | Option           | Type                                  | Description                                 |
 | ---------------- | ------------------------------------- | ------------------------------------------- |
+| `locale`         | `string`                              | The locale BCP-47 identifier. ⚫            |
 | `confirmText`    | `string`                              | The confirm button text. ⚫🟢               |
 | `cancelText`     | `string`                              | The cancel button text. ⚫🟢                |
 | `mode`           | `"compact" \| "graphical" \| "wheel"` | The display mode. ⚫                        |
