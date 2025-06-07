@@ -7,7 +7,7 @@ import SwiftUI
   private var hostingController: UIHostingController<RTNDatePickerView>?
 
   private let viewModel = RTNDatePickerViewModel()
-  private var lastValueUpdate: Date = Date()  // Default value in the view model
+  private var lastValueUpdate: Set<Date>? = nil
 
   @objc override public init(frame: CGRect) {
     super.init(frame: frame)
@@ -43,12 +43,12 @@ import SwiftUI
     return CGSize.zero
   }
 
-  private func onChange(date: Date) {
-    if lastValueUpdate == date {
+  private func onChange(dates: Set<Date>) {
+    if lastValueUpdate == dates {
       return
     }
-    lastValueUpdate = date
-    delegate?.onChange(date: date)
+    lastValueUpdate = dates
+    delegate?.onChange(dates: dates)
   }
 
   private func onConfirm() {
@@ -71,11 +71,13 @@ import SwiftUI
     viewModel.isInline = isInline
   }
 
-  @objc public func setValue(date: Date) {
+  @objc public func setValue(dates: Set<Date>) {
     // Changing the value programmatically shouldn't trigger the onChange event
-    lastValueUpdate = date
+    lastValueUpdate = dates
 
-    viewModel.value = date
+    if let date = dates.first {
+      viewModel.value = date
+    }
   }
 
   @objc public func setRange(lowerBound: Date, upperBound: Date) {
