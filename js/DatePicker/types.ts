@@ -76,6 +76,7 @@ export type DatePickerProps = ViewProps & {
 	min?: Date;
 	max?: Date;
 	step?: number;
+	multiple?: boolean;
 	inline?: boolean;
 	options?: Options;
 	styles?: Styles;

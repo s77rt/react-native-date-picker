@@ -1,8 +1,13 @@
 import type { Defaults } from "./types";
 
 const defaults: Defaults = {
-	defaultValue(_type) {
-		return new Date();
+	defaultValue(_type, isMultiple) {
+		if (isMultiple) {
+			return [];
+		}
+
+		// UIDatePicker always have a set value
+		return [new Date()];
 	},
 
 	defaultOptions(type, _isInline) {

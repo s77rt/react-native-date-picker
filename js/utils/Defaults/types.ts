@@ -2,7 +2,7 @@ import type { Options, Styles, Type } from "../../DatePicker/types";
 
 export type Defaults = {
 	/* Gets default date value */
-	defaultValue: (type: Type) => Date | null;
+	defaultValue: (type: Type, isMultiple: boolean) => Date[];
 
 	/* Gets default options */
 	defaultOptions: (type: Type, isInline: boolean) => Options;

@@ -23,6 +23,7 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	step: stepProp,
+	multiple: isMultiple = false,
 	inline: isInline = false,
 	options: optionsProp,
 	styles: stylesProp,
@@ -49,21 +50,29 @@ function DatePicker({
 	);
 
 	const initialValue = useMemo(() => {
-		const date = valueProp ?? Defaults.defaultValue(type);
-		if (date === null) {
-			return null;
-		}
-		const dateValue = NativeValues.nativeEpochFromMilliseconds(
-			date.getTime()
-		);
-		if (range.lowerBound !== undefined && dateValue < range.lowerBound) {
-			return range.lowerBound;
-		}
-		if (range.upperBound !== undefined && dateValue > range.upperBound) {
-			return range.upperBound;
-		}
-		return dateValue;
-	}, [type, valueProp, range]);
+		const dates =
+			valueProp && valueProp.length > 0
+				? valueProp
+				: Defaults.defaultValue(type, isMultiple);
+		return dates.map((date) => {
+			const dateValue = NativeValues.nativeEpochFromMilliseconds(
+				date.getTime()
+			);
+			if (
+				range.lowerBound !== undefined &&
+				dateValue < range.lowerBound
+			) {
+				return range.lowerBound;
+			}
+			if (
+				range.upperBound !== undefined &&
+				dateValue > range.upperBound
+			) {
+				return range.upperBound;
+			}
+			return dateValue;
+		});
+	}, [type, isMultiple, valueProp, range]);
 
 	const [prevInitialValue, setPrevInitialValue] = useState(initialValue);
 
@@ -81,26 +90,24 @@ function DatePicker({
 			// In inline mode every change is considered a confirmed change
 			// since there is no explicit confirm button
 			if (isInline) {
-				const date =
-					event.nativeEvent.value === null
-						? null
-						: new Date(
-								NativeValues.nativeEpochToMilliseconds(
-									event.nativeEvent.value
-								)
-						  );
-				onChangeProp?.(date);
+				const dates = event.nativeEvent.value.map(
+					(dateValue) =>
+						new Date(
+							NativeValues.nativeEpochToMilliseconds(dateValue)
+						)
+				);
+				onChangeProp?.(dates);
 			}
 		},
 		[isInline, onChangeProp]
 	);
 
 	const onConfirm = useCallback(() => {
-		const date =
-			value === null
-				? null
-				: new Date(NativeValues.nativeEpochToMilliseconds(value));
-		onChangeProp?.(date);
+		const dates = value.map(
+			(dateValue) =>
+				new Date(NativeValues.nativeEpochToMilliseconds(dateValue))
+		);
+		onChangeProp?.(dates);
 		setIsOpen(false);
 	}, [value, onChangeProp]);
 
