@@ -5,85 +5,97 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 function Home({navigation}: {navigation: any}) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text>Basic</Text>
+    <SafeAreaView edges={['bottom']}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text>Basic</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Date')}>
-        <Text style={styles.buttonText}>Date</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Datetime')}>
-        <Text style={styles.buttonText}>Datetime</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Time')}>
-        <Text style={styles.buttonText}>Time</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Yearmonth')}>
-        <Text style={styles.buttonText}>Yearmonth</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Date')}>
+          <Text style={styles.buttonText}>Date</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Datetime')}>
+          <Text style={styles.buttonText}>Datetime</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Time')}>
+          <Text style={styles.buttonText}>Time</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Yearmonth')}>
+          <Text style={styles.buttonText}>Yearmonth</Text>
+        </TouchableOpacity>
 
-      <View />
-      <Text>Features</Text>
+        <View />
+        <Text>Features</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Min / Max')}>
-        <Text style={styles.buttonText}>Min / Max</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Step')}>
-        <Text style={styles.buttonText}>Step</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Min / Max')}>
+          <Text style={styles.buttonText}>Min / Max</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Step')}>
+          <Text style={styles.buttonText}>Step</Text>
+        </TouchableOpacity>
 
-      <View />
-      <Text>Options</Text>
+        <View />
+        <Text>Options</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Locale')}>
-        <Text style={styles.buttonText}>Locale</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Mode')}>
-        <Text style={styles.buttonText}>Mode</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Title & Headline')}>
-        <Text style={styles.buttonText}>Title & Headline</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Time 24H')}>
-        <Text style={styles.buttonText}>Time 24H</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Locale')}>
+          <Text style={styles.buttonText}>Locale</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Mode')}>
+          <Text style={styles.buttonText}>Mode</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Title & Headline')}>
+          <Text style={styles.buttonText}>Title & Headline</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Time 24H')}>
+          <Text style={styles.buttonText}>Time 24H</Text>
+        </TouchableOpacity>
 
-      <View />
-      <Text>Styles</Text>
+        <View />
+        <Text>Styles</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Styled Date')}>
-        <Text style={styles.buttonText}>Styled Date</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Styled Time')}>
-        <Text style={styles.buttonText}>Styled Time</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Styled Date')}>
+          <Text style={styles.buttonText}>Styled Date</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Styled Time')}>
+          <Text style={styles.buttonText}>Styled Time</Text>
+        </TouchableOpacity>
+
+        <View />
+        <Text>Debug</Text>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Debug Date')}>
+          <Text style={styles.buttonText}>Debug Date</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

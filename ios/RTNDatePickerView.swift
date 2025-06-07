@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RTNDatePickerView: View {
   @ObservedObject var viewModel: RTNDatePickerViewModel
-  var onChange: (Date) -> Void
+  var onChange: (Set<Date>) -> Void
   var onConfirm: () -> Void
   var onCancel: () -> Void
 
@@ -19,7 +19,7 @@ struct RTNDatePickerView: View {
       locale: viewModel.locale
     )
     .id("\(viewModel.type)-\(viewModel.mode)")
-    .onChange(of: viewModel.value) { onChange(viewModel.value) }
+    .onChange(of: viewModel.value) { onChange(Set(arrayLiteral: viewModel.value)) }
   }
 
   @ViewBuilder

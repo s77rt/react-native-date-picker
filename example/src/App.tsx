@@ -14,6 +14,7 @@ import Time24H from './screens/Time24H';
 import StyledDate from './screens/StyledDate';
 import StyledTime from './screens/StyledTime';
 import Locale from './screens/Locale';
+import DebugDate from './screens/DebugDate';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ function App() {
           <Stack.Screen name="Time 24H" component={Time24H} />
           <Stack.Screen name="Styled Date" component={StyledDate} />
           <Stack.Screen name="Styled Time" component={StyledTime} />
+          <Stack.Screen name="Debug Date" component={DebugDate} />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

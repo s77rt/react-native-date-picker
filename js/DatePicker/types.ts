@@ -6,7 +6,7 @@ export type DatePickerHandle = {
 };
 
 export type InternalChangeEvent = {
-	value: number | null;
+	value: number[];
 };
 
 export type InternalRange = {
@@ -71,8 +71,8 @@ export type Styles = {
 export type DatePickerProps = ViewProps & {
 	ref?: Ref<DatePickerHandle>;
 	type?: Type;
-	value?: Date | null;
-	onChange?: (value: Date | null) => void;
+	value?: Date[];
+	onChange?: (value: Date[]) => void;
 	min?: Date;
 	max?: Date;
 	step?: number;
