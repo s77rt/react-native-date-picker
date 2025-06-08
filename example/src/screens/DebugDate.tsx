@@ -7,20 +7,35 @@ import {
   Pressable,
 } from 'react-native';
 import {DatePicker} from '@s77rt/react-native-date-picker';
-import {useState} from 'react';
+import type {DatePickerHandle} from '@s77rt/react-native-date-picker';
+import {useRef, useState} from 'react';
 
 function DebugDate() {
+  const datePicker = useRef<DatePickerHandle>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [log, setLog] = useState('');
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text>Date</Text>
+      <Button
+        title="Open modal"
+        onPress={() => datePicker.current?.showPicker()}
+      />
+      <DatePicker
+        ref={datePicker}
+        type="date"
+        value={selectedDate}
+        onChange={date => {
+          setLog(prevLog => `${prevLog}\nonChange: ${date?.toString()}`);
+          setSelectedDate(date);
+        }}
+      />
       <DatePicker
         type="date"
         value={selectedDate}
         onChange={date => {
-          setLog(prevLog => `${prevLog}\nonChange: ${date.toString()}`);
+          setLog(prevLog => `${prevLog}\nonChange: ${date?.toString()}`);
           setSelectedDate(date);
         }}
         inline
