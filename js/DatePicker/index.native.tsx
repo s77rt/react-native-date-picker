@@ -23,7 +23,7 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	step: stepProp,
-	multiple: isMultiple = false,
+	multiple: isMultiple,
 	inline: isInline = false,
 	options: optionsProp,
 	styles: stylesProp,
@@ -50,10 +50,13 @@ function DatePicker({
 	);
 
 	const initialValue = useMemo(() => {
-		const dates =
-			valueProp && valueProp.length > 0
+		const dates = isMultiple
+			? valueProp && valueProp.length > 0
 				? valueProp
-				: Defaults.defaultValue(type, isMultiple);
+				: Defaults.defaultValue(type, true)
+			: valueProp
+			? [valueProp]
+			: Defaults.defaultValue(type, false);
 		return dates.map((date) => {
 			const dateValue = NativeValues.nativeEpochFromMilliseconds(
 				date.getTime()
@@ -96,10 +99,14 @@ function DatePicker({
 							NativeValues.nativeEpochToMilliseconds(dateValue)
 						)
 				);
-				onChangeProp?.(dates);
+				if (isMultiple) {
+					onChangeProp?.(dates);
+				} else {
+					onChangeProp?.(dates[0] ?? null);
+				}
 			}
 		},
-		[isInline, onChangeProp]
+		[isMultiple, isInline, onChangeProp]
 	);
 
 	const onConfirm = useCallback(() => {
@@ -107,9 +114,13 @@ function DatePicker({
 			(dateValue) =>
 				new Date(NativeValues.nativeEpochToMilliseconds(dateValue))
 		);
-		onChangeProp?.(dates);
+		if (isMultiple) {
+			onChangeProp?.(dates);
+		} else {
+			onChangeProp?.(dates[0] ?? null);
+		}
 		setIsOpen(false);
-	}, [value, onChangeProp]);
+	}, [isMultiple, value, onChangeProp]);
 
 	const onCancel = useCallback(() => {
 		setValue(initialValue);
