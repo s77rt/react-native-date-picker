@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const appDirectory = __dirname;
+const libDirectory = path.resolve(__dirname, '../');
 
 // This is needed for webpack to compile JavaScript.
 // Many OSS React Native packages are not compiled to ES5 before being
@@ -13,7 +14,7 @@ const babelLoaderConfiguration = {
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
     path.resolve(appDirectory, 'src'),
-    path.resolve(appDirectory, 'node_modules/@s77rt/react-native-date-picker'),
+    path.resolve(appDirectory, libDirectory),
   ],
   use: {
     loader: 'babel-loader',
@@ -72,5 +73,7 @@ module.exports = {
     // module implementations should be written in files using the extension
     // `.web.js`.
     extensions: ['.web.tsx', '.tsx', '.web.ts', '.ts', '.web.js', '.js'],
+
+    modules: ['node_modules', path.resolve(__dirname, 'node_modules')],
   },
 };
