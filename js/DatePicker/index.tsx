@@ -64,7 +64,9 @@ function DatePicker({
 			// datetime does not provide a valueAsDate (always null)
 			const date =
 				type === "datetime"
-					? new Date(event.target.value)
+					? event.target.value
+						? new Date(event.target.value)
+						: null
 					: event.target.valueAsDate;
 			if (isMultiple) {
 				onChangeProp?.(date ? [date] : []);
