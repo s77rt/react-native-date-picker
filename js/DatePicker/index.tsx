@@ -18,6 +18,7 @@ function DatePicker({
 	min: minProp,
 	max: maxProp,
 	step: stepProp,
+	multiple: isMultiple,
 }: DatePickerProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +36,14 @@ function DatePicker({
 	}, [type]);
 
 	const value = useMemo(() => {
-		const date = valueProp ?? Defaults.defaultValue(type);
+		const dates = isMultiple
+			? valueProp && valueProp.length > 0
+				? valueProp
+				: Defaults.defaultValue(type, true)
+			: valueProp
+			? [valueProp]
+			: Defaults.defaultValue(type, false);
+		const date = dates[0] ?? null;
 		if (date === null) {
 			return "";
 		}
@@ -49,7 +57,7 @@ function DatePicker({
 			case "yearmonth":
 				return DateFormat.dateToYYYYMM(date);
 		}
-	}, [type, valueProp]);
+	}, [type, isMultiple, valueProp]);
 
 	const onChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
@@ -58,9 +66,13 @@ function DatePicker({
 				type === "datetime"
 					? new Date(event.target.value)
 					: event.target.valueAsDate;
-			onChangeProp?.(date);
+			if (isMultiple) {
+				onChangeProp?.(date ? [date] : []);
+			} else {
+				onChangeProp?.(date);
+			}
 		},
-		[type, onChangeProp]
+		[type, isMultiple, onChangeProp]
 	);
 
 	const min = useMemo(() => {
