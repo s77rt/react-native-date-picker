@@ -94,6 +94,11 @@ function Home({navigation}: {navigation: any}) {
           onPress={() => navigation.navigate('Debug Date')}>
           <Text style={styles.buttonText}>Debug Date</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Debug Multiple Dates')}>
+          <Text style={styles.buttonText}>Debug Multiple Dates</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

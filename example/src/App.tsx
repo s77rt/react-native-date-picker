@@ -15,6 +15,7 @@ import StyledDate from './screens/StyledDate';
 import StyledTime from './screens/StyledTime';
 import Locale from './screens/Locale';
 import DebugDate from './screens/DebugDate';
+import DebugMultipleDates from './screens/DebugMultipleDates';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,10 @@ function App() {
           <Stack.Screen name="Styled Date" component={StyledDate} />
           <Stack.Screen name="Styled Time" component={StyledTime} />
           <Stack.Screen name="Debug Date" component={DebugDate} />
+          <Stack.Screen
+            name="Debug Multiple Dates"
+            component={DebugMultipleDates}
+          />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
