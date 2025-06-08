@@ -68,16 +68,20 @@ export type Styles = {
 	timeSelectorUnselectedContentColor?: ColorValue;
 };
 
-export type DatePickerProps = ViewProps & {
-	ref?: Ref<DatePickerHandle>;
-	type?: Type;
-	value?: Date[];
-	onChange?: (value: Date[]) => void;
-	min?: Date;
-	max?: Date;
-	step?: number;
-	multiple?: boolean;
-	inline?: boolean;
-	options?: Options;
-	styles?: Styles;
-};
+type Value<TMultiple> = TMultiple extends true ? Date[] : Date | null;
+
+export type DatePickerProps<TMultiple = boolean> = TMultiple extends boolean
+	? ViewProps & {
+			ref?: Ref<DatePickerHandle>;
+			type?: Type;
+			value?: Value<TMultiple>;
+			onChange?: (value: Value<TMultiple>) => void;
+			min?: Date;
+			max?: Date;
+			step?: number;
+			multiple?: TMultiple;
+			inline?: boolean;
+			options?: Options;
+			styles?: Styles;
+	  }
+	: never;
