@@ -72,6 +72,7 @@ interface Styles {
 export interface RTNDatePickerNativeProps extends ViewProps {
 	type: string;
 	isOpen: boolean;
+	isMultiple: boolean;
 	isInline: boolean;
 	value: Double[];
 	onChange: BubblingEventHandler<Readonly<ChangeEvent>>;

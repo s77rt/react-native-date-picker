@@ -168,6 +168,7 @@ function DatePicker({
 		<RTNDatePickerNativeComponent
 			type={type}
 			isOpen={isOpen}
+			isMultiple={isMultiple ?? false}
 			isInline={isInline}
 			value={value}
 			onChange={onChange}

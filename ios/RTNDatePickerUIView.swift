@@ -67,6 +67,10 @@ import SwiftUI
     viewModel.isOpen = isOpen
   }
 
+  @objc public func setIsMultiple(isMultiple: Bool) {
+    viewModel.isMultiple = isMultiple
+  }
+
   @objc public func setIsInline(isInline: Bool) {
     viewModel.isInline = isInline
   }
@@ -78,6 +82,12 @@ import SwiftUI
     if let date = dates.first {
       viewModel.value = date
     }
+
+    var datesComponents = Set<DateComponents>(minimumCapacity: dates.count)
+    for date in dates {
+      datesComponents.insert(Calendar.current.dateComponents(in: TimeZone.current, from: date))
+    }
+    viewModel.valueMulti = datesComponents
   }
 
   @objc public func setRange(lowerBound: Date, upperBound: Date) {

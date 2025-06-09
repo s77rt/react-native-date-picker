@@ -6,20 +6,35 @@ struct RTNDatePickerView: View {
   var onConfirm: () -> Void
   var onCancel: () -> Void
 
+  @Environment(\.calendar) private var calendar
+
   @ViewBuilder
   var datePicker: some View {
-    DatePicker(
-      selection: $viewModel.value, in: viewModel.range,
-      type: viewModel.type == "yearmonth"
-        ? .yearmonth
-        : viewModel.type == "datetime" ? .datetime : viewModel.type == "time" ? .time : .date,
-      mode: viewModel.mode == "wheel"
-        ? .wheel : viewModel.mode == "compact" ? .compact : .graphical,
-      minuteInterval: viewModel.minuteInterval,
-      locale: viewModel.locale
-    )
-    .id("\(viewModel.type)-\(viewModel.mode)")
-    .onChange(of: viewModel.value) { onChange(Set(arrayLiteral: viewModel.value)) }
+    if viewModel.isMultiple {
+      MultiDatePicker("", selection: $viewModel.valueMulti)
+        .onChange(of: viewModel.valueMulti) {
+          var dates = Set<Date>(minimumCapacity: viewModel.valueMulti.count)
+          for dateComponents in viewModel.valueMulti {
+            if let date = calendar.date(from: dateComponents) {
+              dates.insert(date)
+            }
+          }
+          onChange(dates)
+        }
+    } else {
+      DatePicker(
+        selection: $viewModel.value, in: viewModel.range,
+        type: viewModel.type == "yearmonth"
+          ? .yearmonth
+          : viewModel.type == "datetime" ? .datetime : viewModel.type == "time" ? .time : .date,
+        mode: viewModel.mode == "wheel"
+          ? .wheel : viewModel.mode == "compact" ? .compact : .graphical,
+        minuteInterval: viewModel.minuteInterval,
+        locale: viewModel.locale
+      )
+      .id("\(viewModel.type)-\(viewModel.mode)")
+      .onChange(of: viewModel.value) { onChange(Set(arrayLiteral: viewModel.value)) }
+    }
   }
 
   @ViewBuilder

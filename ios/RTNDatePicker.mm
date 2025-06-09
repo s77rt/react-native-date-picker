@@ -51,6 +51,8 @@ using namespace facebook::react;
 
     { [_view setIsOpenWithIsOpen:defaultViewProps.isOpen]; }
 
+    { [_view setIsMultipleWithIsMultiple:defaultViewProps.isMultiple]; }
+
     { [_view setIsInlineWithIsInline:defaultViewProps.isInline]; }
 
     {
@@ -147,6 +149,10 @@ using namespace facebook::react;
 
   if (oldViewProps.isOpen != newViewProps.isOpen) {
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
+  }
+
+  if (oldViewProps.isMultiple != newViewProps.isMultiple) {
+    [_view setIsMultipleWithIsMultiple:newViewProps.isMultiple];
   }
 
   if (oldViewProps.isInline != newViewProps.isInline) {
