@@ -47,6 +47,11 @@ function Home({navigation}: {navigation: any}) {
           onPress={() => navigation.navigate('Step')}>
           <Text style={styles.buttonText}>Step</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Multiple')}>
+          <Text style={styles.buttonText}>Multiple</Text>
+        </TouchableOpacity>
 
         <View />
         <Text>Options</Text>
