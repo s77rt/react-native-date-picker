@@ -32,6 +32,7 @@ struct RTNDatePickerView: View {
         minuteInterval: viewModel.minuteInterval,
         locale: viewModel.locale
       )
+      .id("\(viewModel.type)-\(viewModel.mode)")
       .onChange(of: viewModel.value) { onChange(Set(arrayLiteral: viewModel.value)) }
     }
   }
