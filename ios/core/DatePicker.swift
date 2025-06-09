@@ -46,6 +46,13 @@ struct DatePicker: UIViewRepresentable {
         .inline
       }
 
+    datePicker.minimumDate = `in`.lowerBound
+    datePicker.maximumDate = `in`.upperBound
+
+    datePicker.minuteInterval = minuteInterval
+
+    datePicker.locale = locale
+
     datePicker.addTarget(
       context.coordinator, action: #selector(Coordinator.updateSelection(_:)), for: .valueChanged)
 
@@ -54,13 +61,6 @@ struct DatePicker: UIViewRepresentable {
 
   func updateUIView(_ datePicker: UIDatePicker, context: Context) {
     datePicker.date = selection
-
-    datePicker.minimumDate = `in`.lowerBound
-    datePicker.maximumDate = `in`.upperBound
-
-    datePicker.minuteInterval = minuteInterval
-
-    datePicker.locale = locale
   }
 
   func sizeThatFits(
