@@ -55,17 +55,17 @@ struct DatePicker: UIViewRepresentable {
   func updateUIView(_ datePicker: UIDatePicker, context: Context) {
     datePicker.date = selection
 
-    if let range = `in` {
-      switch range {
-      case .range(let value):
-        datePicker.minimumDate = value.lowerBound
-        datePicker.maximumDate = value.upperBound
-      case .partialRangeFrom(let value):
-        datePicker.minimumDate = value.lowerBound
+    if let `in` = `in` {
+      switch `in` {
+      case .range(let range):
+        datePicker.minimumDate = range.lowerBound
+        datePicker.maximumDate = range.upperBound
+      case .partialRangeFrom(let partialRangeFrom):
+        datePicker.minimumDate = partialRangeFrom.lowerBound
         datePicker.maximumDate = nil
-      case .partialRangeUpTo(let value):
+      case .partialRangeUpTo(let partialRangeUpTo):
         datePicker.minimumDate = nil
-        datePicker.maximumDate = value.upperBound
+        datePicker.maximumDate = partialRangeUpTo.upperBound
       }
     } else {
       datePicker.minimumDate = nil
