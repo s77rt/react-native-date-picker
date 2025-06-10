@@ -11,7 +11,7 @@ struct RTNDatePickerView: View {
   @ViewBuilder
   var datePicker: some View {
     if viewModel.isMultiple {
-      MultiDatePicker("", selection: $viewModel.valueMulti)
+      MultiDatePicker(selection: $viewModel.valueMulti, in: viewModel.range)
         .onChange(of: viewModel.valueMulti) {
           var dates = Set<Date>(minimumCapacity: viewModel.valueMulti.count)
           for dateComponents in viewModel.valueMulti {
