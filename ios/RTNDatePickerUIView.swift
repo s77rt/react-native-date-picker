@@ -90,8 +90,16 @@ import SwiftUI
     viewModel.valueMulti = datesComponents
   }
 
-  @objc public func setRange(lowerBound: Date, upperBound: Date) {
-    viewModel.range = lowerBound...upperBound
+  @objc public func setRange(lowerBound: Date?, upperBound: Date?) {
+    if let lb = lowerBound, let ub = upperBound {
+      viewModel.range = AnyRange.range(lb..<ub)
+    } else if let lb = lowerBound {
+      viewModel.range = AnyRange.partialRangeFrom(lb...)
+    } else if let ub = upperBound {
+      viewModel.range = AnyRange.partialRangeUpTo(..<ub)
+    } else {
+      viewModel.range = nil
+    }
   }
 
   @objc public func setStep(step: Int) {

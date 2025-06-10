@@ -75,12 +75,12 @@ using namespace facebook::react;
       // zeroed by default)
       NSDate *lowerBound =
           defaultViewProps.range.lowerBound == 0.0
-              ? NSDate.distantPast
+              ? nil
               : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
                                                           .lowerBound];
       NSDate *upperBound =
           defaultViewProps.range.upperBound == 0.0
-              ? NSDate.distantFuture
+              ? nil
               : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
                                                           .upperBound];
       [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
@@ -180,12 +180,12 @@ using namespace facebook::react;
     // zeroed by default)
     NSDate *lowerBound =
         newViewProps.range.lowerBound == 0.0
-            ? NSDate.distantPast
+            ? nil
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.lowerBound];
     NSDate *upperBound =
         newViewProps.range.upperBound == 0.0
-            ? NSDate.distantFuture
+            ? nil
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.upperBound];
     [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
