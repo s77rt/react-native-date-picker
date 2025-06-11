@@ -101,6 +101,11 @@ function Home({navigation}: {navigation: any}) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
+          onPress={() => navigation.navigate('Debug Time')}>
+          <Text style={styles.buttonText}>Debug Time</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate('Debug Multiple Dates')}>
           <Text style={styles.buttonText}>Debug Multiple Dates</Text>
         </TouchableOpacity>
