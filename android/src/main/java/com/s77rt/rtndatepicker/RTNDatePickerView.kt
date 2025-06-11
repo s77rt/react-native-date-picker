@@ -25,7 +25,7 @@ import java.time.ZoneId
 @Composable
 fun RTNDatePickerView(
     viewModel: RTNDatePickerViewModel,
-    onChange: (date: Long?) -> Unit,
+    onChange: (dates: LongArray) -> Unit,
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
 ) {
@@ -171,17 +171,19 @@ fun RTNDatePickerView(
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
         if (date == null) {
-            onChange(null)
+            onChange(longArrayOf())
         } else {
             onChange(
-                Instant
-                    .ofEpochMilli(date)
-                    .atZone(ZoneId.of("UTC"))
-                    .toLocalDate()
-                    .atStartOfDay(ZoneId.systemDefault())
-                    .withHour(timePickerState.hour)
-                    .withMinute(timePickerState.minute)
-                    .toEpochSecond() * 1000,
+                longArrayOf(
+                    Instant
+                        .ofEpochMilli(date)
+                        .atZone(ZoneId.of("UTC"))
+                        .toLocalDate()
+                        .atStartOfDay(ZoneId.systemDefault())
+                        .withHour(timePickerState.hour)
+                        .withMinute(timePickerState.minute)
+                        .toEpochSecond() * 1000,
+                ),
             )
         }
     }

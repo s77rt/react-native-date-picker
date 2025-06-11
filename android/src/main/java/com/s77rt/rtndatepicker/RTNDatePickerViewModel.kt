@@ -185,25 +185,28 @@ class RTNDatePickerViewModel : ViewModel() {
         _isInline.value = newIsInline
     }
 
-    fun updateValue(newValue: Long?) {
+    fun updateValue(newValue: LongArray) {
+        val startDate = newValue.firstOrNull()
+        val endDate = newValue.lastOrNull()
+
         // The selected date is expected to be at the start of the day in UTC
         // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
         _datePickerState.value.selectedDateMillis =
-            if (newValue == null) {
+            if (startDate == null) {
                 null
             } else {
                 Instant
-                    .ofEpochMilli(newValue)
+                    .ofEpochMilli(startDate)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate()
                     .atStartOfDay(ZoneId.of("UTC"))
                     .toEpochSecond() * 1000
             }
 
-        if (newValue != null) {
+        if (startDate != null) {
             val time =
                 Instant
-                    .ofEpochMilli(newValue)
+                    .ofEpochMilli(startDate)
                     .atZone(ZoneId.systemDefault())
                     .toLocalTime()
 
