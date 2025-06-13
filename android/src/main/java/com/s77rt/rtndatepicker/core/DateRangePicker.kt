@@ -116,7 +116,7 @@ fun DateRangePickerTitle(
     displayMode: DisplayMode,
     contentColor: Color,
 ) {
-    val modifier = Modifier.padding(PaddingValues(start = 64.dp, end = 12.dp))
+    val modifier = Modifier.padding(PaddingValues(start = 64.dp, end = 12.dp, top = 16.dp))
 
     if (title.isEmpty()) {
         DateRangePickerDefaults.DateRangePickerTitle(
