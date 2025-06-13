@@ -1,21 +1,12 @@
 package com.s77rt.rtndatepicker
 
-import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
-import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import java.time.Instant
 import java.time.ZoneId
 
@@ -76,68 +67,6 @@ fun RTNDatePickerView(
     val timeSelectorSelectedContentColor by viewModel.timeSelectorSelectedContentColor.collectAsState()
     val timeSelectorUnselectedContentColor by viewModel.timeSelectorUnselectedContentColor.collectAsState()
 
-    val datePickerFormatter = remember { DatePickerDefaults.dateFormatter() }
-
-    val datePickerColors =
-        DatePickerDefaults.colors(
-            containerColor = containerColor,
-            titleContentColor = titleContentColor,
-            headlineContentColor = headlineContentColor,
-            weekdayContentColor = weekdayContentColor,
-            subheadContentColor = subheadContentColor,
-            navigationContentColor = navigationContentColor,
-            yearContentColor = yearContentColor,
-            disabledYearContentColor = disabledYearContentColor,
-            currentYearContentColor = currentYearContentColor,
-            selectedYearContentColor = selectedYearContentColor,
-            disabledSelectedYearContentColor = disabledSelectedYearContentColor,
-            selectedYearContainerColor = selectedYearContainerColor,
-            disabledSelectedYearContainerColor = disabledSelectedYearContainerColor,
-            dayContentColor = dayContentColor,
-            disabledDayContentColor = disabledDayContentColor,
-            selectedDayContentColor = selectedDayContentColor,
-            disabledSelectedDayContentColor = disabledSelectedDayContentColor,
-            selectedDayContainerColor = selectedDayContainerColor,
-            disabledSelectedDayContainerColor = disabledSelectedDayContainerColor,
-            todayContentColor = todayContentColor,
-            todayDateBorderColor = todayDateBorderColor,
-            dayInSelectionRangeContainerColor = dayInSelectionRangeContainerColor,
-            dayInSelectionRangeContentColor = dayInSelectionRangeContentColor,
-            dividerColor = dividerColor,
-        )
-
-    val datePickerTextButtonColors = ButtonDefaults.textButtonColors(contentColor = datePickerColors.selectedDayContainerColor)
-
-    val titleValue = title
-    val datePickerTitle =
-        if (titleValue == null) {
-            null
-        } else {
-            @Composable {
-                DatePickerTitle(
-                    title = titleValue,
-                    displayMode = datePickerState.displayMode,
-                    contentColor = datePickerColors.titleContentColor,
-                )
-            }
-        }
-
-    val headlineValue = headline
-    val datePickerHeadline =
-        if (headlineValue == null) {
-            null
-        } else {
-            @Composable {
-                DatePickerHeadline(
-                    headline = headlineValue,
-                    selectedDateMillis = datePickerState.selectedDateMillis,
-                    displayMode = datePickerState.displayMode,
-                    dateFormatter = datePickerFormatter,
-                    contentColor = datePickerColors.headlineContentColor,
-                )
-            }
-        }
-
     LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
         val date = datePickerState.selectedDateMillis
         if (date == null) {
@@ -184,47 +113,48 @@ fun RTNDatePickerView(
             titleTextColor = titleContentColor,
             confirmText = confirmText,
             cancelText = cancelText,
-            onChange = onChange,
             onConfirm = onConfirm,
             onCancel = onCancel,
         )
     } else {
-        if (isInline) {
-            DatePicker(
-                state = datePickerState,
-                dateFormatter = datePickerFormatter,
-                colors = datePickerColors,
-                // Explicitly set requiredWidth because DatePicker uses LazyRow
-                // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
-                modifier = Modifier.requiredWidth(360.dp),
-                title = datePickerTitle,
-                headline = datePickerHeadline,
-                showModeToggle = showModeToggle,
-            )
-        } else if (isOpen) {
-            DatePickerDialog(
-                onDismissRequest = onCancel,
-                confirmButton = {
-                    TextButton(onClick = onConfirm, colors = datePickerTextButtonColors) {
-                        Text(confirmText)
-                    }
-                },
-                dismissButton = {
-                    TextButton(onClick = onCancel, colors = datePickerTextButtonColors) {
-                        Text(cancelText)
-                    }
-                },
-                colors = datePickerColors,
-            ) {
-                DatePicker(
-                    state = datePickerState,
-                    dateFormatter = datePickerFormatter,
-                    colors = datePickerColors,
-                    title = datePickerTitle,
-                    headline = datePickerHeadline,
-                    showModeToggle = showModeToggle,
-                )
-            }
-        }
+        DatePickerWrapper(
+            isInline = isInline,
+            isOpen = isOpen,
+            state = datePickerState,
+            colors =
+                DatePickerDefaults.colors(
+                    containerColor = containerColor,
+                    titleContentColor = titleContentColor,
+                    headlineContentColor = headlineContentColor,
+                    weekdayContentColor = weekdayContentColor,
+                    subheadContentColor = subheadContentColor,
+                    navigationContentColor = navigationContentColor,
+                    yearContentColor = yearContentColor,
+                    disabledYearContentColor = disabledYearContentColor,
+                    currentYearContentColor = currentYearContentColor,
+                    selectedYearContentColor = selectedYearContentColor,
+                    disabledSelectedYearContentColor = disabledSelectedYearContentColor,
+                    selectedYearContainerColor = selectedYearContainerColor,
+                    disabledSelectedYearContainerColor = disabledSelectedYearContainerColor,
+                    dayContentColor = dayContentColor,
+                    disabledDayContentColor = disabledDayContentColor,
+                    selectedDayContentColor = selectedDayContentColor,
+                    disabledSelectedDayContentColor = disabledSelectedDayContentColor,
+                    selectedDayContainerColor = selectedDayContainerColor,
+                    disabledSelectedDayContainerColor = disabledSelectedDayContainerColor,
+                    todayContentColor = todayContentColor,
+                    todayDateBorderColor = todayDateBorderColor,
+                    dayInSelectionRangeContainerColor = dayInSelectionRangeContainerColor,
+                    dayInSelectionRangeContentColor = dayInSelectionRangeContentColor,
+                    dividerColor = dividerColor,
+                ),
+            titleText = title,
+            headlineText = headline,
+            showModeToggle = showModeToggle,
+            confirmText = confirmText,
+            cancelText = cancelText,
+            onConfirm = onConfirm,
+            onCancel = onCancel,
+        )
     }
 }

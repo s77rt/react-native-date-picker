@@ -40,10 +40,10 @@ fun TimePickerWrapper(
     titleTextColor: Color,
     confirmText: String,
     cancelText: String,
-    onChange: (dates: LongArray) -> Unit,
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
 ) {
+    val textButtonColors = ButtonDefaults.textButtonColors(contentColor = colors.selectorColor)
     val title =
         if (titleText == null) {
             null
@@ -55,7 +55,6 @@ fun TimePickerWrapper(
                 )
             }
         }
-    val textButtonColors = ButtonDefaults.textButtonColors(contentColor = colors.selectorColor)
 
     if (isInline) {
         TimePicker(state = state, colors = colors)
