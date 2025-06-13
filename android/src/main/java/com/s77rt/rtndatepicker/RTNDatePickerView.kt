@@ -21,8 +21,10 @@ fun RTNDatePickerView(
 ) {
     val type by viewModel.type.collectAsState()
     val isOpen by viewModel.isOpen.collectAsState()
+    val isMultiple by viewModel.isMultiple.collectAsState()
     val isInline by viewModel.isInline.collectAsState()
     val datePickerState by viewModel.datePickerState.collectAsState()
+    val dateRangePickerState by viewModel.dateRangePickerState.collectAsState()
     val timePickerState by viewModel.timePickerState.collectAsState()
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
@@ -87,40 +89,11 @@ fun RTNDatePickerView(
         }
     }
 
-    if (type == "time") {
-        TimePickerWrapper(
+    if (isMultiple) {
+        DateRangePickerWrapper(
             isInline = isInline,
             isOpen = isOpen,
-            state = timePickerState,
-            colors =
-                TimePickerDefaults.colors(
-                    clockDialColor = clockDialColor,
-                    selectorColor = selectorColor,
-                    containerColor = containerColor,
-                    periodSelectorBorderColor = periodSelectorBorderColor,
-                    clockDialSelectedContentColor = clockDialSelectedContentColor,
-                    clockDialUnselectedContentColor = clockDialUnselectedContentColor,
-                    periodSelectorSelectedContainerColor = periodSelectorSelectedContainerColor,
-                    periodSelectorUnselectedContainerColor = periodSelectorUnselectedContainerColor,
-                    periodSelectorSelectedContentColor = periodSelectorSelectedContentColor,
-                    periodSelectorUnselectedContentColor = periodSelectorUnselectedContentColor,
-                    timeSelectorSelectedContainerColor = timeSelectorSelectedContainerColor,
-                    timeSelectorUnselectedContainerColor = timeSelectorUnselectedContainerColor,
-                    timeSelectorSelectedContentColor = timeSelectorSelectedContentColor,
-                    timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
-                ),
-            titleText = title,
-            titleTextColor = titleContentColor,
-            confirmText = confirmText,
-            cancelText = cancelText,
-            onConfirm = onConfirm,
-            onCancel = onCancel,
-        )
-    } else {
-        DatePickerWrapper(
-            isInline = isInline,
-            isOpen = isOpen,
-            state = datePickerState,
+            state = dateRangePickerState,
             colors =
                 DatePickerDefaults.colors(
                     containerColor = containerColor,
@@ -156,5 +129,76 @@ fun RTNDatePickerView(
             onConfirm = onConfirm,
             onCancel = onCancel,
         )
+    } else {
+        if (type == "time") {
+            TimePickerWrapper(
+                isInline = isInline,
+                isOpen = isOpen,
+                state = timePickerState,
+                colors =
+                    TimePickerDefaults.colors(
+                        clockDialColor = clockDialColor,
+                        selectorColor = selectorColor,
+                        containerColor = containerColor,
+                        periodSelectorBorderColor = periodSelectorBorderColor,
+                        clockDialSelectedContentColor = clockDialSelectedContentColor,
+                        clockDialUnselectedContentColor = clockDialUnselectedContentColor,
+                        periodSelectorSelectedContainerColor = periodSelectorSelectedContainerColor,
+                        periodSelectorUnselectedContainerColor = periodSelectorUnselectedContainerColor,
+                        periodSelectorSelectedContentColor = periodSelectorSelectedContentColor,
+                        periodSelectorUnselectedContentColor = periodSelectorUnselectedContentColor,
+                        timeSelectorSelectedContainerColor = timeSelectorSelectedContainerColor,
+                        timeSelectorUnselectedContainerColor = timeSelectorUnselectedContainerColor,
+                        timeSelectorSelectedContentColor = timeSelectorSelectedContentColor,
+                        timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
+                    ),
+                titleText = title,
+                titleTextColor = titleContentColor,
+                confirmText = confirmText,
+                cancelText = cancelText,
+                onConfirm = onConfirm,
+                onCancel = onCancel,
+            )
+        } else {
+            DatePickerWrapper(
+                isInline = isInline,
+                isOpen = isOpen,
+                state = datePickerState,
+                colors =
+                    DatePickerDefaults.colors(
+                        containerColor = containerColor,
+                        titleContentColor = titleContentColor,
+                        headlineContentColor = headlineContentColor,
+                        weekdayContentColor = weekdayContentColor,
+                        subheadContentColor = subheadContentColor,
+                        navigationContentColor = navigationContentColor,
+                        yearContentColor = yearContentColor,
+                        disabledYearContentColor = disabledYearContentColor,
+                        currentYearContentColor = currentYearContentColor,
+                        selectedYearContentColor = selectedYearContentColor,
+                        disabledSelectedYearContentColor = disabledSelectedYearContentColor,
+                        selectedYearContainerColor = selectedYearContainerColor,
+                        disabledSelectedYearContainerColor = disabledSelectedYearContainerColor,
+                        dayContentColor = dayContentColor,
+                        disabledDayContentColor = disabledDayContentColor,
+                        selectedDayContentColor = selectedDayContentColor,
+                        disabledSelectedDayContentColor = disabledSelectedDayContentColor,
+                        selectedDayContainerColor = selectedDayContainerColor,
+                        disabledSelectedDayContainerColor = disabledSelectedDayContainerColor,
+                        todayContentColor = todayContentColor,
+                        todayDateBorderColor = todayDateBorderColor,
+                        dayInSelectionRangeContainerColor = dayInSelectionRangeContainerColor,
+                        dayInSelectionRangeContentColor = dayInSelectionRangeContentColor,
+                        dividerColor = dividerColor,
+                    ),
+                titleText = title,
+                headlineText = headline,
+                showModeToggle = showModeToggle,
+                confirmText = confirmText,
+                cancelText = cancelText,
+                onConfirm = onConfirm,
+                onCancel = onCancel,
+            )
+        }
     }
 }

@@ -144,6 +144,10 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateIsOpen(isOpen)
     }
 
+    public fun setIsMultiple(isMultiple: Boolean) {
+        viewModel.updateIsMultiple(isMultiple)
+    }
+
     public fun setIsInline(isInline: Boolean) {
         viewModel.updateIsInline(isInline)
     }

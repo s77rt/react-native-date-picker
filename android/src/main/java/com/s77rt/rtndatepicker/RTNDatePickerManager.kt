@@ -51,8 +51,7 @@ class RTNDatePickerManager(
         view: RTNDatePicker,
         isMultiple: Boolean,
     ) {
-        // TODO
-        // view.setIsMultiple(isMultiple)
+        view.setIsMultiple(isMultiple)
     }
 
     @ReactProp(name = "isInline")

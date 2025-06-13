@@ -1,6 +1,7 @@
 package com.s77rt.rtndatepicker
 
 import androidx.compose.material3.DatePickerState
+import androidx.compose.material3.DateRangePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TimePickerSelectionMode
@@ -39,10 +40,18 @@ class RTNDatePickerViewModel : ViewModel() {
 
     private val _type = MutableStateFlow("date")
     private val _isOpen = MutableStateFlow(false)
+    private val _isMultiple = MutableStateFlow(false)
     private val _isInline = MutableStateFlow(false)
     private val _datePickerState =
         MutableStateFlow(
             DatePickerState(
+                locale = locale,
+                selectableDates = selectableDates,
+            ),
+        )
+    private val _dateRangePickerState =
+        MutableStateFlow(
+            DateRangePickerState(
                 locale = locale,
                 selectableDates = selectableDates,
             ),
@@ -100,8 +109,10 @@ class RTNDatePickerViewModel : ViewModel() {
 
     val type: StateFlow<String> get() = _type
     val isOpen: StateFlow<Boolean> get() = _isOpen
+    val isMultiple: StateFlow<Boolean> get() = _isMultiple
     val isInline: StateFlow<Boolean> get() = _isInline
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
+    val dateRangePickerState: StateFlow<DateRangePickerState> get() = _dateRangePickerState
     val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
@@ -181,6 +192,10 @@ class RTNDatePickerViewModel : ViewModel() {
             resetTimeSelection()
         }
         _isOpen.value = newIsOpen
+    }
+
+    fun updateIsMultiple(newIsMultiple: Boolean) {
+        _isMultiple.value = newIsMultiple
     }
 
     fun updateIsInline(newIsInline: Boolean) {
