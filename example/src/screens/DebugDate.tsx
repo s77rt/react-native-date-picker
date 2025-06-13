@@ -13,6 +13,7 @@ import {useRef, useState} from 'react';
 function DebugDate() {
   const datePicker = useRef<DatePickerHandle>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [min, setMin] = useState<Date | undefined>(undefined);
   const [log, setLog] = useState('');
 
   return (
@@ -30,6 +31,7 @@ function DebugDate() {
           setLog(prevLog => `${prevLog}\nonChange: ${date?.toString()}`);
           setSelectedDate(date);
         }}
+        min={min}
       />
       <DatePicker
         type="date"
@@ -38,6 +40,7 @@ function DebugDate() {
           setLog(prevLog => `${prevLog}\nonChange: ${date?.toString()}`);
           setSelectedDate(date);
         }}
+        min={min}
         inline
       />
 
@@ -49,6 +52,10 @@ function DebugDate() {
         <Button
           title="Set date to 1746227970959"
           onPress={() => setSelectedDate(new Date(1746227970959))}
+        />
+        <Button
+          title="Toggle min"
+          onPress={() => setMin(prevMin => (prevMin ? undefined : new Date()))}
         />
         <Button title="Clear date" onPress={() => setSelectedDate(null)} />
       </View>
