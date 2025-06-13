@@ -136,8 +136,11 @@ function DatePicker({
 	);
 
 	const options = useMemo(
-		() => ({ ...Defaults.defaultOptions(type, isInline), ...optionsProp }),
-		[type, isInline, optionsProp]
+		() => ({
+			...Defaults.defaultOptions(type, isMultiple, isInline),
+			...optionsProp,
+		}),
+		[type, isMultiple, isInline, optionsProp]
 	);
 
 	const styles = useMemo(() => {

@@ -5,7 +5,11 @@ export type Defaults = {
 	defaultValue: (type: Type, isMultiple: boolean) => Date[];
 
 	/* Gets default options */
-	defaultOptions: (type: Type, isInline: boolean) => Options;
+	defaultOptions: (
+		type: Type,
+		isMultiple: boolean,
+		isInline: boolean
+	) => Options;
 
 	/* Gets default styles */
 	defaultStyles: () => Styles;

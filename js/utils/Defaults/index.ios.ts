@@ -10,7 +10,7 @@ const defaults: Defaults = {
 		return [new Date()];
 	},
 
-	defaultOptions(type, _isInline) {
+	defaultOptions(type, _isMultiple, _isInline) {
 		return {
 			mode:
 				type === "time" || type === "yearmonth" ? "wheel" : "graphical",

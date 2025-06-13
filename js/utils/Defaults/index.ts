@@ -5,7 +5,7 @@ const defaults: Defaults = {
 		return [];
 	},
 
-	defaultOptions(_type, _isInline) {
+	defaultOptions(_type, _isMultiple, _isInline) {
 		return {};
 	},
 

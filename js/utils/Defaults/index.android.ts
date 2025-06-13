@@ -11,11 +11,14 @@ const defaults: Defaults = {
 		return [];
 	},
 
-	defaultOptions(_type, isInline) {
+	defaultOptions(_type, isMultiple, isInline) {
 		return {
 			title: isInline ? "" : undefined,
 			headline: isInline ? "" : undefined,
-			showModeToggle: !isInline,
+
+			// Ideally the mode toggle button should be shown in multiple selection modal too
+			// but currently it's causing the headline text to wrap
+			showModeToggle: !isInline && !isMultiple,
 		};
 	},
 
