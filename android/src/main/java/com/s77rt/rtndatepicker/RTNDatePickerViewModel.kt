@@ -16,8 +16,26 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 class RTNDatePickerViewModel : ViewModel() {
+    private var locale: Locale = Locale.getDefault()
     private var lowerBound: Long? = null
     private var upperBound: Long? = null
+    private val selectableDates =
+        object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                val lb = lowerBound
+                val ub = upperBound
+
+                if (lb != null && utcTimeMillis < lb) {
+                    return false
+                }
+
+                if (ub != null && utcTimeMillis > ub) {
+                    return false
+                }
+
+                return true
+            }
+        }
 
     private val _type = MutableStateFlow("date")
     private val _isOpen = MutableStateFlow(false)
@@ -25,24 +43,8 @@ class RTNDatePickerViewModel : ViewModel() {
     private val _datePickerState =
         MutableStateFlow(
             DatePickerState(
-                locale = Locale.getDefault(),
-                selectableDates =
-                    object : SelectableDates {
-                        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                            val lb = lowerBound
-                            val ub = upperBound
-
-                            if (lb != null && utcTimeMillis < lb) {
-                                return false
-                            }
-
-                            if (ub != null && utcTimeMillis > ub) {
-                                return false
-                            }
-
-                            return true
-                        }
-                    },
+                locale = locale,
+                selectableDates = selectableDates,
             ),
         )
     private val _timePickerState =
@@ -151,7 +153,7 @@ class RTNDatePickerViewModel : ViewModel() {
             newDisplayedMonthMillis = Instant.now().toEpochMilli()
         }
 
-        if (!_datePickerState.value.selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
+        if (!selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
             val lb = lowerBound
             val ub = upperBound
 
@@ -186,33 +188,35 @@ class RTNDatePickerViewModel : ViewModel() {
     }
 
     fun updateValue(newValue: LongArray) {
-        val startDate = newValue.firstOrNull()
-        val endDate = newValue.lastOrNull()
+        val firstValue = newValue.firstOrNull()
+        val lastValue = newValue.lastOrNull()
 
         // The selected date is expected to be at the start of the day in UTC
         // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-        _datePickerState.value.selectedDateMillis =
-            if (startDate == null) {
+        val startDate =
+            if (firstValue == null) {
                 null
             } else {
                 Instant
-                    .ofEpochMilli(startDate)
+                    .ofEpochMilli(firstValue)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate()
                     .atStartOfDay(ZoneId.of("UTC"))
                     .toEpochSecond() * 1000
             }
-
-        if (startDate != null) {
-            val time =
+        val startTime =
+            if (firstValue == null) {
+                null
+            } else {
                 Instant
-                    .ofEpochMilli(startDate)
+                    .ofEpochMilli(firstValue)
                     .atZone(ZoneId.systemDefault())
                     .toLocalTime()
+            }
 
-            _timePickerState.value.hour = time.getHour()
-            _timePickerState.value.minute = time.getMinute()
-        }
+        _datePickerState.value.selectedDateMillis = startDate
+        _timePickerState.value.hour = startTime?.getHour() ?: 0
+        _timePickerState.value.minute = startTime?.getMinute() ?: 0
 
         syncDisplayedMonth()
     }
