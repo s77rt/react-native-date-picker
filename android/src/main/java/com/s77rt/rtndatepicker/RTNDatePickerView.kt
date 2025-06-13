@@ -8,7 +8,6 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -106,26 +105,8 @@ fun RTNDatePickerView(
             dayInSelectionRangeContentColor = dayInSelectionRangeContentColor,
             dividerColor = dividerColor,
         )
-    val timePickerColors =
-        TimePickerDefaults.colors(
-            clockDialColor = clockDialColor,
-            selectorColor = selectorColor,
-            containerColor = containerColor,
-            periodSelectorBorderColor = periodSelectorBorderColor,
-            clockDialSelectedContentColor = clockDialSelectedContentColor,
-            clockDialUnselectedContentColor = clockDialUnselectedContentColor,
-            periodSelectorSelectedContainerColor = periodSelectorSelectedContainerColor,
-            periodSelectorUnselectedContainerColor = periodSelectorUnselectedContainerColor,
-            periodSelectorSelectedContentColor = periodSelectorSelectedContentColor,
-            periodSelectorUnselectedContentColor = periodSelectorUnselectedContentColor,
-            timeSelectorSelectedContainerColor = timeSelectorSelectedContainerColor,
-            timeSelectorUnselectedContainerColor = timeSelectorUnselectedContainerColor,
-            timeSelectorSelectedContentColor = timeSelectorSelectedContentColor,
-            timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
-        )
 
     val datePickerTextButtonColors = ButtonDefaults.textButtonColors(contentColor = datePickerColors.selectedDayContainerColor)
-    val timePickerTextButtonColors = ButtonDefaults.textButtonColors(contentColor = timePickerColors.selectorColor)
 
     val titleValue = title
     val datePickerTitle =
@@ -136,17 +117,6 @@ fun RTNDatePickerView(
                 DatePickerTitle(
                     title = titleValue,
                     displayMode = datePickerState.displayMode,
-                    contentColor = datePickerColors.titleContentColor,
-                )
-            }
-        }
-    val timePickerTitle =
-        if (titleValue == null) {
-            null
-        } else {
-            @Composable {
-                TimePickerTitle(
-                    title = titleValue,
                     contentColor = datePickerColors.titleContentColor,
                 )
             }
@@ -189,27 +159,35 @@ fun RTNDatePickerView(
     }
 
     if (type == "time") {
-        if (isInline) {
-            TimePicker(state = timePickerState, colors = timePickerColors)
-        } else if (isOpen) {
-            TimePickerDialog(
-                onDismissRequest = onCancel,
-                confirmButton = {
-                    TextButton(onClick = onConfirm, colors = timePickerTextButtonColors) {
-                        Text(confirmText)
-                    }
-                },
-                dismissButton = {
-                    TextButton(onClick = onCancel, colors = timePickerTextButtonColors) {
-                        Text(cancelText)
-                    }
-                },
-                colors = timePickerColors,
-                title = timePickerTitle,
-            ) {
-                TimePicker(state = timePickerState, colors = timePickerColors)
-            }
-        }
+        TimePickerWrapper(
+            isInline = isInline,
+            isOpen = isOpen,
+            state = timePickerState,
+            colors =
+                TimePickerDefaults.colors(
+                    clockDialColor = clockDialColor,
+                    selectorColor = selectorColor,
+                    containerColor = containerColor,
+                    periodSelectorBorderColor = periodSelectorBorderColor,
+                    clockDialSelectedContentColor = clockDialSelectedContentColor,
+                    clockDialUnselectedContentColor = clockDialUnselectedContentColor,
+                    periodSelectorSelectedContainerColor = periodSelectorSelectedContainerColor,
+                    periodSelectorUnselectedContainerColor = periodSelectorUnselectedContainerColor,
+                    periodSelectorSelectedContentColor = periodSelectorSelectedContentColor,
+                    periodSelectorUnselectedContentColor = periodSelectorUnselectedContentColor,
+                    timeSelectorSelectedContainerColor = timeSelectorSelectedContainerColor,
+                    timeSelectorUnselectedContainerColor = timeSelectorUnselectedContainerColor,
+                    timeSelectorSelectedContentColor = timeSelectorSelectedContentColor,
+                    timeSelectorUnselectedContentColor = timeSelectorUnselectedContentColor,
+                ),
+            titleText = title,
+            titleTextColor = titleContentColor,
+            confirmText = confirmText,
+            cancelText = cancelText,
+            onChange = onChange,
+            onConfirm = onConfirm,
+            onCancel = onCancel,
+        )
     } else {
         if (isInline) {
             DatePicker(
