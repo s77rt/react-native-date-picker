@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2025-06-14
+
+### Added
+
+-   `multiple` prop ([#40](https://github.com/s77rt/react-native-date-picker/pull/40)).
+
 ## [2.4.1] - 2025-06-05
 
 ### Added
@@ -139,6 +145,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[3.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.1...v3.0.0
 [2.4.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.0...v2.4.1
 [2.4.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.2...v2.4.0
 [2.3.2]: https://github.com/s77rt/react-native-date-picker/compare/v2.3.1...v2.3.2
