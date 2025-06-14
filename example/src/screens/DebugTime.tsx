@@ -17,7 +17,7 @@ function DebugTime() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text>Date</Text>
+      <Text>Time</Text>
       <Button
         title="Open modal"
         onPress={() => datePicker.current?.showPicker()}

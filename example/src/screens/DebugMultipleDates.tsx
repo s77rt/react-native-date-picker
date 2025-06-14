@@ -17,7 +17,7 @@ function DebugMultipleDates() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text>Date</Text>
+      <Text>Multiple Dates</Text>
       <Button
         title="Open modal"
         onPress={() => datePicker.current?.showPicker()}
