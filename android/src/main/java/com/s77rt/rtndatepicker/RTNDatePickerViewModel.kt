@@ -176,6 +176,11 @@ class RTNDatePickerViewModel : ViewModel() {
         }
 
         _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
+
+        // Normally we'd execute the above logic for _dateRangePickerState.value.selectedStartDateMillis too
+        // but its value is in sync with _datePickerState.value.selectedDateMillis
+        // thus that computation can be skipped and use same newDisplayedMonthMillis
+        _dateRangePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
     }
 
     fun resetTimeSelection() {
@@ -219,6 +224,17 @@ class RTNDatePickerViewModel : ViewModel() {
                     .atStartOfDay(ZoneId.of("UTC"))
                     .toEpochSecond() * 1000
             }
+        val endDate =
+            if (lastValue == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(lastValue)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
         val startTime =
             if (firstValue == null) {
                 null
@@ -230,6 +246,7 @@ class RTNDatePickerViewModel : ViewModel() {
             }
 
         _datePickerState.value.selectedDateMillis = startDate
+        _dateRangePickerState.value.setSelection(startDate, endDate)
         _timePickerState.value.hour = startTime?.getHour() ?: 0
         _timePickerState.value.minute = startTime?.getMinute() ?: 0
 
