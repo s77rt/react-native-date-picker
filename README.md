@@ -13,6 +13,7 @@ Native Date, Time, Datetime and Yearmonth Picker
 -   🗓️ Datetime picker
 -   🌙 Yearmonth picker
 -   🔌 Supports iOS, Android and Web
+-   🎯 Selection is single and multiple
 -   💎 Renders in modal and inline
 -   ✨ Highly customizable
 
