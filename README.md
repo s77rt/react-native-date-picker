@@ -101,6 +101,34 @@ function Example() {
 }
 ```
 
+### Multiple
+
+<img align="right" width="100" height="auto" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/example-multiple.png">
+
+```tsx
+function Example() {
+	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+
+	return (
+		<>
+			<Text>
+				Selected dates:{" "}
+				{selectedDates
+					?.map((date) => date.toLocaleDateString())
+					.join(", ")}
+			</Text>
+			<DatePicker
+				type="date"
+				value={selectedDates}
+				onChange={setSelectedDates}
+				multiple
+				inline
+			/>
+		</>
+	);
+}
+```
+
 ## Props
 
 Inherits [View Props](https://reactnative.dev/docs/view#props).
