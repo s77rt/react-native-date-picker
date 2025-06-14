@@ -75,7 +75,7 @@ function DebugDate() {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 12,
+    padding: 12,
     gap: 12,
   },
 });

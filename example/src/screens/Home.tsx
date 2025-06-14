@@ -116,7 +116,7 @@ function Home({navigation}: {navigation: any}) {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 12,
+    padding: 12,
     gap: 12,
   },
   button: {
