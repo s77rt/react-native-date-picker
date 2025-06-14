@@ -45,9 +45,17 @@ function DebugMultipleDates() {
 
       <View>
         <Button
-          title="Set dates to 2025-04-16, 2025-04-18"
+          title="Set dates to 2025-04-16"
+          onPress={() => setSelectedDates([new Date('2025-04-16')])}
+        />
+        <Button
+          title="Set dates to 2025-04-16, 2025-04-17, 2025-04-18"
           onPress={() =>
-            setSelectedDates([new Date('2025-04-16'), new Date('2025-04-18')])
+            setSelectedDates([
+              new Date('2025-04-16'),
+              new Date('2025-04-17'),
+              new Date('2025-04-18'),
+            ])
           }
         />
         <Button

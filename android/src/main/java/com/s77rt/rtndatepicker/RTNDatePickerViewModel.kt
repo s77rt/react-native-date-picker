@@ -225,7 +225,7 @@ class RTNDatePickerViewModel : ViewModel() {
                     .toEpochSecond() * 1000
             }
         val endDate =
-            if (lastValue == null) {
+            if (lastValue == null || lastValue == firstValue) {
                 null
             } else {
                 Instant

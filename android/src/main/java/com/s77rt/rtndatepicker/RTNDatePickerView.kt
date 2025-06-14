@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import java.time.Instant
 import java.time.ZoneId
+import java.util.stream.Collectors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
@@ -69,23 +70,70 @@ fun RTNDatePickerView(
     val timeSelectorSelectedContentColor by viewModel.timeSelectorSelectedContentColor.collectAsState()
     val timeSelectorUnselectedContentColor by viewModel.timeSelectorUnselectedContentColor.collectAsState()
 
-    LaunchedEffect(datePickerState.selectedDateMillis, timePickerState.hour, timePickerState.minute) {
-        val date = datePickerState.selectedDateMillis
-        if (date == null) {
-            onChange(longArrayOf())
-        } else {
-            onChange(
-                longArrayOf(
+    LaunchedEffect(
+        datePickerState.selectedDateMillis,
+        dateRangePickerState.selectedStartDateMillis,
+        dateRangePickerState.selectedEndDateMillis,
+        timePickerState.hour,
+        timePickerState.minute,
+    ) {
+        if (isMultiple) {
+            val selectedStartDateMillis = dateRangePickerState.selectedStartDateMillis
+            val selectedEndDateMillis = dateRangePickerState.selectedEndDateMillis
+            val dates =
+                if (selectedStartDateMillis == null) {
+                    longArrayOf()
+                } else if (selectedEndDateMillis == null) {
+                    longArrayOf(
+                        Instant
+                            .ofEpochMilli(selectedStartDateMillis)
+                            .atZone(ZoneId.of("UTC"))
+                            .toLocalDate()
+                            .atStartOfDay(ZoneId.systemDefault())
+                            .withHour(timePickerState.hour)
+                            .withMinute(timePickerState.minute)
+                            .toEpochSecond() * 1000,
+                    )
+                } else {
                     Instant
-                        .ofEpochMilli(date)
+                        .ofEpochMilli(selectedStartDateMillis)
                         .atZone(ZoneId.of("UTC"))
                         .toLocalDate()
-                        .atStartOfDay(ZoneId.systemDefault())
-                        .withHour(timePickerState.hour)
-                        .withMinute(timePickerState.minute)
-                        .toEpochSecond() * 1000,
-                ),
-            )
+                        .datesUntil(
+                            Instant
+                                .ofEpochMilli(selectedEndDateMillis)
+                                .atZone(ZoneId.of("UTC"))
+                                .toLocalDate()
+                                .plusDays(1),
+                        ).map({
+                            it
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .withHour(timePickerState.hour)
+                                .withMinute(timePickerState.minute)
+                                .toEpochSecond() * 1000
+                        })
+                        .collect(Collectors.toList())
+                        .toLongArray()
+                }
+            onChange(dates)
+        } else {
+            val selectedDateMillis = datePickerState.selectedDateMillis
+            val dates =
+                if (selectedDateMillis == null) {
+                    longArrayOf()
+                } else {
+                    longArrayOf(
+                        Instant
+                            .ofEpochMilli(selectedDateMillis)
+                            .atZone(ZoneId.of("UTC"))
+                            .toLocalDate()
+                            .atStartOfDay(ZoneId.systemDefault())
+                            .withHour(timePickerState.hour)
+                            .withMinute(timePickerState.minute)
+                            .toEpochSecond() * 1000,
+                    )
+                }
+            onChange(dates)
         }
     }
 
