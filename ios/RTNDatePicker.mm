@@ -32,6 +32,10 @@ using namespace facebook::react;
       RTNDatePickerComponentDescriptor>();
 }
 
++ (BOOL)shouldBeRecycled {
+  return NO;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps =
@@ -51,12 +55,19 @@ using namespace facebook::react;
 
     { [_view setIsOpenWithIsOpen:defaultViewProps.isOpen]; }
 
+    { [_view setIsMultipleWithIsMultiple:defaultViewProps.isMultiple]; }
+
     { [_view setIsInlineWithIsInline:defaultViewProps.isInline]; }
 
     {
-      [_view setValueWithDate:[NSDate
-                                  dateWithTimeIntervalSince1970:defaultViewProps
-                                                                    .value]];
+      NSMutableSet<NSDate *> *dates =
+          [NSMutableSet setWithCapacity:defaultViewProps.value.size()];
+
+      for (auto date : defaultViewProps.value) {
+        [dates addObject:[NSDate dateWithTimeIntervalSince1970:date]];
+      }
+
+      [_view setValueWithDates:dates];
     }
 
     {
@@ -64,12 +75,12 @@ using namespace facebook::react;
       // zeroed by default)
       NSDate *lowerBound =
           defaultViewProps.range.lowerBound == 0.0
-              ? NSDate.distantPast
+              ? nil
               : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
                                                           .lowerBound];
       NSDate *upperBound =
           defaultViewProps.range.upperBound == 0.0
-              ? NSDate.distantFuture
+              ? nil
               : [NSDate dateWithTimeIntervalSince1970:defaultViewProps.range
                                                           .upperBound];
       [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
@@ -144,14 +155,23 @@ using namespace facebook::react;
     [_view setIsOpenWithIsOpen:newViewProps.isOpen];
   }
 
+  if (oldViewProps.isMultiple != newViewProps.isMultiple) {
+    [_view setIsMultipleWithIsMultiple:newViewProps.isMultiple];
+  }
+
   if (oldViewProps.isInline != newViewProps.isInline) {
     [_view setIsInlineWithIsInline:newViewProps.isInline];
   }
 
   if (oldViewProps.value != newViewProps.value) {
-    [_view
-        setValueWithDate:[NSDate
-                             dateWithTimeIntervalSince1970:newViewProps.value]];
+    NSMutableSet<NSDate *> *dates =
+        [NSMutableSet setWithCapacity:newViewProps.value.size()];
+
+    for (auto date : newViewProps.value) {
+      [dates addObject:[NSDate dateWithTimeIntervalSince1970:date]];
+    }
+
+    [_view setValueWithDates:dates];
   }
 
   if (oldViewProps.range.lowerBound != newViewProps.range.lowerBound ||
@@ -160,12 +180,12 @@ using namespace facebook::react;
     // zeroed by default)
     NSDate *lowerBound =
         newViewProps.range.lowerBound == 0.0
-            ? NSDate.distantPast
+            ? nil
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.lowerBound];
     NSDate *upperBound =
         newViewProps.range.upperBound == 0.0
-            ? NSDate.distantFuture
+            ? nil
             : [NSDate
                   dateWithTimeIntervalSince1970:newViewProps.range.upperBound];
     [_view setRangeWithLowerBound:lowerBound upperBound:upperBound];
@@ -221,10 +241,16 @@ using namespace facebook::react;
           state);
 }
 
-- (void)onChangeWithDate:(NSDate *_Nonnull)date {
+- (void)onChangeWithDates:(NSSet<NSDate *> *_Nonnull)dates {
   if (_eventEmitter) {
+    std::vector<double> value;
+
+    for (NSDate *date in dates) {
+      value.push_back(date.timeIntervalSince1970);
+    }
+
     static_cast<const RTNDatePickerEventEmitter &>(*_eventEmitter)
-        .onChange({date.timeIntervalSince1970});
+        .onChange({value});
   }
 }
 

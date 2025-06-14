@@ -1,6 +1,7 @@
 package com.s77rt.rtndatepicker
 
 import androidx.compose.material3.DatePickerState
+import androidx.compose.material3.DateRangePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TimePickerSelectionMode
@@ -16,33 +17,43 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 class RTNDatePickerViewModel : ViewModel() {
+    private var locale: Locale = Locale.getDefault()
     private var lowerBound: Long? = null
     private var upperBound: Long? = null
+    private val selectableDates =
+        object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                val lb = lowerBound
+                val ub = upperBound
+
+                if (lb != null && utcTimeMillis < lb) {
+                    return false
+                }
+
+                if (ub != null && utcTimeMillis > ub) {
+                    return false
+                }
+
+                return true
+            }
+        }
 
     private val _type = MutableStateFlow("date")
     private val _isOpen = MutableStateFlow(false)
+    private val _isMultiple = MutableStateFlow(false)
     private val _isInline = MutableStateFlow(false)
     private val _datePickerState =
         MutableStateFlow(
             DatePickerState(
-                locale = Locale.getDefault(),
-                selectableDates =
-                    object : SelectableDates {
-                        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                            val lb = lowerBound
-                            val ub = upperBound
-
-                            if (lb != null && utcTimeMillis < lb) {
-                                return false
-                            }
-
-                            if (ub != null && utcTimeMillis > ub) {
-                                return false
-                            }
-
-                            return true
-                        }
-                    },
+                locale = locale,
+                selectableDates = selectableDates,
+            ),
+        )
+    private val _dateRangePickerState =
+        MutableStateFlow(
+            DateRangePickerState(
+                locale = locale,
+                selectableDates = selectableDates,
             ),
         )
     private val _timePickerState =
@@ -98,8 +109,10 @@ class RTNDatePickerViewModel : ViewModel() {
 
     val type: StateFlow<String> get() = _type
     val isOpen: StateFlow<Boolean> get() = _isOpen
+    val isMultiple: StateFlow<Boolean> get() = _isMultiple
     val isInline: StateFlow<Boolean> get() = _isInline
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
+    val dateRangePickerState: StateFlow<DateRangePickerState> get() = _dateRangePickerState
     val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
@@ -151,7 +164,7 @@ class RTNDatePickerViewModel : ViewModel() {
             newDisplayedMonthMillis = Instant.now().toEpochMilli()
         }
 
-        if (!_datePickerState.value.selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
+        if (!selectableDates.isSelectableDate(newDisplayedMonthMillis)) {
             val lb = lowerBound
             val ub = upperBound
 
@@ -163,6 +176,11 @@ class RTNDatePickerViewModel : ViewModel() {
         }
 
         _datePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
+
+        // Normally we'd execute the above logic for _dateRangePickerState.value.selectedStartDateMillis too
+        // but its value is in sync with _datePickerState.value.selectedDateMillis
+        // thus that computation can be skipped and use same newDisplayedMonthMillis
+        _dateRangePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
     }
 
     fun resetTimeSelection() {
@@ -181,35 +199,56 @@ class RTNDatePickerViewModel : ViewModel() {
         _isOpen.value = newIsOpen
     }
 
+    fun updateIsMultiple(newIsMultiple: Boolean) {
+        _isMultiple.value = newIsMultiple
+    }
+
     fun updateIsInline(newIsInline: Boolean) {
         _isInline.value = newIsInline
     }
 
-    fun updateValue(newValue: Long?) {
+    fun updateValue(newValue: LongArray) {
+        val firstValue = newValue.firstOrNull()
+        val lastValue = newValue.lastOrNull()
+
         // The selected date is expected to be at the start of the day in UTC
         // https://developer.android.com/reference/kotlin/androidx/compose/material3/DatePickerState#selectedDateMillis()
-        _datePickerState.value.selectedDateMillis =
-            if (newValue == null) {
+        val startDate =
+            if (firstValue == null) {
                 null
             } else {
                 Instant
-                    .ofEpochMilli(newValue)
+                    .ofEpochMilli(firstValue)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate()
                     .atStartOfDay(ZoneId.of("UTC"))
                     .toEpochSecond() * 1000
             }
-
-        if (newValue != null) {
-            val time =
+        val endDate =
+            if (lastValue == null || lastValue == firstValue) {
+                null
+            } else {
                 Instant
-                    .ofEpochMilli(newValue)
+                    .ofEpochMilli(lastValue)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toEpochSecond() * 1000
+            }
+        val startTime =
+            if (firstValue == null) {
+                null
+            } else {
+                Instant
+                    .ofEpochMilli(firstValue)
                     .atZone(ZoneId.systemDefault())
                     .toLocalTime()
+            }
 
-            _timePickerState.value.hour = time.getHour()
-            _timePickerState.value.minute = time.getMinute()
-        }
+        _datePickerState.value.selectedDateMillis = startDate
+        _dateRangePickerState.value.setSelection(startDate, endDate)
+        _timePickerState.value.hour = startTime?.getHour() ?: 0
+        _timePickerState.value.minute = startTime?.getMinute() ?: 0
 
         syncDisplayedMonth()
     }

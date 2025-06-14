@@ -42,11 +42,11 @@ function Date() {
 
 const styles = StyleSheet.create({
   selectedDate: {
-    margin: 12,
+    padding: 12,
     textAlign: 'center',
   },
   container: {
-    margin: 12,
+    padding: 12,
     gap: 12,
   },
 });

@@ -2,14 +2,15 @@ package com.s77rt.rtndatepicker
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DatePickerFormatter
-import androidx.compose.material3.DatePickerState
+import androidx.compose.material3.DateRangePicker
+import androidx.compose.material3.DateRangePickerDefaults
+import androidx.compose.material3.DateRangePickerState
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -24,10 +25,10 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
 @Composable
-fun DatePickerWrapper(
+fun DateRangePickerWrapper(
     isInline: Boolean,
     isOpen: Boolean,
-    state: DatePickerState,
+    state: DateRangePickerState,
     colors: DatePickerColors,
     titleText: String?,
     headlineText: String?,
@@ -44,7 +45,7 @@ fun DatePickerWrapper(
             null
         } else {
             @Composable {
-                DatePickerTitle(
+                DateRangePickerTitle(
                     title = titleText,
                     displayMode = state.displayMode,
                     contentColor = colors.titleContentColor,
@@ -56,9 +57,10 @@ fun DatePickerWrapper(
             null
         } else {
             @Composable {
-                DatePickerHeadline(
+                DateRangePickerHeadline(
                     headline = headlineText,
-                    selectedDateMillis = state.selectedDateMillis,
+                    selectedStartDateMillis = state.selectedStartDateMillis,
+                    selectedEndDateMillis = state.selectedEndDateMillis,
                     displayMode = state.displayMode,
                     dateFormatter = formatter,
                     contentColor = colors.headlineContentColor,
@@ -67,13 +69,13 @@ fun DatePickerWrapper(
         }
 
     if (isInline) {
-        DatePicker(
+        DateRangePicker(
             state = state,
             dateFormatter = formatter,
             colors = colors,
-            // Explicitly set requiredWidth because DatePicker uses LazyRow
+            // Explicitly set requiredHeight because DateRangePicker uses LazyColumn
             // and measuring it with no constraints results in an infinite width and/or OutOfMemoryError exception.
-            modifier = Modifier.requiredWidth(360.dp),
+            modifier = Modifier.requiredHeight(432.dp),
             title = title,
             headline = headline,
             showModeToggle = showModeToggle,
@@ -93,7 +95,7 @@ fun DatePickerWrapper(
             },
             colors = colors,
         ) {
-            DatePicker(
+            DateRangePicker(
                 state = state,
                 dateFormatter = formatter,
                 colors = colors,
@@ -105,19 +107,19 @@ fun DatePickerWrapper(
     }
 }
 
-// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DatePicker.kt
+// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DateRangePicker.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
 @Composable
-fun DatePickerTitle(
+fun DateRangePickerTitle(
     title: String,
     displayMode: DisplayMode,
     contentColor: Color,
 ) {
-    val modifier = Modifier.padding(PaddingValues(start = 24.dp, end = 12.dp, top = 16.dp))
+    val modifier = Modifier.padding(PaddingValues(start = 64.dp, end = 12.dp, top = 16.dp))
 
     if (title.isEmpty()) {
-        DatePickerDefaults.DatePickerTitle(
+        DateRangePickerDefaults.DateRangePickerTitle(
             displayMode = displayMode,
             modifier = modifier,
             // TODO: Pass contentColor after upgrading material 3 to v1.4.0+
@@ -132,22 +134,24 @@ fun DatePickerTitle(
     }
 }
 
-// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DatePicker.kt
+// Based on compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/DateRangePicker.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
 @Composable
-fun DatePickerHeadline(
+fun DateRangePickerHeadline(
     headline: String,
-    selectedDateMillis: Long?,
+    selectedStartDateMillis: Long?,
+    selectedEndDateMillis: Long?,
     displayMode: DisplayMode,
     dateFormatter: DatePickerFormatter,
     contentColor: Color,
 ) {
-    val modifier = Modifier.padding(PaddingValues(start = 24.dp, end = 12.dp, bottom = 12.dp))
+    val modifier = Modifier.padding(PaddingValues(start = 64.dp, end = 12.dp, bottom = 12.dp))
 
     if (headline.isEmpty()) {
-        DatePickerDefaults.DatePickerHeadline(
-            selectedDateMillis = selectedDateMillis,
+        DateRangePickerDefaults.DateRangePickerHeadline(
+            selectedStartDateMillis = selectedStartDateMillis,
+            selectedEndDateMillis = selectedEndDateMillis,
             displayMode = displayMode,
             dateFormatter = dateFormatter,
             modifier = modifier,

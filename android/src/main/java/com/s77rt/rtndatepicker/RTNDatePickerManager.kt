@@ -1,6 +1,7 @@
 package com.s77rt.rtndatepicker
 
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ReactStylesDiffMap
@@ -45,6 +46,14 @@ class RTNDatePickerManager(
         view.setIsOpen(isOpen)
     }
 
+    @ReactProp(name = "isMultiple")
+    override fun setIsMultiple(
+        view: RTNDatePicker,
+        isMultiple: Boolean,
+    ) {
+        view.setIsMultiple(isMultiple)
+    }
+
     @ReactProp(name = "isInline")
     override fun setIsInline(
         view: RTNDatePicker,
@@ -56,16 +65,18 @@ class RTNDatePickerManager(
     @ReactProp(name = "value")
     override fun setValue(
         view: RTNDatePicker,
-        value: Double,
+        value: ReadableArray?,
     ) {
-        // Codegen passes null double as 0f (0.0)
-        // https://github.com/facebook/react-native/blob/996be870713cd72df1f91db99e8f981bbc5406af/packages/react-native-codegen/src/generators/components/GeneratePropsJavaDelegate.js#L107
-        if (value == 0.0) {
-            view.setValue(null)
+        if (value == null) {
             return
         }
 
-        view.setValue(value.toLong())
+        val dates = LongArray(value.size())
+        for (i in 0 until value.size()) {
+            dates[i] = value.getDouble(i).toLong()
+        }
+
+        view.setValue(dates)
     }
 
     @ReactProp(name = "range")

@@ -14,6 +14,10 @@ import Time24H from './screens/Time24H';
 import StyledDate from './screens/StyledDate';
 import StyledTime from './screens/StyledTime';
 import Locale from './screens/Locale';
+import DebugDate from './screens/DebugDate';
+import DebugMultipleDates from './screens/DebugMultipleDates';
+import Multiple from './screens/Multiple';
+import DebugTime from './screens/DebugTime';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,10 +35,17 @@ function App() {
           <Stack.Screen name="Mode" component={Mode} />
           <Stack.Screen name="Min / Max" component={MinMax} />
           <Stack.Screen name="Step" component={Step} />
+          <Stack.Screen name="Multiple" component={Multiple} />
           <Stack.Screen name="Title & Headline" component={TitleHeadline} />
           <Stack.Screen name="Time 24H" component={Time24H} />
           <Stack.Screen name="Styled Date" component={StyledDate} />
           <Stack.Screen name="Styled Time" component={StyledTime} />
+          <Stack.Screen name="Debug Date" component={DebugDate} />
+          <Stack.Screen name="Debug Time" component={DebugTime} />
+          <Stack.Screen
+            name="Debug Multiple Dates"
+            component={DebugMultipleDates}
+          />
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

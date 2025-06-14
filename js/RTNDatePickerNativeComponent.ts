@@ -9,7 +9,7 @@ import type {
 } from "react-native/Libraries/Types/CodegenTypes";
 
 interface ChangeEvent {
-	value: Double | null;
+	value: Double[];
 }
 
 interface Range {
@@ -72,8 +72,9 @@ interface Styles {
 export interface RTNDatePickerNativeProps extends ViewProps {
 	type: string;
 	isOpen: boolean;
+	isMultiple: boolean;
 	isInline: boolean;
-	value: Double | null;
+	value: Double[];
 	onChange: BubblingEventHandler<Readonly<ChangeEvent>>;
 	onConfirm: DirectEventHandler<null>;
 	onCancel: DirectEventHandler<null>;

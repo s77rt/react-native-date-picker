@@ -6,7 +6,7 @@ export type DatePickerHandle = {
 };
 
 export type InternalChangeEvent = {
-	value: number | null;
+	value: number[];
 };
 
 export type InternalRange = {
@@ -68,11 +68,9 @@ export type Styles = {
 	timeSelectorUnselectedContentColor?: ColorValue;
 };
 
-export type DatePickerProps = ViewProps & {
+type BaseDatePickerProps = {
 	ref?: Ref<DatePickerHandle>;
 	type?: Type;
-	value?: Date | null;
-	onChange?: (value: Date | null) => void;
 	min?: Date;
 	max?: Date;
 	step?: number;
@@ -80,3 +78,19 @@ export type DatePickerProps = ViewProps & {
 	options?: Options;
 	styles?: Styles;
 };
+
+type DynamicDatePickerProps =
+	| {
+			value?: Date[];
+			onChange?: (value: Date[]) => void;
+			multiple: true;
+	  }
+	| {
+			value?: Date | null;
+			onChange?: (value: Date | null) => void;
+			multiple?: false;
+	  };
+
+export type DatePickerProps = ViewProps &
+	BaseDatePickerProps &
+	DynamicDatePickerProps;

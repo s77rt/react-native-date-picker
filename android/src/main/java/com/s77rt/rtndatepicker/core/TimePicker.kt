@@ -8,13 +8,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TimePickerColors
+import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -23,6 +27,57 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
+@Composable
+fun TimePickerWrapper(
+    isInline: Boolean,
+    isOpen: Boolean,
+    state: TimePickerState,
+    colors: TimePickerColors,
+    titleText: String?,
+    titleTextColor: Color,
+    confirmText: String,
+    cancelText: String,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
+) {
+    val textButtonColors = ButtonDefaults.textButtonColors(contentColor = colors.selectorColor)
+    val title =
+        if (titleText == null) {
+            null
+        } else {
+            @Composable {
+                TimePickerTitle(
+                    title = titleText,
+                    contentColor = titleTextColor,
+                )
+            }
+        }
+
+    if (isInline) {
+        TimePicker(state = state, colors = colors)
+    } else if (isOpen) {
+        TimePickerDialog(
+            onDismissRequest = onCancel,
+            confirmButton = {
+                TextButton(onClick = onConfirm, colors = textButtonColors) {
+                    Text(confirmText)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onCancel, colors = textButtonColors) {
+                    Text(cancelText)
+                }
+            },
+            colors = colors,
+            title = title,
+        ) {
+            TimePicker(state = state, colors = colors)
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")

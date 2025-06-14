@@ -15,7 +15,7 @@ enum DatePickerMode {
 
 struct DatePicker: UIViewRepresentable {
   @Binding var selection: Date
-  var `in`: ClosedRange<Date>
+  var `in`: AnyRange<Date>?
   var type: DatePickerType  // DatePickerType is used as UIDatePicker.Mode
   var mode: DatePickerMode  // Not to be confused with UIDatePicker.Mode. DatePickerMode is used as UIDatePickerStyle
   var minuteInterval: Int
@@ -55,8 +55,22 @@ struct DatePicker: UIViewRepresentable {
   func updateUIView(_ datePicker: UIDatePicker, context: Context) {
     datePicker.date = selection
 
-    datePicker.minimumDate = `in`.lowerBound
-    datePicker.maximumDate = `in`.upperBound
+    if let `in` = `in` {
+      switch `in` {
+      case .range(let range):
+        datePicker.minimumDate = range.lowerBound
+        datePicker.maximumDate = range.upperBound
+      case .partialRangeFrom(let partialRangeFrom):
+        datePicker.minimumDate = partialRangeFrom.lowerBound
+        datePicker.maximumDate = nil
+      case .partialRangeUpTo(let partialRangeUpTo):
+        datePicker.minimumDate = nil
+        datePicker.maximumDate = partialRangeUpTo.upperBound
+      }
+    } else {
+      datePicker.minimumDate = nil
+      datePicker.maximumDate = nil
+    }
 
     datePicker.minuteInterval = minuteInterval
 

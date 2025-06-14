@@ -20,7 +20,7 @@ class RTNDatePicker : FrameLayout {
     internal var stateWrapper: StateWrapper? = null
 
     private val viewModel = RTNDatePickerViewModel()
-    private var lastValueUpdate: Long? = null // Default value in the view model
+    private var lastValueUpdate: LongArray? = null
 
     constructor(context: Context) : super(context) {
         reactContext = context as ReactContext
@@ -101,15 +101,21 @@ class RTNDatePicker : FrameLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
-    private fun onChange(date: Long?) {
-        if (lastValueUpdate == date) {
+    private fun onChange(dates: LongArray) {
+        if (lastValueUpdate.contentEquals(dates)) {
             return
         }
-        lastValueUpdate = date
+        lastValueUpdate = dates
 
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
-        val event = RTNDatePickerChangeEvent(surfaceId, id, if (date == null) null else date.toDouble())
+        val value =
+            Arguments.createArray().apply {
+                for (date in dates) {
+                    pushDouble(date.toDouble())
+                }
+            }
+        val event = RTNDatePickerChangeEvent(surfaceId, id, value)
 
         eventDispatcher?.dispatchEvent(event)
     }
@@ -138,11 +144,15 @@ class RTNDatePicker : FrameLayout {
         viewModel.updateIsOpen(isOpen)
     }
 
+    public fun setIsMultiple(isMultiple: Boolean) {
+        viewModel.updateIsMultiple(isMultiple)
+    }
+
     public fun setIsInline(isInline: Boolean) {
         viewModel.updateIsInline(isInline)
     }
 
-    public fun setValue(value: Long?) {
+    public fun setValue(value: LongArray) {
         // Changing the value programmatically shouldn't trigger the onChange event
         lastValueUpdate = value
 

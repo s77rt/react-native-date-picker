@@ -13,6 +13,7 @@ Native Date, Time, Datetime and Yearmonth Picker
 -   🗓️ Datetime picker
 -   🌙 Yearmonth picker
 -   🔌 Supports iOS, Android and Web
+-   🎯 Selection is single and multiple
 -   💎 Renders in modal and inline
 -   ✨ Highly customizable
 
@@ -101,22 +102,51 @@ function Example() {
 }
 ```
 
+### Multiple
+
+<img align="right" width="100" height="auto" src="https://raw.githubusercontent.com/s77rt/react-native-date-picker/refs/heads/main/assets/example-multiple.png">
+
+```tsx
+function Example() {
+	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+
+	return (
+		<>
+			<Text>
+				Selected dates:{" "}
+				{selectedDates
+					?.map((date) => date.toLocaleDateString())
+					.join(", ")}
+			</Text>
+			<DatePicker
+				type="date"
+				value={selectedDates}
+				onChange={setSelectedDates}
+				multiple
+				inline
+			/>
+		</>
+	);
+}
+```
+
 ## Props
 
 Inherits [View Props](https://reactnative.dev/docs/view#props).
 
-| Prop       | Type                            | Description                                                                                        |
-| ---------- | ------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                                                                    |
-| `type`     | [`Type`](#type)                 | The type of the picker.                                                                            |
-| `value`    | `Date \| null`                  | The selected date.                                                                                 |
-| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                                  |
-| `min`      | `Date`                          | The earliest selectable date.                                                                      |
-| `max`      | `Date`                          | The latest selectable date.                                                                        |
-| `step`     | `number`                        | The stepping interval, in seconds. ⚫🔵                                                            |
-| `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
-| `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
-| `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
+| Prop       | Type                                                         | Description                                                                                        |
+| ---------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`                                      | Ref for the date picker handle.                                                                    |
+| `type`     | [`Type`](#type)                                              | The type of the picker.                                                                            |
+| `value`    | `Date \| null`<br>`Date[]`                                   | The selected date(s).                                                                              |
+| `onChange` | `(value: Date \| null) => void`<br>`(value: Date[]) => void` | Callback when the user changes the selected date(s).                                               |
+| `min`      | `Date`                                                       | The earliest selectable date(s).                                                                   |
+| `max`      | `Date`                                                       | The latest selectable date(s).                                                                     |
+| `step`     | `number`                                                     | The stepping interval, in seconds. ⚫🔵                                                            |
+| `multiple` | `boolean`                                                    | Whether the user can select multiple dates. ⚫🟢                                                   |
+| `inline`   | `boolean`                                                    | Whether the date picker should be displayed inline. ⚫🟢                                           |
+| `options`  | [`Options`](#options)                                        | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
+| `styles`   | [`Styles`](#styles)                                          | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
 
 ### Type
 
