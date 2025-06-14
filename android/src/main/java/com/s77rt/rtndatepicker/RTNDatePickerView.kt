@@ -9,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import java.time.Instant
 import java.time.ZoneId
-import java.util.stream.Collectors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
@@ -112,7 +111,7 @@ fun RTNDatePickerView(
                                 .withMinute(timePickerState.minute)
                                 .toEpochSecond() * 1000
                         })
-                        .collect(Collectors.toList())
+                        .toList()
                         .toLongArray()
                 }
             onChange(dates)
