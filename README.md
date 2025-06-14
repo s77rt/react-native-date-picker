@@ -105,18 +105,19 @@ function Example() {
 
 Inherits [View Props](https://reactnative.dev/docs/view#props).
 
-| Prop       | Type                            | Description                                                                                        |
-| ---------- | ------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ref`      | `Ref<DatePickerHandle>`         | Ref for the date picker handle.                                                                    |
-| `type`     | [`Type`](#type)                 | The type of the picker.                                                                            |
-| `value`    | `Date \| null`                  | The selected date.                                                                                 |
-| `onChange` | `(value: Date \| null) => void` | Callback when the user changes the selected date.                                                  |
-| `min`      | `Date`                          | The earliest selectable date.                                                                      |
-| `max`      | `Date`                          | The latest selectable date.                                                                        |
-| `step`     | `number`                        | The stepping interval, in seconds. ⚫🔵                                                            |
-| `inline`   | `boolean`                       | Whether the date picker should be displayed inline. ⚫🟢                                           |
-| `options`  | [`Options`](#options)           | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
-| `styles`   | [`Styles`](#styles)             | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
+| Prop       | Type                                                         | Description                                                                                        |
+| ---------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `ref`      | `Ref<DatePickerHandle>`                                      | Ref for the date picker handle.                                                                    |
+| `type`     | [`Type`](#type)                                              | The type of the picker.                                                                            |
+| `value`    | `Date \| null`<br>`Date[]`                                   | The selected date(s).                                                                              |
+| `onChange` | `(value: Date \| null) => void`<br>`(value: Date[]) => void` | Callback when the user changes the selected date(s).                                               |
+| `min`      | `Date`                                                       | The earliest selectable date(s).                                                                   |
+| `max`      | `Date`                                                       | The latest selectable date(s).                                                                     |
+| `step`     | `number`                                                     | The stepping interval, in seconds. ⚫🔵                                                            |
+| `multiple` | `boolean`                                                    | Whether the user can select multiple dates. ⚫🟢                                                   |
+| `inline`   | `boolean`                                                    | Whether the date picker should be displayed inline. ⚫🟢                                           |
+| `options`  | [`Options`](#options)                                        | Options. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢 |
+| `styles`   | [`Styles`](#styles)                                          | Styles. **Note:** Must be memoized ([`useMemo`](https://react.dev/reference/react/useMemo)). ⚫🟢  |
 
 ### Type
 
