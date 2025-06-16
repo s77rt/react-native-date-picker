@@ -1,20 +1,26 @@
 package com.s77rt.rtndatepicker
 
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.Event
 
 internal class RTNDatePickerChangeEvent(
     surfaceId: Int,
     viewId: Int,
-    private val value: ReadableArray,
+    private val dates: LongArray,
 ) : Event<RTNDatePickerChangeEvent>(surfaceId, viewId) {
     override fun getEventName(): String = EVENT_NAME
 
     override fun getEventData(): WritableMap? =
         Arguments.createMap().apply {
-            putArray("value", value)
+            putArray(
+                "value",
+                Arguments.createArray().apply {
+                    for (date in dates) {
+                        pushDouble(date.toDouble())
+                    }
+                },
+            )
         }
 
     public companion object {
