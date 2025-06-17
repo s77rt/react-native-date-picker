@@ -177,7 +177,18 @@ fun RTNDatePickerView(
             onCancel = onCancel,
         )
     } else {
-        if (type == "time") {
+        if (type == "yearmonth") {
+            YearMonthPickerWrapper(
+                isInline = isInline,
+                isOpen = isOpen,
+                titleText = title,
+                titleTextColor = titleContentColor,
+                confirmText = confirmText,
+                cancelText = cancelText,
+                onConfirm = onConfirm,
+                onCancel = onCancel,
+            )
+        } else if (type == "time") {
             TimePickerWrapper(
                 isInline = isInline,
                 isOpen = isOpen,
