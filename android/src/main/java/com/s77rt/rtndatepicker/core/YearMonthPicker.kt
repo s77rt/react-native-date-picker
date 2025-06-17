@@ -1,9 +1,11 @@
 package com.s77rt.rtndatepicker
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,15 +13,20 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,6 +35,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -162,6 +170,10 @@ fun YearMonthPickerDialog(
 interface YearMonthPickerState {
     var selection: YearMonthPickerSelectionMode
     val yearRange: IntRange
+
+    var month: Int
+    var year: Int
+
     val locale: Locale
 }
 
@@ -189,6 +201,23 @@ private class YearMonthPickerStateImpl(
 ) : YearMonthPickerState {
     override var selection by mutableStateOf(YearMonthPickerSelectionMode.Month)
     override val yearRange = yearRange
+
+    val monthState = mutableIntStateOf(1)
+
+    override var month: Int
+        get() = monthState.intValue
+        set(value) {
+            monthState.intValue = value
+        }
+
+    val yearState = mutableIntStateOf(2000)
+
+    override var year: Int
+        get() = yearState.intValue
+        set(value) {
+            yearState.intValue = value
+        }
+
     override val locale = locale
 }
 
@@ -205,52 +234,94 @@ fun YearMonthPicker(
     state: YearMonthPickerState,
     modifier: Modifier = Modifier,
 ) {
-    val dfs = remember(state.locale) { DateFormatSymbols(state.locale) }
+    val dateFormatSymbols = remember(state.locale) { DateFormatSymbols(state.locale) }
 
-    val months = remember(dfs) { dfs.getMonths() }
+    val monthsNames = remember(dateFormatSymbols) { dateFormatSymbols.getMonths() }
+    val monthsShortNames = remember(dateFormatSymbols) { dateFormatSymbols.getShortMonths() }
     val years = remember(state.yearRange) { state.yearRange.toList() }
 
     val monthsListState = rememberLazyListState()
     val yearsListState = rememberLazyListState()
 
+    val isSelectionMonth = state.selection == YearMonthPickerSelectionMode.Month
+
     Column(modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-            TextButton(onClick = { state.selection = YearMonthPickerSelectionMode.Month }) {
+            TextButton(
+                onClick = {
+                    state.selection =
+                        YearMonthPickerSelectionMode.Month
+                },
+            ) {
+                val color =
+                    if (isSelectionMonth) {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    } else {
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                    }
                 Text(
-                    text = "Aug",
+                    text = monthsShortNames[state.month - 1],
                     style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = color,
                 )
+                if (isSelectionMonth) {
+                    Icon(Icons.Filled.ArrowDropDown, contentDescription = "Months list", tint = color)
+                }
             }
-            TextButton(onClick = { state.selection = YearMonthPickerSelectionMode.Year }) {
+            TextButton(
+                onClick = { state.selection = YearMonthPickerSelectionMode.Year },
+            ) {
+                val color =
+                    if (isSelectionMonth) {
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+
                 Text(
-                    text = "2023",
+                    text = state.year.toString(),
                     style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = color,
                 )
+                if (!isSelectionMonth) {
+                    Icon(Icons.Filled.ArrowDropDown, contentDescription = "Years list", tint = color)
+                }
             }
         }
         HorizontalDivider()
-        if (state.selection == YearMonthPickerSelectionMode.Month) {
-            LazyColumn(state = monthsListState) {
-                items(months) { month ->
+        if (isSelectionMonth) {
+            LazyColumn(state = monthsListState, contentPadding = PaddingValues(vertical = 8.dp)) {
+                items(monthsNames.size) { index ->
+                    val monthName = monthsNames[index]
+                    val month = index + 1
+                    val isSelected = month == state.month
                     DropdownMenuItem(
                         text = {
                             Text(
-                                text = "$month",
+                                text = "$monthName",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
                         },
-                        onClick = {},
-                        leadingIcon = {},
-                        modifier = Modifier.height(48.dp),
+                        onClick = { state.month = month },
+                        leadingIcon = {
+                            if (isSelected) {
+                                Icon(Icons.Filled.Check, contentDescription = "Selected")
+                            }
+                        },
+                        modifier =
+                            Modifier
+                                .height(48.dp)
+                                .background(
+                                    if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
+                                ),
                     )
                 }
             }
         } else {
-            LazyColumn(state = yearsListState) {
+            LazyColumn(state = yearsListState, contentPadding = PaddingValues(vertical = 8.dp)) {
                 items(years) { year ->
+                    val isSelected = year == state.year
                     DropdownMenuItem(
                         text = {
                             Text(
@@ -259,9 +330,18 @@ fun YearMonthPicker(
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
                         },
-                        onClick = {},
-                        leadingIcon = {},
-                        modifier = Modifier.height(48.dp),
+                        onClick = { state.year = year },
+                        leadingIcon = {
+                            if (isSelected) {
+                                Icon(Icons.Filled.Check, contentDescription = "Selected", modifier = Modifier.size(24.dp))
+                            }
+                        },
+                        modifier =
+                            Modifier
+                                .height(48.dp)
+                                .background(
+                                    if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
+                                ),
                     )
                 }
             }
