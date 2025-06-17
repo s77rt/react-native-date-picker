@@ -240,8 +240,8 @@ fun YearMonthPicker(
     val monthsShortNames = remember(dateFormatSymbols) { dateFormatSymbols.getShortMonths() }
     val years = remember(state.yearRange) { state.yearRange.toList() }
 
-    val monthsListState = rememberLazyListState()
-    val yearsListState = rememberLazyListState()
+    val monthsListState = rememberLazyListState(initialFirstVisibleItemIndex = state.month - 1)
+    val yearsListState = rememberLazyListState(initialFirstVisibleItemIndex = state.year - state.yearRange.start)
 
     val isSelectionMonth = state.selection == YearMonthPickerSelectionMode.Month
 
