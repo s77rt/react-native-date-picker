@@ -26,6 +26,7 @@ fun RTNDatePickerView(
     val datePickerState by viewModel.datePickerState.collectAsState()
     val dateRangePickerState by viewModel.dateRangePickerState.collectAsState()
     val timePickerState by viewModel.timePickerState.collectAsState()
+    val yearMonthPickerState by viewModel.yearMonthPickerState.collectAsState()
     val confirmText by viewModel.confirmText.collectAsState()
     val cancelText by viewModel.cancelText.collectAsState()
     val title by viewModel.title.collectAsState()
@@ -181,6 +182,7 @@ fun RTNDatePickerView(
             YearMonthPickerWrapper(
                 isInline = isInline,
                 isOpen = isOpen,
+                state = yearMonthPickerState,
                 titleText = title,
                 titleTextColor = titleContentColor,
                 confirmText = confirmText,

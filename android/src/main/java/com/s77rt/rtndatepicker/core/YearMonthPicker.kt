@@ -53,6 +53,7 @@ import java.util.Locale
 fun YearMonthPickerWrapper(
     isInline: Boolean,
     isOpen: Boolean,
+    state: YearMonthPickerState,
     titleText: String?,
     titleTextColor: Color,
     confirmText: String,
@@ -71,8 +72,6 @@ fun YearMonthPickerWrapper(
                 )
             }
         }
-
-    val state = YearMonthPickerState(locale = Locale.getDefault())
 
     if (isInline) {
         YearMonthPicker(
