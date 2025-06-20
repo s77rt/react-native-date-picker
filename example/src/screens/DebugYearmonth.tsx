@@ -56,15 +56,11 @@ function DebugYearmonth() {
       <View>
         <Button
           title="Set yearmonth to April 2022"
-          onPress={() =>
-            setSelectedDate(new Date(new Date().setFullYear(2022, 3)))
-          }
+          onPress={() => setSelectedDate(new Date('2022-04'))}
         />
         <Button
           title="Set yearmonth to August 2026"
-          onPress={() =>
-            setSelectedDate(new Date(new Date().setFullYear(2026, 7)))
-          }
+          onPress={() => setSelectedDate(new Date('2026-08'))}
         />
         <Button title="Clear yearmonth" onPress={() => setSelectedDate(null)} />
       </View>
