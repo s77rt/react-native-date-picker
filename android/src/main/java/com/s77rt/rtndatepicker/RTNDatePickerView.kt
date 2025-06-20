@@ -76,6 +76,8 @@ fun RTNDatePickerView(
         dateRangePickerState.selectedEndDateMillis,
         timePickerState.hour,
         timePickerState.minute,
+        yearMonthPickerState.year,
+        yearMonthPickerState.month,
     ) {
         if (isMultiple) {
             val selectedStartDateMillis = dateRangePickerState.selectedStartDateMillis
@@ -117,23 +119,43 @@ fun RTNDatePickerView(
                 }
             onChange(dates)
         } else {
-            val selectedDateMillis = datePickerState.selectedDateMillis
-            val dates =
-                if (selectedDateMillis == null) {
-                    longArrayOf()
-                } else {
-                    longArrayOf(
-                        Instant
-                            .ofEpochMilli(selectedDateMillis)
-                            .atZone(ZoneId.of("UTC"))
-                            .toLocalDate()
-                            .atStartOfDay(ZoneId.systemDefault())
-                            .withHour(timePickerState.hour)
-                            .withMinute(timePickerState.minute)
-                            .toEpochSecond() * 1000,
-                    )
-                }
-            onChange(dates)
+            if (type == "yearmonth") {
+                val selectedDateMillis = datePickerState.selectedDateMillis
+                val dates =
+                    if (selectedDateMillis == null) {
+                        longArrayOf()
+                    } else {
+                        longArrayOf(
+                            Instant
+                                .ofEpochMilli(selectedDateMillis)
+                                .atZone(ZoneId.of("UTC"))
+                                .toLocalDate()
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .withYear(yearMonthPickerState.year)
+                                .withMonth(yearMonthPickerState.month)
+                                .toEpochSecond() * 1000,
+                        )
+                    }
+                onChange(dates)
+            } else {
+                val selectedDateMillis = datePickerState.selectedDateMillis
+                val dates =
+                    if (selectedDateMillis == null) {
+                        longArrayOf()
+                    } else {
+                        longArrayOf(
+                            Instant
+                                .ofEpochMilli(selectedDateMillis)
+                                .atZone(ZoneId.of("UTC"))
+                                .toLocalDate()
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .withHour(timePickerState.hour)
+                                .withMinute(timePickerState.minute)
+                                .toEpochSecond() * 1000,
+                        )
+                    }
+                onChange(dates)
+            }
         }
     }
 

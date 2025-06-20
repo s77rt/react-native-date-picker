@@ -2,6 +2,11 @@ import type { Defaults } from "./types";
 
 const defaults: Defaults = {
 	defaultValue(type, _isMultiple) {
+		// YearMonthPickerState is similar to TimePickerState (see comment below)
+		if (type === "yearmonth") {
+			return [new Date()];
+		}
+
 		// TimePickerState`s hour and minute are non-nullable
 		// https://developer.android.com/reference/kotlin/androidx/compose/material3/TimePickerState#summary
 		if (type === "time") {
