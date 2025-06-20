@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2025-06-20
+
+### Added
+
+-   Android: `yearmonth` picker support ([#43](https://github.com/s77rt/react-native-date-picker/pull/43)).
+
 ## [3.0.1] - 2025-06-16
 
 ### Fixed
 
--   Android: crash when select date ([#42](https://github.com/s77rt/react-native-date-picker/pull/42)).
+-   Android: crash when select date ([#42](https://github.com/s77rt/react-native-date-picker/issues/42)).
 
 ## [3.0.0] - 2025-06-14
 
@@ -151,6 +157,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[3.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.1...v3.0.0
 [2.4.1]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.0...v2.4.1
