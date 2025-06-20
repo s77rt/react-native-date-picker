@@ -106,6 +106,11 @@ function Home({navigation}: {navigation: any}) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
+          onPress={() => navigation.navigate('Debug Yearmonth')}>
+          <Text style={styles.buttonText}>Debug Yearmonth</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate('Debug Multiple Dates')}>
           <Text style={styles.buttonText}>Debug Multiple Dates</Text>
         </TouchableOpacity>

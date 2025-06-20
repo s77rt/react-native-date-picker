@@ -64,6 +64,12 @@ class RTNDatePickerViewModel : ViewModel() {
                 is24Hour = false,
             ),
         )
+    private val _yearMonthPickerState =
+        MutableStateFlow(
+            YearMonthPickerState(
+                locale = locale,
+            ),
+        )
     private val _confirmText = MutableStateFlow("OK")
     private val _cancelText = MutableStateFlow("Cancel")
     private val _title = MutableStateFlow<String?>("")
@@ -114,6 +120,7 @@ class RTNDatePickerViewModel : ViewModel() {
     val datePickerState: StateFlow<DatePickerState> get() = _datePickerState
     val dateRangePickerState: StateFlow<DateRangePickerState> get() = _dateRangePickerState
     val timePickerState: StateFlow<TimePickerState> get() = _timePickerState
+    val yearMonthPickerState: StateFlow<YearMonthPickerState> get() = _yearMonthPickerState
     val confirmText: StateFlow<String> get() = _confirmText
     val cancelText: StateFlow<String> get() = _cancelText
     val title: StateFlow<String?> get() = _title
@@ -183,8 +190,9 @@ class RTNDatePickerViewModel : ViewModel() {
         _dateRangePickerState.value.displayedMonthMillis = newDisplayedMonthMillis
     }
 
-    fun resetTimeSelection() {
+    fun resetSelectionMode() {
         _timePickerState.value.selection = TimePickerSelectionMode.Hour
+        _yearMonthPickerState.value.selection = YearMonthPickerSelectionMode.Month
     }
 
     fun updateType(newType: String) {
@@ -194,7 +202,7 @@ class RTNDatePickerViewModel : ViewModel() {
     fun updateIsOpen(newIsOpen: Boolean) {
         if (newIsOpen) {
             syncDisplayedMonth()
-            resetTimeSelection()
+            resetSelectionMode()
         }
         _isOpen.value = newIsOpen
     }
@@ -222,7 +230,6 @@ class RTNDatePickerViewModel : ViewModel() {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate()
                     .atStartOfDay(ZoneId.of("UTC"))
-                    .toEpochSecond() * 1000
             }
         val endDate =
             if (lastValue == null || lastValue == firstValue) {
@@ -233,7 +240,6 @@ class RTNDatePickerViewModel : ViewModel() {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate()
                     .atStartOfDay(ZoneId.of("UTC"))
-                    .toEpochSecond() * 1000
             }
         val startTime =
             if (firstValue == null) {
@@ -245,10 +251,15 @@ class RTNDatePickerViewModel : ViewModel() {
                     .toLocalTime()
             }
 
-        _datePickerState.value.selectedDateMillis = startDate
-        _dateRangePickerState.value.setSelection(startDate, endDate)
+        val startDateMillis = if (startDate == null) null else startDate.toEpochSecond() * 1000
+        val endDateMillis = if (endDate == null) null else endDate.toEpochSecond() * 1000
+
+        _datePickerState.value.selectedDateMillis = startDateMillis
+        _dateRangePickerState.value.setSelection(startDateMillis, endDateMillis)
         _timePickerState.value.hour = startTime?.getHour() ?: 0
         _timePickerState.value.minute = startTime?.getMinute() ?: 0
+        _yearMonthPickerState.value.month = startDate?.getMonthValue() ?: 1
+        _yearMonthPickerState.value.year = startDate?.getYear() ?: 2000
 
         syncDisplayedMonth()
     }

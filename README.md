@@ -155,7 +155,7 @@ The type of the picker and can be one of the following:
 -   `date`
 -   `time`
 -   `datetime` ⚫🔵
--   `yearmonth` ⚫🔵
+-   `yearmonth`
 
 ### Options
 
