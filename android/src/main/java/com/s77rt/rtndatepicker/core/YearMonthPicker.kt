@@ -256,7 +256,7 @@ fun YearMonthPicker(
                     if (isSelectionMonth) {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     } else {
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
                     }
                 Text(
                     text = monthsShortNames[state.month - 1],
@@ -272,7 +272,7 @@ fun YearMonthPicker(
             ) {
                 val color =
                     if (isSelectionMonth) {
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     }
