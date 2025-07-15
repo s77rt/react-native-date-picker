@@ -294,12 +294,20 @@ fun YearMonthPicker(
                     val monthName = monthsNames[index]
                     val month = index + 1
                     val isSelected = month == state.month
+                    val isEnabled = month > 5
+                    val color =
+                        if (isEnabled) {
+                            MaterialTheme.colorScheme.onSurface
+                        } else {
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
+                        }
+
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = "$monthName",
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
+                                color = color,
                             )
                         },
                         onClick = { state.month = month },
@@ -314,6 +322,7 @@ fun YearMonthPicker(
                                 .background(
                                     if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
                                 ),
+                        enabled = isEnabled,
                     )
                 }
             }
@@ -321,12 +330,20 @@ fun YearMonthPicker(
             LazyColumn(state = yearsListState, contentPadding = PaddingValues(vertical = 8.dp)) {
                 items(years) { year ->
                     val isSelected = year == state.year
+                    val isEnabled = year > 2015
+                    val color =
+                        if (isEnabled) {
+                            MaterialTheme.colorScheme.onSurface
+                        } else {
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
+                        }
+
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = "$year",
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
+                                color = color,
                             )
                         },
                         onClick = { state.year = year },
@@ -341,6 +358,7 @@ fun YearMonthPicker(
                                 .background(
                                     if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
                                 ),
+                        enabled = isEnabled,
                     )
                 }
             }
