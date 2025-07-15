@@ -29,6 +29,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,6 +46,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import java.text.DateFormatSymbols
+import java.time.YearMonth
+import java.time.ZoneId
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -174,6 +177,7 @@ interface YearMonthPickerState {
     var year: Int
 
     val locale: Locale
+    val selectableDates: SelectableDates
 }
 
 @JvmInline
@@ -194,8 +198,10 @@ value class YearMonthPickerSelectionMode private constructor(
         }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 private class YearMonthPickerStateImpl(
     locale: Locale,
+    selectableDates: SelectableDates,
     yearRange: IntRange,
 ) : YearMonthPickerState {
     override var selection by mutableStateOf(YearMonthPickerSelectionMode.Month)
@@ -218,13 +224,15 @@ private class YearMonthPickerStateImpl(
         }
 
     override val locale = locale
+    override val selectableDates = selectableDates
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun YearMonthPickerState(
     locale: Locale,
+    selectableDates: SelectableDates,
     yearRange: IntRange = IntRange(1900, 2100),
-): YearMonthPickerState = YearMonthPickerStateImpl(locale = locale, yearRange = yearRange)
+): YearMonthPickerState = YearMonthPickerStateImpl(locale = locale, selectableDates = selectableDates, yearRange = yearRange)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
@@ -256,7 +264,7 @@ fun YearMonthPicker(
                     if (isSelectionMonth) {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     } else {
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
                     }
                 Text(
                     text = monthsShortNames[state.month - 1],
@@ -272,7 +280,7 @@ fun YearMonthPicker(
             ) {
                 val color =
                     if (isSelectionMonth) {
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = .35f)
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     }
@@ -294,12 +302,27 @@ fun YearMonthPicker(
                     val monthName = monthsNames[index]
                     val month = index + 1
                     val isSelected = month == state.month
+                    val isEnabled =
+                        state.selectableDates.isSelectableDate(
+                            YearMonth
+                                .of(state.year, month)
+                                .atDay(1)
+                                .atStartOfDay(ZoneId.of("UTC"))
+                                .toEpochSecond() * 1000,
+                        )
+                    val color =
+                        if (isEnabled) {
+                            MaterialTheme.colorScheme.onSurface
+                        } else {
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
+                        }
+
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = "$monthName",
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
+                                color = color,
                             )
                         },
                         onClick = { state.month = month },
@@ -314,6 +337,7 @@ fun YearMonthPicker(
                                 .background(
                                     if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
                                 ),
+                        enabled = isEnabled,
                     )
                 }
             }
@@ -321,12 +345,27 @@ fun YearMonthPicker(
             LazyColumn(state = yearsListState, contentPadding = PaddingValues(vertical = 8.dp)) {
                 items(years) { year ->
                     val isSelected = year == state.year
+                    val isEnabled =
+                        state.selectableDates.isSelectableDate(
+                            YearMonth
+                                .of(year, state.month)
+                                .atDay(1)
+                                .atStartOfDay(ZoneId.of("UTC"))
+                                .toEpochSecond() * 1000,
+                        )
+                    val color =
+                        if (isEnabled) {
+                            MaterialTheme.colorScheme.onSurface
+                        } else {
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = .38f)
+                        }
+
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = "$year",
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
+                                color = color,
                             )
                         },
                         onClick = { state.year = year },
@@ -341,6 +380,7 @@ fun YearMonthPicker(
                                 .background(
                                     if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Unspecified,
                                 ),
+                        enabled = isEnabled,
                     )
                 }
             }

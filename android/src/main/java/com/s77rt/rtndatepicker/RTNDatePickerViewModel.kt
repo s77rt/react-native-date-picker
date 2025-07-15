@@ -68,6 +68,7 @@ class RTNDatePickerViewModel : ViewModel() {
         MutableStateFlow(
             YearMonthPickerState(
                 locale = locale,
+                selectableDates = selectableDates,
             ),
         )
     private val _confirmText = MutableStateFlow("OK")
