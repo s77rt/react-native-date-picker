@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2025-07-16
+
+### Added
+
+-   Android: `yearmonth` picker min/max support ([#46](https://github.com/s77rt/react-native-date-picker/pull/46)).
+
 ## [3.1.0] - 2025-06-20
 
 ### Added
@@ -157,6 +163,7 @@ All notable changes to this project will be documented in this file.
 
 -   Initial release.
 
+[3.1.1]: https://github.com/s77rt/react-native-date-picker/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/s77rt/react-native-date-picker/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/s77rt/react-native-date-picker/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/s77rt/react-native-date-picker/compare/v2.4.1...v3.0.0
