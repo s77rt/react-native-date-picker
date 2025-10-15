@@ -21,12 +21,16 @@ target_link_libraries(
   reactnative
 )
 
-target_compile_options(
-  react_codegen_RTNDatePickerSpecs
-  PRIVATE
-  -DLOG_TAG=\"ReactNative\"
-  -fexceptions
-  -frtti
-  -std=c++20
-  -Wall
-)
+if(ReactAndroid_VERSION_MINOR GREATER_EQUAL 80)
+  target_compile_reactnative_options(react_codegen_RTNDatePickerSpecs PRIVATE)
+else()
+  target_compile_options(
+    react_codegen_RTNDatePickerSpecs
+    PRIVATE
+    -DLOG_TAG=\"ReactNative\"
+    -fexceptions
+    -frtti
+    -std=c++20
+    -Wall
+  )
+endif()
